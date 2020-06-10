@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
@@ -18,11 +20,17 @@ public class Property {
     @Column(name = "id_PK", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
+    @Getter
+    @Setter
     private long id_PK;
     
     @Column(name = "title", nullable = false)
+    @Getter
+    @Setter
     private String title;
     
     @Column(name = "measure", nullable = false)
+    @Getter
+    @Setter
     private String measure;
 }

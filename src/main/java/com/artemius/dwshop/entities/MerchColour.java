@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
@@ -20,15 +22,21 @@ public class MerchColour {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id_PK;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "merch_FK",nullable = false)
+    @Getter
+    @Setter
     private long merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "colour_FK",nullable = false)
+    @Getter
+    @Setter
     private long colourFK;
     
 }

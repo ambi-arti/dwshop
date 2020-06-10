@@ -20,11 +20,17 @@ public class Discount {
     @Column(name = "id_PK", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
+    @Getter
+    @Setter
     private long id_PK;
     
     @Column(name = "title", nullable = false)
+    @Getter
+    @Setter
     private String title;
     
     @Column(name = "value", nullable = false)
+    @Getter
+    @Setter
     private Double value;
 }
