@@ -2,7 +2,9 @@ package com.artemius.dwshop.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MerchRepository extends JpaRepository {
+import com.artemius.dwshop.entities.Merch;
+
+public interface MerchRepository extends JpaRepository<Merch, Long> {
     
 
 }
