@@ -1,7 +1,6 @@
 package com.artemius.dwshop.entities;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,8 +19,7 @@ import lombok.Setter;
 @Table(name = "merchcolour")
 public class MerchColour {
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
     private long id_PK;

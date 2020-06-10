@@ -5,12 +5,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 import lombok.Getter;
@@ -21,9 +20,7 @@ import lombok.Setter;
 @Table(name = "merchproperty")
 public class MerchProperty {
     @Id
-    @Column(name = "id_PK", nullable = false)
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name= "increment", strategy= "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
     private long id_PK;

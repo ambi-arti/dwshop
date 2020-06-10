@@ -1,4 +1,4 @@
-package com.artemius.dwshop;
+package com.artemius.dwshop.configs;
 
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
