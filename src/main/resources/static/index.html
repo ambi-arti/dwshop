@@ -1,10 +1,130 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-    <p>Get your greeting <a href="/test">here</a></p>
-</body>
+<!DOCTYPE html>
+<!--Made by: Ryakhovky A.V, b1-IFST-21; started at: 18.05.2020-->
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>D&W Online Shop</title>
+		<meta charset = "utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel = "stylesheet" type="text/css" media="screen" href = "styles/bootstrap/bootstrap.min.css"/>
+		<link rel = "stylesheet" type="text/css" media="screen" href = "styles/bootstrap/bootstrap-reboot.min.css"/>
+		<link rel = "stylesheet" type="text/css" media="screen" href = "styles/bootstrap/bootstrap-grid.min.css"/>
+		<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+		<link rel = "stylesheet" type="text/css" media="screen" href = "styles/fonts.css"/>
+		<link rel = "stylesheet" type="text/css" media="screen" href = "styles/styles.css"/>
+		<script src = "scripts/jquery/jquery.js"></script>
+		<script src = "scripts/bootstrap/bootstrap.min.js"></script>
+		<script src = "scripts/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src = "scripts/main.js"></script>
+	</head>
+	<body onload = "loadContent()">
+	<script src = "slick/slick.min.js"></script>
+		<nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+			<a id = "dw_logo_button"class="navbar-brand" href="#" onclick = "resetContents()">D&W Fashion</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto" id = "menuBar">
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Casual</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Business</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Sports</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Accessories</a>
+					  </li>
+					</ul>
+				<!--	<ul id = "auxBts" class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a href="#" id = "loginBtn" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
+						</li>
+						<li class="nav-item active">
+							<a href="#" role = "button"><img src = "graphics/cart.png"></img></a>
+						</li>
+					</ul> -->
+				  </div>
+				  <!--<div id = "auxBts">
+						<a href="#" id = "loginBtn" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
+						<a href="#" role = "button"><img src = "graphics/cart.png"></img></a>
+				 </div> -->
+		</nav>
+		<div id = "mainContainer">
+			<div id = "mainInfo" style = "background-image: url(graphics/backs/casual.jpg)">
+				<div id = "mainInfoContainer"  class = "flexElems">
+					<div id = "header" class = "innerElem">Casual Collection</div>
+					<div id = "desc" class = "innerElem">Desinged for everyday usage, the Casual Collection meets every
+					requirement of daily routine. We try our best to make the clothing comfortable and practical. The collection offers a wide choice of t-shirts, Polo shirts, shorts and Chinos pants. If you are intereseted, just scroll down and see all the merch avaliable!</div>
+				</div>
+			</div>
+			<!--<div id = "merchCarousel" class = "flexElems">-->
+			<div th:replace = "carousel::carousel"></div>
+			<!--</div>-->
+			<div id = "merchInfo" class = "flexElemsRow">
+				<div id = "merchImgContainer">
+					<img class = "flexElems" id = "merchImg" src = "graphics/merch/casual/gigachad.jpg"></img>
+					<div id = "merchActions" class="btn-group" role="group" aria-label="Button group with nested dropdown">
+						  <div class="btn-group" role="group">
+							<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  Size:
+							</button>
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							  <a class="dropdown-item" href="#">M</a>
+							  <a class="dropdown-item" href="#">L</a>
+							  <a class="dropdown-item" href="#">XL</a>
+							</div>
+						  </div>
+						 <div class="btn-group" role="group">
+							<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  Colour:
+							</button>
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+							  <a class="dropdown-item" href="#">Black</a>
+							  <a class="dropdown-item" href="#">Brown</a>
+							  <a class="dropdown-item" href="#">Gray</a>
+							</div>
+						  </div>
+						<button type="button" class="btn btn-secondary">+</button>
+						<button type="button" disabled class="btn btn-secondary">0</button>
+						<button type="button" class="btn btn-secondary">-</button>
+						<button type="button" class="btn btn-secondary">To cart!</button>
+					</div>
+				</div>
+				<div id = "merchDesc">
+					<p id = "merchDescTitle">Dirkholme&Wolff Leather Jacket</p>
+					<p id = "merchDescBlah">Who doesn't like leath? It's difficult to find someone, who minds wearing
+					such a popular garment. Thus, D&W designers have brought to you a present - redisigned version of the classical leath! The new version is far more versatile and made of a high-quality leather, to ensure the comfort and sturdyness!</p>
+					<br>
+					<p class = "charTableTitle">Information: </p>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Year: 2019</li>
+						<li class="list-group-item">Material: calf leather, polyester, viscose</li>
+						<li class="list-group-item">Type: outwear</li>
+						<li class="list-group-item">Colours avaliable: black, brown, gray</li>
+						<li class="list-group-item">Sizes avaliable: M, L, XL</li>
+						<li class="list-group-item">Price: 69 USD$</li>
+					</ul>
+				</div>
+			</div>
+			<div id = "footer" class = "flexElemsRow">
+				<div id = "footerLinks" class = "flexElems">
+					<p>Shipping Information</p>
+					<p>Privacy Policy</p>
+					<p>Feedback</p>
+					<p>Bank Accounts</p>
+				</div>
+				<div id = "footerAbout" class = "flexElems">
+					<p>Dirkholme&Wolff Ltd.</p>
+					<p>Russian Federation, Saratov, Polytekhnicheskaya St. 71</p>
+					<p>Website developed by: Ryakhovky Artyom</p>
+					<p>2018-2020. All rights reserved</p>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

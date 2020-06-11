@@ -30,14 +30,14 @@ public class MerchSize {
     @JoinColumn(name = "merch_FK",nullable = false)
     @Getter
     @Setter
-    private long merchFK;
+    private Merch merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "size_FK",nullable = false)
     @Getter
     @Setter
-    private long sizeFK;
+    private MSize sizeFK;
     
     @Column(name = "quantity", nullable = false)
     @Getter

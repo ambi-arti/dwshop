@@ -1,0 +1,204 @@
+#menu {
+	/*background: #b5dafd;*/
+	background-color: #44a3fc;
+	z-index: 2;
+}
+
+#menu #menuBar {
+	margin-left: 5%;
+}
+
+#menu .nav-item {
+	font-size: 2vw;
+	font-family: Source;
+	margin-right: 15%;
+}
+
+#menu #auxBts {
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#menu #auxBts #loginBtn {
+	font-size: 1.5vw;
+	background: #6db7fc;
+	border-color: #44a3fc;
+	border-width: 3px;
+	font-family: Source;
+	font-weight: bold;
+}
+
+#menu #auxBts a img {
+	width: 10%;
+	height: 10%;
+}
+ 
+#menu .nav-item .nav-link {
+	color: white;
+}
+
+#dw_logo_button {
+	font-size: 2.5vw;
+	font-family: Voguer;
+	color: white;
+}
+
+#mainContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#mainContainer .flexElems {
+	display: flex;
+	padding: 5%;
+	box-sizing: border-box;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 5;
+	width: 100%;
+}
+
+#mainContainer .flexElemsRow {
+	display: flex;
+	padding-top: 2%;
+	padding-left: 4%;
+	padding-right: 4%;
+	box-sizing: border-box;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 5;
+	width: 100%;
+}
+
+#mainContainer #merchInfo #merchImgContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+}
+
+#mainContainer #merchInfo #merchImgContainer #merchActions {
+	align-items: center;
+	background: #6db7fc;
+}
+
+#mainContainer #merchInfo #merchImgContainer #merchActions .dropdown-item {
+	background: #6db7fc;
+}
+
+#mainContainer #merchInfo #merchImgContainer #merchActions button {
+	background: #6db7fc;
+}
+
+#mainContainer #merchInfo #merchImgContainer #merchImg {
+	width: 100%;
+}
+
+#mainContainer #merchInfo #merchDesc {
+	width: 60%;
+	align-self: flex-start;
+	z-index: 4;
+}
+
+#mainContainer #merchInfo #merchDesc #merchDescTitle {
+	font-family: Franklin Gothic;
+	font-size: 4vh;
+	font-weight: bold;
+	text-align: left;
+	
+}
+
+#mainContainer #merchInfo #merchDesc #merchDescBlah {
+	font-family: Tahoma;
+	font-size: 3vh;
+	text-align: justify;
+}
+
+.charTableTitle {
+	font-family: Franklin Gothic;
+	font-weight: bold;
+	font-size: 3vh;
+}
+
+#mainContainer #mainInfo {
+	background-size: cover;
+	z-index: 1;
+}
+
+#mainContainer #mainInfo #mainInfoContainer {
+	flex-grow: 1;
+	background-color: rgb(150,150,150,0.5);
+}
+
+#mainContainer #mainInfo .innerElem {
+	z-index: 3;
+}
+
+#mainContainer #mainInfo #header{
+	font-size: 9vh;
+	color: white;
+	font-family: Source;
+	font-weight: bold;
+	margin-top: 2%;
+}
+
+#mainContainer #mainInfo #desc{
+	font-size: 3vh;
+	color: white;
+	font-family: Tahoma;
+	text-align: justify;
+	padding: 5%;
+}
+
+#mainContainer #footer {
+	color: white;
+	/*background-color: #b5dafd;*/
+	background-color: #44a3fc;
+	margin-top: 5%;
+	padding-bottom: 1%;
+	align-items: flex-start;
+	font-size: 2vh;
+}
+
+#mainContainer #footer #footerLinks {
+	font-style: Franklin Gothic;
+	align-items: flex-start;
+	padding: 0%;
+}
+
+#mainContainer #footer #footerAbout {
+	align-items: flex-end;
+	padding: 0%;
+}
+
+#mainContainer .merchCarousel {
+	width: 100%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.merchItem {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	width: 60%;
+	margin-right: 10px;
+	margin-left: 10px; 
+}
+
+.merchItem .merchItemDesc {
+	font-family: Source;
+	font-size: 2.5vh;
+	font-weight: bold;
+	text-align: center;
+}
+
+.merchItem .merchItemPic {
+	width: 100%;
+}

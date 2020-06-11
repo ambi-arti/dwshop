@@ -28,13 +28,13 @@ public class MerchColour {
     @JoinColumn(name = "merch_FK",nullable = false)
     @Getter
     @Setter
-    private long merchFK;
+    private Merch merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "colour_FK",nullable = false)
     @Getter
     @Setter
-    private long colourFK;
+    private Colour colourFK;
     
 }

@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,11 +28,11 @@ public class Merch {
     @Setter
     private String title;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "type_FK",nullable = false)
     @Getter
     @Setter
-    private long typeFK;
+    private MerchType typeFK;
     
     @Column(name = "price", nullable = false)
     @Getter

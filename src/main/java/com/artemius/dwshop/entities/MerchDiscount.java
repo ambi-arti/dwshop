@@ -28,13 +28,13 @@ public class MerchDiscount {
     @JoinColumn(name = "merch_FK",nullable = false)
     @Getter
     @Setter
-    private long merchFK;
+    private Merch merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "discount_FK",nullable = false)
     @Getter
     @Setter
-    private long discountFK;
+    private Discount discountFK;
     
 }

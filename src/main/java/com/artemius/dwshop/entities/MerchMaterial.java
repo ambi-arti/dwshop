@@ -29,14 +29,14 @@ public class MerchMaterial {
     @JoinColumn(name = "merch_FK",nullable = false)
     @Getter
     @Setter
-    private long merchFK;
+    private Merch merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "material_FK",nullable = false)
     @Getter
     @Setter
-    private long materialFK;
+    private MerchMaterial materialFK;
 
     
 }
