@@ -1,4 +1,8 @@
-
-<div th:fragment = "carousel" class="merchCarousel" th:each="merch : ${merchList}>
-		<div class = "merchItem"><img class = "merchItemPic" src = ${merch.imgsrc}></img><p class = "merchItemDesc" th:text = ${merch.name}></p></div>
-</div>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>	
+		<div th:fragment="carousel" class="merchCarousel" th:each="merch : ${merchList}">
+				<div class = "merchItem"><img class = "merchItemPic" src = ${merch.imgsrc}></img><p class = "merchItemDesc" th:text = ${merch.name}></p></div>
+		</div>
+	</body>
+</html>

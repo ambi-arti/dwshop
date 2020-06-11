@@ -15,14 +15,17 @@ public class MerchController {
     private MerchRepository m;
 
     @RequestMapping("/index")
-    public String greeting(Model model) {
+    public String index(Model model) {
         //model.addAttribute("name", name);
-        return "greeting";
+        return "index";
     }
     
     public String carousel (Model model) {
 	Iterable<Merch> merchList = m.findAll();
 	model.addAttribute("merchList",merchList);
+	for (Merch me: merchList) {
+	    me.getTitle();
+	}
 	return "carousel";
     }
 
