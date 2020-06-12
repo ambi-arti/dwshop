@@ -53,4 +53,8 @@ public class Merch {
     @Getter
     @Setter
     private String description;
+    
+    public String getTheTitle() {
+	return this.title;
+    }
 }

@@ -1,10 +1,11 @@
 package com.artemius.dwshop.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.artemius.dwshop.entities.MerchType;
 
-public interface MerchTypeRepository extends JpaRepository<MerchType, Long> {
+public interface MerchTypeRepository extends CrudRepository<MerchType, Long> {
     
 
 }

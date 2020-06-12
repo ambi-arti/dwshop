@@ -1,10 +1,11 @@
 package com.artemius.dwshop.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.artemius.dwshop.entities.Consumer;
 
-public interface ConsumerRepository extends JpaRepository<Consumer, Long> {
+public interface ConsumerRepository extends CrudRepository<Consumer, Long> {
     
 
 }

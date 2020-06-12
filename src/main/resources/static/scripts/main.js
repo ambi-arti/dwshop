@@ -6,7 +6,7 @@ function resetContents()  {
 function loadContent() {
 	$('.merchCarousel').slick({
 		infinite: false,
-		slidesToShow: 5,
+		slidesToShow: 3,
 		slidesToScroll: 3,
 		dots: true,
 		arrows: false

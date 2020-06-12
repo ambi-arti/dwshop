@@ -5,9 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${message} + '!'" />
-    <tr th:each="db : ${testDb}">
-    	<td th:text="${db}"></td>
+    <tr th:each="merch:${merchList}">
+    	<td th:text=${merch.getImgsrc()}></td>
     </tr>
 </body>
 </html>

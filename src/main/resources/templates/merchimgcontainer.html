@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<div th:fragment="merchimgcontainer" id = "merchImgContainer">
+			<img class = "flexElems" id = "merchImg" src = "graphics/merch/casual/gigachad.jpg"></img>
+			<div id = "merchActions" class="btn-group" role="group" aria-label="Button group with nested dropdown">
+				  <div class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Size:
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					  <a class="dropdown-item" href="#">M</a>
+					  <a class="dropdown-item" href="#">L</a>
+					  <a class="dropdown-item" href="#">XL</a>
+					</div>
+				  </div>
+				 <div class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Colour:
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					  <a class="dropdown-item" href="#">Black</a>
+					  <a class="dropdown-item" href="#">Brown</a>
+					  <a class="dropdown-item" href="#">Gray</a>
+					</div>
+				  </div>
+				<button type="button" class="btn btn-secondary">+</button>
+				<button type="button" disabled class="btn btn-secondary">0</button>
+				<button type="button" class="btn btn-secondary">-</button>
+				<button type="button" class="btn btn-secondary">To cart!</button>
+			</div>
+		</div>
+	</body>
+</html>

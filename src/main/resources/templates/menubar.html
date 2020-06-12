@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>	
+		<nav th:fragment="menubar" id = "menu" class="navbar navbar-expand-lg navbar-light">
+			<a id = "dw_logo_button"class="navbar-brand" href="#" onclick = "resetContents()">D&W Fashion</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto" id = "menuBar">
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Casual</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Business</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Sports</a>
+					  </li>
+					  <li class="nav-item active">
+						<a class="nav-link" href="#">Accessories</a>
+					  </li>
+					</ul>
+				<!--	<ul id = "auxBts" class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a href="#" id = "loginBtn" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
+						</li>
+						<li class="nav-item active">
+							<a href="#" role = "button"><img src = "graphics/cart.png"></img></a>
+						</li>
+					</ul> -->
+				  </div>
+				  <!--<div id = "auxBts">
+						<a href="#" id = "loginBtn" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log in</a>
+						<a href="#" role = "button"><img src = "graphics/cart.png"></img></a>
+				 </div> -->
+		</nav>
+	</body>
+</html>
