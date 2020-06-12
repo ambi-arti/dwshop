@@ -21,7 +21,7 @@ public class Merch {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    private long id_PK;
+    private Long id_PK;
     
     @Column(name = "title", nullable = false)
     @Getter
@@ -53,8 +53,4 @@ public class Merch {
     @Getter
     @Setter
     private String description;
-    
-    public String getTheTitle() {
-	return this.title;
-    }
 }

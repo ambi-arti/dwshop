@@ -5,6 +5,6 @@ import com.artemius.dwshop.entities.MerchMaterial;
 
 public interface MerchMaterialRepository extends CrudRepository<MerchMaterial, Long> {
     
-    public Iterable<MerchMaterial> getByMerchFK(Long merchFK);
+    public Iterable<MerchMaterial> findAllByMerchFK(Long merchFK);
 
 }
