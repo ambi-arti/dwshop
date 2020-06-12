@@ -7,5 +7,4 @@ import com.artemius.dwshop.entities.Merch;
 
 public interface MerchRepository extends CrudRepository<Merch, Long> {
     
-
 }

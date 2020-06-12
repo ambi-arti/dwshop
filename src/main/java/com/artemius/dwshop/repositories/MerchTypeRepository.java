@@ -6,6 +6,4 @@ import org.springframework.data.repository.CrudRepository;
 import com.artemius.dwshop.entities.MerchType;
 
 public interface MerchTypeRepository extends CrudRepository<MerchType, Long> {
-    
-
 }
