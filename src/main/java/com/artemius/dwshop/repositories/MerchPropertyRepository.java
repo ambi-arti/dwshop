@@ -7,7 +7,7 @@ import com.artemius.dwshop.entities.MerchProperty;
 
 public interface MerchPropertyRepository extends CrudRepository<MerchProperty, Long> {
     
-    @Query("SELECT e FROM MerchProperty e WHERE e.merchFK.id_PK = :merchID ")
+    @Query(value = "SELECT * FROM MerchProperty e WHERE e.merch_FK = :merchID ORDER BY property_FK ASC", nativeQuery = true)
     public Iterable<MerchProperty> findAllByMerchID(@Param("merchID")Long merchID);
     
 }

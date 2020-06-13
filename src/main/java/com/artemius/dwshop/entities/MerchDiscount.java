@@ -16,7 +16,7 @@ import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "merchDiscount")
+@Table(name = "merchdiscount")
 public class MerchDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
