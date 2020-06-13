@@ -7,14 +7,14 @@
 			<p id = "merchDescBlah" th:text="${merch.get().getDescription()}">Who doesn't like leath? It's difficult to find someone, who minds wearing
 			such a popular garment. Thus, D&W designers have brought to you a present - redesigned version of the classical leath! The new version is far more versatile and made of a high-quality leather, to ensure the comfort and sturdyness!</p>
 			<br>
-			<p class = "charTableTitle">Информация: </p>
+			<p class = "charTableTitle">РРЅС„РѕСЂРјР°С†РёСЏ: </p>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item">Год: 2019</li>
-				<li class="list-group-item">Материал: <tr th:each="mat,iterStat:${matList}">
+				<li class="list-group-item">Р“РѕРґ: 2019</li>
+				<li class="list-group-item">РњР°С‚РµСЂРёР°Р»: <tr th:each="mat,iterStat:${matList}">
 				<td style = "margin-right: 2%" th:utext="${mat.getTitle()}"></td><td th:if = "${not iterStat.last}" th:inline="none">, </td></tr></li>
-				<li class="list-group-item">Тип: outwear</li>
-				<li class="list-group-item">Доступные размеры: M, L, XL</li>
-				<li class="list-group-item">Цена: 69 USD$</li>
+				<li class="list-group-item">РўРёРї: outwear</li>
+				<li class="list-group-item">Р”РѕСЃС‚СѓРїРЅС‹Рµ СЂР°Р·РјРµСЂС‹: M, L, XL</li>
+				<li class="list-group-item">Р¦РµРЅР°: 69 USD$</li>
 			</ul>
 		</div>
 	</body>
