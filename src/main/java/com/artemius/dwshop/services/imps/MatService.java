@@ -22,7 +22,7 @@ public class MatService implements com.artemius.dwshop.services.MaterialService 
 
     @Override
     public List<Material> getMaterialsByMerchID(Long merchID) {
-	Iterable<MerchMaterial> merchMats =  this.getMerchMaterialsByMerchID(merchID);
+	Iterable<MerchMaterial> merchMats =  getMerchMaterialsByMerchID(merchID);
 	List<Long> ids = new ArrayList<Long>();
 	for (MerchMaterial merchMat: merchMats) {
 	    ids.add(merchMat.getMaterialFK().getId_PK());
@@ -36,7 +36,7 @@ public class MatService implements com.artemius.dwshop.services.MaterialService 
     @Override
     public List<MerchMaterial> getMerchMaterialsByMerchID(Long merchID) {
 	List<MerchMaterial> toReturn = new ArrayList<>();
-	for (MerchMaterial e: mM.findAllByMerchFK(merchID))
+	for (MerchMaterial e: mM.findAllByMerchID(merchID))
 	    toReturn.add(e);
 	return toReturn;
     }
