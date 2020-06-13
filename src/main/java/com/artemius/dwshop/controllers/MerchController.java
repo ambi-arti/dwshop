@@ -55,8 +55,8 @@ public class MerchController {
 	List<Colour> colList = cs.getColoursByMerchID(firstID);
 	List<Discount> discList = ds.getDiscountsByMerchID(firstID);
 	Double finalPrice = (double)(merch.get().getPrice());
-	for (Discount dis: discList) {
-	    finalPrice*=dis.getValue();
+	for (Discount ds: discList) {
+	    finalPrice*=ds.getValue();
 	}
 	model.put("merch",merch);
 	model.put("matList",matList);

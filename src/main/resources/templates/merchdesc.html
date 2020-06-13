@@ -19,7 +19,7 @@
 				<li class="list-group-item">Доступные цвета: <tr th:each="col,iterStat:${colList}">
 				<td style = "margin-right: 2%" th:utext="${col.getTitle()}"></td><td th:if = "${not iterStat.last}" th:inline="none">, </td></tr></li>
 				<li class="list-group-item">Цена: <span th:text = "${finalPrice}">69</span> RUB
-				<tr th:if="${not discList.size=0}" th:each="disc,iterStat:${discList}"></tr><td th:text="${disc.getTitle()}"></td><td th:if="not iterStat.last">, </td></li>
+				<tr th:each="disc,iterStat:${discList}"><td th:if = "${iterStat.first}">(</td><td th:text="${disc.getTitle()}"></td><td th:if="${not iterStat.last}">, </td><td th:if="${iterStat.last}">)</td></tr></li>
 			</ul>
 		</div>
 	</body>
