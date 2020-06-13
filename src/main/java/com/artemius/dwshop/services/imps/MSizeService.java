@@ -52,12 +52,12 @@ public class MSizeService implements com.artemius.dwshop.services.SizeService {
     }
 
     @Override
-    public void addNewMSize(MSize MSize) {
-	m.save(MSize);
+    public MSize addNewMSize(MSize MSize) {
+	return m.save(MSize);
     }
 
     @Override
-    public void addNewMerchSize(MerchSize merchSize) {
-	mM.save(merchSize);
+    public MerchSize addNewMerchSize(MerchSize merchSize) {
+	return mM.save(merchSize);
     }
 }

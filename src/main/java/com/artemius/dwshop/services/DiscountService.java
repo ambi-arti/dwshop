@@ -12,7 +12,7 @@ public interface DiscountService {
     public List<MerchDiscount> getMerchDiscountsByMerchID(Long merchID);
     public Optional<Discount> getDiscountByID(Long id_PK);
     public Optional<MerchDiscount> getMerchDiscountByID(Long id_PK);
-    public void addNewDiscount(Discount Discount);
-    public void addNewMerchDiscount(MerchDiscount merchDiscount);
+    public Discount addNewDiscount(Discount Discount);
+    public MerchDiscount addNewMerchDiscount(MerchDiscount merchDiscount);
 
 }

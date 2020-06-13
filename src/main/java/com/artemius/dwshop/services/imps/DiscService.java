@@ -52,12 +52,12 @@ public class DiscService implements com.artemius.dwshop.services.DiscountService
     }
 
     @Override
-    public void addNewDiscount(Discount Discount) {
-	m.save(Discount);
+    public Discount addNewDiscount(Discount Discount) {
+	return m.save(Discount);
     }
 
     @Override
-    public void addNewMerchDiscount(MerchDiscount merchDiscount) {
-	mM.save(merchDiscount);
+    public MerchDiscount addNewMerchDiscount(MerchDiscount merchDiscount) {
+	return mM.save(merchDiscount);
     }
 }

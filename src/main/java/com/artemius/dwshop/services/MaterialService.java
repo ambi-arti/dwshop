@@ -12,7 +12,7 @@ public interface MaterialService {
     public List<MerchMaterial> getMerchMaterialsByMerchID(Long merchID);
     public Optional<Material> getMaterialByID(Long id_PK);
     public Optional<MerchMaterial> getMerchMaterialByID(Long id_PK);
-    public void addNewMaterial(Material material);
-    public void addNewMerchMaterial(MerchMaterial merchMaterial);
+    public Material addNewMaterial(Material material);
+    public MerchMaterial addNewMerchMaterial(MerchMaterial merchMaterial);
 
 }

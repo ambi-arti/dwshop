@@ -20,20 +20,19 @@ import com.artemius.dwshop.repositories.MerchRepository;
 import com.artemius.dwshop.services.ColourService;
 import com.artemius.dwshop.services.DiscountService;
 import com.artemius.dwshop.services.MaterialService;
+import com.artemius.dwshop.services.MerchService;
 import com.artemius.dwshop.services.PropertyService;
 import com.artemius.dwshop.services.imps.ColService;
 import com.artemius.dwshop.services.imps.DiscService;
 import com.artemius.dwshop.services.imps.MatService;
+import com.artemius.dwshop.services.imps.MerService;
 import com.artemius.dwshop.services.imps.PropService;
 
 @Controller
 public class MerchController {
     
-    //The following code is an obvious shit: TESTING PURPOSES ONLY!
-    //It is a precursor to the Services foundation
-    
     @Autowired
-    private MerchRepository m;  
+    private MerchService m = new MerService();  
     @Autowired
     private MaterialService ms = new MatService();
     @Autowired
@@ -54,6 +53,7 @@ public class MerchController {
 	List<Property> propList = ps.getPropertysByMerchID(firstID); //список свойств
 	List<Colour> colList = cs.getColoursByMerchID(firstID);
 	List<Discount> discList = ds.getDiscountsByMerchID(firstID);
+	String typeTitle = m.findTypeNameByMerchID(firstID);
 	Double finalPrice = (double)(merch.get().getPrice());
 	for (Discount ds: discList) {
 	    finalPrice*=ds.getValue();
@@ -66,6 +66,7 @@ public class MerchController {
 	model.put("colList",colList);
 	model.put("discList",discList);
 	model.put("finalPrice",finalPrice);
+	model.put("typeTitle",typeTitle);
         return "index";
     }
     
@@ -87,11 +88,20 @@ public class MerchController {
 	List<MerchProperty> valuesList = ps.getMerchPropertysByMerchID(merchID); //список значений
 	List<Property> propList = ps.getPropertysByMerchID(merchID); //список свойств
 	List<Colour> colList = cs.getColoursByMerchID(merchID);
+	List<Discount> discList = ds.getDiscountsByMerchID(firstID);
+	String typeTitle = m.findTypeNameByMerchID(firstID);
+	Double finalPrice = (double)(merch.get().getPrice());
+	for (Discount ds: discList) {
+	    finalPrice*=ds.getValue();
+	}
 	model.put("merch",merch);
 	model.put("matList",matList);
 	model.put("propList",propList);
 	model.put("valuesList",valuesList);
 	model.put("colList",colList);
+	model.put("discList",discList);
+	model.put("finalPrice",finalPrice);
+	model.put("typeTitle",typeTitle);
 	return "merchInfo";
     }
     

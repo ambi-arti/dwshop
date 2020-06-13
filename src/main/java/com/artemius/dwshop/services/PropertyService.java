@@ -12,7 +12,7 @@ public interface PropertyService {
     public List<MerchProperty> getMerchPropertysByMerchID(Long merchID);
     public Optional<Property> getPropertyByID(Long id_PK);
     public Optional<MerchProperty> getMerchPropertyByID(Long id_PK);
-    public void addNewProperty(Property Property);
-    public void addNewMerchProperty(MerchProperty merchProperty);
+    public Property addNewProperty(Property Property);
+    public MerchProperty addNewMerchProperty(MerchProperty merchProperty);
 
 }

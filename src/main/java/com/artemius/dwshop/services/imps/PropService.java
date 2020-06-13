@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Property;
@@ -53,12 +52,12 @@ public class PropService implements com.artemius.dwshop.services.PropertyService
     }
 
     @Override
-    public void addNewProperty(Property Property) {
-	m.save(Property);
+    public Property addNewProperty(Property Property) {
+	return m.save(Property);
     }
 
     @Override
-    public void addNewMerchProperty(MerchProperty merchProperty) {
-	mM.save(merchProperty);
+    public MerchProperty addNewMerchProperty(MerchProperty merchProperty) {
+	return mM.save(merchProperty);
     }
 }

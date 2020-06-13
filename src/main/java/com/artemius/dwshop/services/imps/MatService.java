@@ -52,13 +52,13 @@ public class MatService implements com.artemius.dwshop.services.MaterialService 
     }
 
     @Override
-    public void addNewMaterial(Material material) {
-	m.save(material);
+    public Material addNewMaterial(Material material) {
+	return m.save(material);
     }
 
     @Override
-    public void addNewMerchMaterial(MerchMaterial merchMaterial) {
-	mM.save(merchMaterial);
+    public MerchMaterial addNewMerchMaterial(MerchMaterial merchMaterial) {
+	return mM.save(merchMaterial);
     }
 
 }

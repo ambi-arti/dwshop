@@ -11,7 +11,7 @@
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">Материал: <tr th:each="mat,iterStat:${matList}">
 				<td style = "margin-right: 2%" th:utext="${mat.getTitle()}"></td><td th:if = "${not iterStat.last}" th:inline="none">, </td></tr></li>
-				<li class="list-group-item">Тип: outwear</li>
+				<li class="list-group-item">Тип: <span th:text = "${typeTitle}">outwear</span></li>
 				<tr th:each="value,iterStat:${valuesList}">
 					<li class="list-group-item"><td th:with="propID=${value.getPropertyFK().getId_PK()}" th:text="${propList.get(iterStat.index).getTitle()}"></td><td>: </td><td th:text="${value.getValue()}"></td><td> </td><td th:text="${propList.get(iterStat.index).getMeasure()}"></td></li>
 				</tr>

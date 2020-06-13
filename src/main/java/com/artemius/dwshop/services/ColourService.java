@@ -12,7 +12,7 @@ public interface ColourService {
     public List<MerchColour> getMerchColoursByMerchID(Long merchID);
     public Optional<Colour> getColourByID(Long id_PK);
     public Optional<MerchColour> getMerchColourByID(Long id_PK);
-    public void addNewColour(Colour Colour);
-    public void addNewMerchColour(MerchColour merchColour);
+    public Colour addNewColour(Colour Colour);
+    public MerchColour addNewMerchColour(MerchColour merchColour);
 
 }

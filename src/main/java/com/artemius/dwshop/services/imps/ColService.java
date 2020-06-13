@@ -52,12 +52,12 @@ public class ColService implements com.artemius.dwshop.services.ColourService {
     }
 
     @Override
-    public void addNewColour(Colour Colour) {
-	m.save(Colour);
+    public Colour addNewColour(Colour Colour) {
+	return m.save(Colour);
     }
 
     @Override
-    public void addNewMerchColour(MerchColour merchColour) {
-	mM.save(merchColour);
+    public MerchColour addNewMerchColour(MerchColour merchColour) {
+	return mM.save(merchColour);
     }
 }
