@@ -20,7 +20,7 @@ function sendRequest(type,url,params,target) {
 	return request;
 }
 
-function loadContent() {
+function loadContent(page) {
 	$('.merchCarousel').slick({
 		infinite: false,
 		slidesToShow: 3,
@@ -28,10 +28,19 @@ function loadContent() {
 		dots: true,
 		arrows: false
 	});
+	let initMerchID;
+	switch (page) {
+		case "Casual":
+			initMerchID=1;
+			break;
+		default: initMerchID=1;
+			break;
+	}
+
+	showMerchInfo(initMerchID);
 }
 
-function showMerchInfo(merch) {
-	let merchID = merch.getAttribute("merchid");
+function showMerchInfo(merchID) {
 	let merchInfo = document.getElementById("merchInfo");
 	//AJAX query: send the merch ID back to server, retrieves a view of merch info with all data set
 	const request = sendRequest("POST","/merchInfo",("merchID="+merchID),merchInfo);

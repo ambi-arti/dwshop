@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<body>	
 		<div th:fragment="carousel" class="merchCarousel">
-			<div onclick="showMerchInfo(this)" th:each="merch:${merchList}" class = "merchItem" th:merchID = ${merch.getId_PK()}>
+			<div onclick="showMerchInfo(this.getAttribute('merchid'))" th:each="merch:${merchList}" class = "merchItem" th:merchID = ${merch.getId_PK()}>
 				<img class = "merchItemPic" th:src = ${merch.getImgsrc()}></img>
 				<p class = "merchItemDesc" th:text = ${merch.getTitle()}></p>
 			</div>

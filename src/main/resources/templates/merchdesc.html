@@ -15,8 +15,8 @@
 				<tr th:each="value,iterStat:${valuesList}">
 					<li class="list-group-item"><td th:with="propID=${value.getPropertyFK().getId_PK()}" th:text="${propList.get(iterStat.index).getTitle()}"></td><td>: </td><td th:text="${value.getValue()}"></td><td> </td><td th:text="${propList.get(iterStat.index).getMeasure()}"></td></li>
 				</tr>
-				<li class="list-group-item">Доступные размеры: M, L, XL</li>
-				<li class="list-group-item">Доступные цвета: <tr th:each="col,iterStat:${colList}">
+				<li class="list-group-item">Доступные размеры: <tr th:each="size,iterStat:${sizeList}"><td style = "margin-right: 2%" th:utext="${size.getSizeFK().getTitle()}"></td><td th:if = "${not iterStat.last}" th:inline="none">, </td></tr> </li> 
+				<li class="list-group-item">Цвета: <tr th:each="col,iterStat:${colList}">
 				<td style = "margin-right: 2%" th:utext="${col.getTitle()}"></td><td th:if = "${not iterStat.last}" th:inline="none">, </td></tr></li>
 				<li class="list-group-item">Цена: <span th:text = "${finalPrice}">69</span> RUB
 				<tr th:each="disc,iterStat:${discList}"><td th:if = "${iterStat.first}">(</td><td th:text="${disc.getTitle()}"></td><td th:if="${not iterStat.last}">, </td><td th:if="${iterStat.last}">)</td></tr></li>

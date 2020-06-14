@@ -2,7 +2,7 @@
 <!--Made by: Ryakhovky A.V, b1-IFST-21; started at: 18.05.2020-->
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="merchpagehead::merchpagehead"></head>
-	<body onload = "loadContent()">
+	<body onload = "loadContent('Casual')">
 	<script src = "slick/slick.min.js"></script>
 		<div th:replace = "menubar::menubar"></div>
 		<div id = "mainContainer">
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div th:replace="carousel::carousel"></div>
-			<div id = "merchInfo" class = "flexElemsRow" th:insert="merchinfo::merchinfo(merch=${merch},matList=${matList})"></div>
+			<div id = "merchInfo" class = "flexElemsRow"></div>
 			<div th:replace="footer::footer"></div>
 		</div>
 	</body>

@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 	<body th:fragment="merchinfo">
-		<div th:replace="merchimgcontainer::merchimgcontainer"></div>
-		<div th:replace="merchdesc::merchdesc(merch=${merch},matList=${matList})"></div>			
+		<div th:replace="merchimgcontainer::merchimgcontainer(merch=${merch},matList=${matList})"></div>
+		<div th:replace="merchdesc::merchdesc(merch=${merch},matList=${matList})"></div>
 	</body>
 </html>
