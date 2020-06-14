@@ -1,6 +1,40 @@
+var currentMerch = {
+	merchID: null,
+	sizeFK: null,
+	quantity: 0
+};
 
 function resetContents()  {
 	//Resets all the contents to their default view
+}
+
+function setCurrentMerch(merchID) {
+	currentMerch.merchID = parseInt(merchID);
+	currentMerch.sizeFK = null;
+	currentMerch.quantity = 0;
+	showMerchInfo(merchID);
+}
+
+function setMerchSize(sizeFK,sizeTitle) {
+	currentMerch.sizeFK = sizeFK;
+	document.getElementById("sizeButton").innerHTML = "Размер: "+sizeTitle;
+}
+
+function incrementCurrentMerch() {
+	currentMerch.quantity++;
+	document.getElementById("quantityPicked").innerHTML = currentMerch.quantity;
+}
+
+function decrementCurrentMerch() {
+	let val = parseInt(document.getElementById("quantityPicked").innerHTML);
+	if (val>0) {
+		currentMerch.quantity--;
+		document.getElementById("quantityPicked").innerHTML = currentMerch.quantity;
+	}
+}
+
+function addToCart() {
+	//
 }
 
 function sendRequest(type,url,params,target) {
@@ -36,7 +70,6 @@ function loadContent(page) {
 		default: initMerchID=1;
 			break;
 	}
-
 	showMerchInfo(initMerchID);
 }
 

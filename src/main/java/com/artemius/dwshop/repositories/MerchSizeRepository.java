@@ -7,7 +7,8 @@ import com.artemius.dwshop.entities.MerchSize;
 
 public interface MerchSizeRepository extends CrudRepository<MerchSize, Long> {
     
-    @Query("SELECT * FROM MerchSize e WHERE e.merchFK.id_PK = :merchID ")
+    //@Query(value = "SELECT * FROM MerchSize e WHERE e.merchFK.id_PK = :merchID ")
+    @Query(value = "SELECT * FROM MerchSize WHERE merch_FK = :merchID ", nativeQuery=true)
     public Iterable<MerchSize> findAllByMerchID(@Param("merchID")Long merchID);
     
 }

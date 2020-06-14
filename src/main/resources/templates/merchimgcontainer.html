@@ -6,16 +6,17 @@
 			<img class = "flexElems" id = "merchImg" th:src = "${merch.get().getImgsrc()}"></img>
 			<div id = "merchActions" class="btn-group" role="group" aria-label="Button group with nested dropdown">
 				  <div class="btn-group" role="group">
-					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  Size:
+					<button id="sizeButton" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Размер:
 					</button>
-					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1" th:each="size,iterStat:${sizeList}">
-						<a th:if="${size.getQuantity()} > 0" class="dropdown-item" href="#" th:text="${size.getSizeFK().getTitle()}"></a>
-					 <!--  <a class="dropdown-item" href="#">M</a>
-					  <a class="dropdown-item" href="#">L</a>
-					  <a class="dropdown-item" href="#">XL</a>-->
-					</div>
-				  </div>
+					 <div class="dropdown-menu">
+							<a th:each="size,iterStat:${sizeList}" th:sizeFK = ${size.getSizeFK().getId_PK()} th:sizeTitle = ${size.getSizeFK().getTitle()} th:onclick="setMerchSize(this.getAttribute('sizeFK'),this.getAttribute('sizeTitle'))" th:if="${size.getQuantity()} > 0" class="dropdown-item">
+								<span th:utext="${size.getSizeFK().getTitle()}"></span><span>:</span>
+								<span th:utext="${size.getQuantity()}"></span>
+								<span>штук</span>
+							</a>
+					 </div>
+				 </div>
 				 <div class="btn-group" role="group">
 				<!--	<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  Colour:
@@ -26,10 +27,11 @@
 					  <a class="dropdown-item" href="#">Gray</a>
 					</div>-->
 				 </div>
-				<button type="button" class="btn btn-secondary">+</button>
-				<button type="button" disabled class="btn btn-secondary">0</button>
-				<button type="button" class="btn btn-secondary">-</button>
-				<button type="button" class="btn btn-secondary">To cart!</button>
+				<button type="button" class="btn btn-secondary" onclick = "incrementCurrentMerch()">+</button>
+				<button type="button" disabled class="btn btn-secondary"><span id = "quantityPicked">0</span>
+				</button>
+				<button type="button" class="btn btn-secondary" onclick = "decrementCurrentMerch()">-</button>
+				<button type="button" class="btn btn-secondary" onclick = "addToCart()">В корзину!</button>
 			</div>
 		</div>
 	</body>
