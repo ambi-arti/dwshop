@@ -1,8 +1,3 @@
-var currentMerch = {
-	merchID: null,
-	sizeFK: null,
-	quantity: 0
-};
 
 function resetContents()  {
 	//Resets all the contents to their default view
@@ -34,7 +29,9 @@ function decrementCurrentMerch() {
 }
 
 function addToCart() {
-	//
+	/*Проверяет, залогинился ли юзверь (запросом на сервер, или проверкой кэша): 
+	 * Если да - формирует запрос на внесение текущего айтема в корзину.
+	 * Если нет - то отфутболивает на страничку регистрации (да-да, придётся поебаться со Spring Security)*/
 }
 
 function sendRequest(type,url,params,target) {
@@ -70,12 +67,16 @@ function loadContent(page) {
 		default: initMerchID=1;
 			break;
 	}
+	var currentMerch = {
+			merchID: initMerchID,
+			sizeFK: null,
+			quantity: 0
+		};
 	showMerchInfo(initMerchID);
 }
 
 function showMerchInfo(merchID) {
 	let merchInfo = document.getElementById("merchInfo");
-	//AJAX query: send the merch ID back to server, retrieves a view of merch info with all data set
 	const request = sendRequest("POST","/merchInfo",("merchID="+merchID),merchInfo);
 	console.log(request);
 }
