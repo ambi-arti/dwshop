@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Logging in!</title>
+    </head>
+    <body>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/registration}" method="post">
+        	<div><label> Фамилия: <input type="text" th:value="${surname}" name="surname"/> </label></div>
+        	<div><label> Имя: <input type="text" th:value="${firstname}" name="firstname"/> </label></div>
+        	<div><label> Отчество: <input type="text" th:value="${patronymic}" name="patronymic"/> </label></div>
+        	<div><label> Дата рождения: <input type="date" th:value="${birthdate}" name="birthdate"/> </label></div>
+        	<div><label> Город: <input type="text" th:value="${city}" name="city"/> </label></div>
+        	<div><label> Адрес: <input type="text" th:value="${address}" name="address"/> </label></div>
+            <div><label> Email: <input type="text" th:value="${username}" name="username"/> </label></div>
+            <div th:if="${nicknameExists}" th:text="${nicknameExists}" ></div>
+        	<div th:if="${notAnEmail}" th:text="${notAnEmail}"></div>
+            <div><label> Password: <input type="password" name="password"/> </label></div>
+            <div th:if="${passwordTooShort}" th:text="${passwordTooShort}"></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
+    </body>
+</html>

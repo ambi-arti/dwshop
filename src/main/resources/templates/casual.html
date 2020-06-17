@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="merchpagehead::merchpagehead"></head>
 	<body onload = "loadContent('Casual')">
-	<script src = "slick/slick.min.js"></script>
+		<script th:src = "@{slick/slick.min.js}"></script>
 		<div th:replace = "menubar::menubar"></div>
 		<div id = "mainContainer">
 			<div id = "mainInfo" style = "background-image: url(graphics/backs/casual.jpg)">

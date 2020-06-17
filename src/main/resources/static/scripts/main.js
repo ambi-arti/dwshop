@@ -1,3 +1,4 @@
+var currentMerch = null;
 
 function resetContents()  {
 	//Resets all the contents to their default view
@@ -67,7 +68,7 @@ function loadContent(page) {
 		default: initMerchID=1;
 			break;
 	}
-	var currentMerch = {
+	currentMerch = {
 			merchID: initMerchID,
 			sizeFK: null,
 			quantity: 0

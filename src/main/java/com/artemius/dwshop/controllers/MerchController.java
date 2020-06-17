@@ -6,19 +6,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.artemius.dwshop.entities.Colour;
 import com.artemius.dwshop.entities.Discount;
-import com.artemius.dwshop.entities.MSize;
 import com.artemius.dwshop.entities.Material;
 import com.artemius.dwshop.entities.Merch;
 import com.artemius.dwshop.entities.MerchProperty;
 import com.artemius.dwshop.entities.MerchSize;
 import com.artemius.dwshop.entities.Property;
-import com.artemius.dwshop.repositories.MerchRepository;
 import com.artemius.dwshop.services.ColourService;
 import com.artemius.dwshop.services.DiscountService;
 import com.artemius.dwshop.services.MaterialService;
@@ -46,17 +44,29 @@ public class MerchController {
     @Autowired
     private ColourService cs = new ColService();
     @Autowired
-    private SizeService ss = new MSizeService();
+    private SizeService ss = new MSizeService();    
     
+
+    @RequestMapping("/casual")
+    public String casual(Map<String,Object> model) {
+	Iterable<Merch> merchList =  m.findBySection("Casual");
+	model.put("merchList",merchList);
+        return "casual";
+    }
 
     @RequestMapping("/index")
     public String index(Map<String,Object> model) {
-	Iterable<Merch> merchList =  m.findBySection("Casual");
-	model.put("merchList",merchList);
-        return "index";
+        return "redirect:/casual";
     }
     
-    @RequestMapping("/merchInfo")
+    @RequestMapping("/")
+    public String root(Map<String,Object> model) {
+        return "redirect:/casual";
+    }
+    
+    
+    
+    @PostMapping("/merchInfo")
     public String merchInfo(@RequestParam(name = "merchID",required=true)Long merchID, Map<String,Object> model) {
 	Optional<Merch> merch = m.findById(merchID);
 	Iterable<Material> matList = ms.getMaterialsByMerchID(merchID);
@@ -82,9 +92,5 @@ public class MerchController {
 	return "merchInfo";
     }
     
-    public String carousel (Map<String,Object> model) {
-	//model.put("merchList",merchList);
-	return "carousel";
-    }
 
 }
