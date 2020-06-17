@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.artemius.dwshop.entities.CartItem;
 import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.MerchDiscount;
+import com.artemius.dwshop.entities.Roles;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.DiscountService;
@@ -45,7 +46,7 @@ public class ConsmController {
     
    @GetMapping("/cart")
     public String cart(Map<String,Object> model) { //redirects to the cart page
-	return "";
+	return "cart";
     }
     
     @PostMapping("/cart_add") //adding some merch

@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="cartcontents">
+	<div id = "cartсontents" class = "flexElems">
+		<div class = "cartItem flexElemsRow">
+			<img class = "cartItemImg" th:src = "@{/static/graphics/merch/gigachad.img}"></img>
+			<span class = "cartItemTitle">D&W New Gigachad</span>
+			<input class="form-control" id = "cartItemPrice" type="text" placeholder="3000 RUB">
+			<button id="incrementButton" type="button"class="btn btn-secondary quantBut">+</button>
+			<button type="button" disabled class="btn btn-secondary"><span id = "quantityPicked">0</span></button>
+			<button id="decrementButton" type="button" class="btn btn-secondary quantBut">-</button>
+			<a class="dropdown-item" href="#">Убрать из корзины</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

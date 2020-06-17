@@ -199,6 +199,25 @@
 	margin-bottom: 2%;
 }
 
+.cartItem {
+	display: flex;
+	flex-directon: row;
+	justify-content: space-between;
+	align-content: center;
+	width: 95%;
+	padding: 2%;
+	border: 3px solid black;
+	border-radius: 3%;
+	font-family: Franklin Gothic;
+	font-size: 3vh;
+}
+
+.cartItem .cartItemImg {
+	height: 200px;
+}
+
+
+
 .merchItem {
 	display: flex;
 	flex-direction: column;
@@ -213,6 +232,17 @@
 	font-size: 2.5vh;
 	font-weight: bold;
 	text-align: center;
+}
+
+.merchItem button {
+	background: white;
+	border: 3px solid black;
+	color: black;
+	font-size: 2vh;
+}
+
+.merchItem .quantBut {
+	border-radius: 50%;
 }
 
 .merchItem .merchItemPic {
