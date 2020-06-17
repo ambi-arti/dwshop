@@ -4,8 +4,24 @@
 	z-index: 2;
 }
 
-#menu #menuBar {
+#menuBar {
 	margin-left: 5%;
+}
+
+#loginButton {
+	background-color: transparent;
+	border: 2px solid white;
+	font-size: 3vh;
+}
+
+#profileMenu {
+	background-color: transparent;
+	border: none;
+	font-size: 3vh;
+}
+
+#profileMenu:enabled {
+	border: none;
 }
 
 #menu .nav-item {

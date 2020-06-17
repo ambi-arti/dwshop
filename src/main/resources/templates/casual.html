@@ -4,7 +4,7 @@
 	<head th:replace="merchpagehead::merchpagehead"></head>
 	<body onload = "loadContent('Casual')">
 		<script th:src = "@{slick/slick.min.js}"></script>
-		<div th:replace = "menubar::menubar"></div>
+		<div th:replace = "menubar::menubar(user=${user})"></div>
 		<div id = "mainContainer">
 			<div id = "mainInfo" style = "background-image: url(graphics/backs/casual.jpg)">
 				<div id = "mainInfoContainer"  class = "flexElems">

@@ -1,4 +1,20 @@
 var currentMerch = null;
+var sizeButton = document.getElementById("sizeButton");
+var token =  $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader(header, token);
+    }
+});
+
+/*$(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});*/
 
 function resetContents()  {
 	//Resets all the contents to their default view
@@ -11,28 +27,45 @@ function setCurrentMerch(merchID) {
 	showMerchInfo(merchID);
 }
 
+function canAddToCartCheck() {
+	if (currentMerch.sizeFK!=null&&currentMerch.quantity>0)
+		document.getElementById("cartButton").disabled=false;
+}
+
+function canNotAddToCartCheck() {
+	if (currentMerch.sizeFK==null||currentMerch.quantity==0)
+		document.getElementById("cartButton").disabled=true;
+}
+
 function setMerchSize(sizeFK,sizeTitle) {
 	currentMerch.sizeFK = sizeFK;
+	document.getElementById("incrementButton").disabled=false;
 	document.getElementById("sizeButton").innerHTML = "Размер: "+sizeTitle;
+	canAddToCartCheck();
 }
 
 function incrementCurrentMerch() {
 	currentMerch.quantity++;
+	document.getElementById("decrementButton").disabled=false;
 	document.getElementById("quantityPicked").innerHTML = currentMerch.quantity;
+	canAddToCartCheck();
 }
 
 function decrementCurrentMerch() {
-	let val = parseInt(document.getElementById("quantityPicked").innerHTML);
+	let val = currentMerch.quantity;
 	if (val>0) {
 		currentMerch.quantity--;
 		document.getElementById("quantityPicked").innerHTML = currentMerch.quantity;
 	}
+	else document.getElementById("decrementButton").disabled=true
+	canNotAddToCartCheck();
 }
 
 function addToCart() {
-	/*Проверяет, залогинился ли юзверь (запросом на сервер, или проверкой кэша): 
-	 * Если да - формирует запрос на внесение текущего айтема в корзину.
-	 * Если нет - то отфутболивает на страничку регистрации (да-да, придётся поебаться со Spring Security)*/
+	const request = sendRequest("POST","/cart_add",("id="
+			+currentMerch.merchID
+			+"&amount="+currentMerch.quantity
+			+"&size="+currentMerch.sizeFK),document.getElementById("cartResponse"));
 }
 
 function sendRequest(type,url,params,target) {
@@ -40,11 +73,10 @@ function sendRequest(type,url,params,target) {
 	request.open(type, (url+"?"+params), true);
 	request.addEventListener("readystatechange", () => {
 	    if(request.readyState === 4 && request.status === 200) {
-	    	if (target==null)
-	    		console.log(request.responseText);
-	    	else {
+	    	if (target!=null){
 	    		target.innerHTML=request.responseText;
 	    	}
+	    	else console.log(request.responseText);
 	    }
 	    
 	});
@@ -71,7 +103,7 @@ function loadContent(page) {
 	currentMerch = {
 			merchID: initMerchID,
 			sizeFK: null,
-			quantity: 0
+			quantity: 0,
 		};
 	showMerchInfo(initMerchID);
 }

@@ -10,7 +10,7 @@
 					  Размер:
 					</button>
 					 <div class="dropdown-menu">
-							<a th:each="size,iterStat:${sizeList}" th:sizeFK = ${size.getSizeFK().getId_PK()} th:sizeTitle = ${size.getSizeFK().getTitle()} th:onclick="setMerchSize(this.getAttribute('sizeFK'),this.getAttribute('sizeTitle'))" th:if="${size.getQuantity()} > 0" class="dropdown-item">
+							<a th:each="size,iterStat:${sizeList}" th:sizeFK = ${size.getId_PK()} th:sizeTitle = ${size.getSizeFK().getTitle()} th:onclick="setMerchSize(this.getAttribute('sizeFK'),this.getAttribute('sizeTitle'))" th:if="${size.getQuantity()} > 0" class="dropdown-item">
 								<span th:utext="${size.getSizeFK().getTitle()}"></span><span>:</span>
 								<span th:utext="${size.getQuantity()}"></span>
 								<span>штук</span>
@@ -27,12 +27,13 @@
 					  <a class="dropdown-item" href="#">Gray</a>
 					</div>-->
 				 </div>
-				<button type="button" class="btn btn-secondary" onclick = "incrementCurrentMerch()">+</button>
+				<button id="incrementButton" type="button" disabled class="btn btn-secondary" onclick = "incrementCurrentMerch()">+</button>
 				<button type="button" disabled class="btn btn-secondary"><span id = "quantityPicked">0</span>
 				</button>
-				<button type="button" class="btn btn-secondary" onclick = "decrementCurrentMerch()">-</button>
-				<button type="button" class="btn btn-secondary" onclick = "addToCart()">В корзину!</button>
+				<button id="decrementButton" type="button" class="btn btn-secondary" disabled onclick = "decrementCurrentMerch()">-</button>
+				<button id="cartButton" type="button" disabled class="btn btn-secondary" onclick = "addToCart()">В корзину!</button>
 			</div>
+			<span class = "flexElems" id = "cartResponse"></span>
 		</div>
 	</body>
 </html>

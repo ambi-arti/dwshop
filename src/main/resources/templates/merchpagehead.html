@@ -5,6 +5,8 @@
 		<title>D&W Online Shop</title>
 		<meta charset = "utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="_csrf" content="${_csrf.token}"/>
+    	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 		<link th:rel = "stylesheet" type="text/css" media="screen" th:href = "@{/styles/bootstrap/bootstrap.min.css}"/>
 		<link th:rel = "stylesheet" type="text/css" media="screen" th:href = "@{/styles/bootstrap/bootstrap-reboot.min.css}"/>
 		<link th:rel = "stylesheet" type="text/css" media="screen" th:href = "@{/styles/bootstrap/bootstrap-grid.min.css}"/>
