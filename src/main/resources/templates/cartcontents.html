@@ -1,14 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="cartcontents">
 	<div id = "cartсontents" class = "flexElems">
-		<div class = "cartItem flexElemsRow">
-			<img class = "cartItemImg" th:src = "@{/static/graphics/merch/gigachad.img}"></img>
-			<span class = "cartItemTitle">D&W New Gigachad</span>
-			<input class="form-control" id = "cartItemPrice" type="text" placeholder="3000 RUB">
-			<button id="incrementButton" type="button"class="btn btn-secondary quantBut">+</button>
-			<button type="button" disabled class="btn btn-secondary"><span id = "quantityPicked">0</span></button>
-			<button id="decrementButton" type="button" class="btn btn-secondary quantBut">-</button>
-			<a class="dropdown-item" href="#">Убрать из корзины</a>
+		<div class = "cartItem">
+			<img class = "cartItemImg" src = "graphics/merch/casual/gigachad.jpg"></img>
+			<div class = " innerItem">
+				<p class = "cartItemTitle">D&W New Gigachad</p>
+				<span class = "cartItemInfo"><p>Размер: М</p><p>Скидка: <span>75%</span></p></span>
+			</div>
+			<div class = "innerItem" id = "cartItemPriceContainer">
+				<span>
+						Цена: <span>3600 р.</span>
+				</span>
+				<div class="btn-group innerItem" role="group">
+					<button id="incrementButton" type="button"class="btn btn-secondary quantBut innerItem">+</button>
+					<button type="button" disabled class="btn btn-secondary"><span id = "quantityPicked">0</span></button>
+					<button id="decrementButton" type="button" class="btn btn-secondary quantBut">-</button>
+				</div>
+			</div>
+			<a id = "cartItemRemove" href="#">X</a>
 		</div>
 	</div>
 </div>
