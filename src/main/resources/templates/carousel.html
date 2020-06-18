@@ -3,8 +3,9 @@
 	<body>	
 		<div th:fragment="carousel" class="merchCarousel">
 			<div onclick="setCurrentMerch(this.getAttribute('merchid'))" th:each="merch:${merchList}" class = "merchItem" th:merchID = ${merch.getId_PK()}>
-				<img class = "merchItemPic" th:src = ${merch.getImgsrc()}></img>
 				<p class = "merchItemDesc" th:text = ${merch.getTitle()}></p>
+				<img class = "merchItemPic" th:src = ${merch.getImgsrc()}></img>
+				<p class = "merchItemDesc"><span th:text = ${merch.getPrice()}></span><span> рублей</span></p>
 			</div>
 		</div>
 	</body>

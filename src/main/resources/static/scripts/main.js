@@ -68,6 +68,48 @@ function addToCart() {
 			+"&size="+currentMerch.sizeFK),document.getElementById("cartResponse"));
 }
 
+function removeItem(itemId) {
+	let cartcontents=document.getElementById("cartcontents");
+	const request = sendRequest("POST",
+			"/cart_remove",
+			("itemId="+itemId),
+			cartcontents);
+}
+
+function incrementItem(itemId) {
+	let cartcontents=document.getElementById("cartcontents");
+	const request = sendRequest("POST",
+			"/cart_increment",
+			("itemId="+itemId),
+			cartcontents);
+/*	if (response="+") {
+		console.log("Success!");
+		value = document.getElementById("quantityPicked").value;
+		document.getElementById("quantityPicked").value = parseInt(value)+1;
+	}
+	else {
+		console.log("Fail!");
+		document.getElementById("incrementButton").setAttribute("disabled",true);
+	} */
+}
+
+function decrementItem(itemId) {
+	let cartcontents=document.getElementById("cartcontents");
+	const request = sendRequest("POST",
+			"/cart_decrement",
+			("itemId="+itemId),
+			cartcontents);
+	/*if (response="+") {
+		console.log("Success!");
+		value = document.getElementById("quantityPicked").value;
+		document.getElementById("quantityPicked").value = parseInt(value)-1;
+	}
+	else {
+		console.log("Fail!");
+		document.getElementById("decrementButton").setAttribute("disabled",true);
+	}*/
+}
+
 function sendRequest(type,url,params,target) {
 	const request = new XMLHttpRequest();
 	request.open(type, (url+"?"+params), true);
@@ -85,13 +127,6 @@ function sendRequest(type,url,params,target) {
 }
 
 function loadContent(page) {
-	$('.merchCarousel').slick({
-		infinite: false,
-		slidesToShow: 3,
-		slidesToScroll: 3,
-		dots: true,
-		arrows: false
-	});
 	let initMerchID;
 	switch (page) {
 		case "Casual":

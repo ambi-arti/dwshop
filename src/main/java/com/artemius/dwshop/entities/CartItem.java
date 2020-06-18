@@ -38,7 +38,7 @@ public class CartItem {
     private MerchSize merchSizeFK;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "consumer_FK",nullable = false)
+    @JoinColumn(name = "consumer_fk",nullable = false)
     @Getter
     @Setter
     private Account consumerFK;
@@ -46,7 +46,7 @@ public class CartItem {
     @Column(name = "quantity", nullable = false)
     @Getter
     @Setter
-    private Integer quantity;
+    private Long quantity;
     
     @Column(name = "cost", nullable = false)
     @Getter

@@ -5,7 +5,7 @@
 	<body onload = "loadContent('Cart')">
 		<div th:replace = "menubar::menubar(user=${user})"></div>
 		<div id = "mainContainer">
-			<div th:replace = "cartcontents::cartcontents"></div>
+			<div id = "cartcontents" th:insert = "cartcontents::cartcontents(items=${items})" class = "flexElems"></div>
 			<div th:replace="footer::footer"></div>
 		</div>
 	</body>

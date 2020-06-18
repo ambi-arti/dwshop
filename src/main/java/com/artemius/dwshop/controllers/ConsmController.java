@@ -45,8 +45,71 @@ public class ConsmController {
     CartItemRepository cs;   //to be replaced with service
     
    @GetMapping("/cart")
-    public String cart(Map<String,Object> model) { //redirects to the cart page
+    public String cart(Map<String,Object> model, Principal principal) { //redirects to the cart page
+       	if (principal==null)
+       	    return "redirect:/login";
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
 	return "cart";
+    }
+   
+   @PostMapping("/cart_increment")
+   public String incrementCart(@RequestParam(name="itemId",required=true)Long itemId,
+	    Map<String,Object> model,
+	    Principal principal) {
+	if (principal==null)
+      	    return "redirect:/login";
+	long quantity = cs.findById(itemId).get()
+		.getQuantity();
+	long max = ss.getMerchSizeByID(cs.findById(itemId)
+		.get().getMerchSizeFK()
+		.getId_PK())
+		.get().getQuantity();
+	if (quantity<max) {
+	   CartItem toSave = cs.findById(itemId).get();
+	   toSave.setQuantity(quantity+1);
+	   cs.save(toSave);
+	}
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	model.put("items",items);
+	    
+	return "cartcontents";
+   }
+   
+   @PostMapping("/cart_decrement") 
+   public String decrementCart(@RequestParam(name="itemId",required=true)Long itemId,
+	    Map<String,Object> model,
+	    Principal principal) throws Exception{
+	if (principal==null)
+      	    return "redirect:/login";
+	long quantity = cs.findById(itemId).get()
+		.getQuantity();
+	if (quantity>0) {
+	    CartItem toSave = cs.findById(itemId).get();
+	    toSave.setQuantity(quantity-1);
+	    cs.save(toSave);
+	    cs.wait(1000);
+	}
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	model.put("items",items);
+	return "cartcontents";
+   }
+   
+    @PostMapping("/cart_remove")
+    public String removeFromCart(@RequestParam(name="itemId",required=true)Long itemId,
+	    Map<String,Object> model,
+	    Principal principal) {
+	if (principal==null)
+       	    return "redirect:/login";
+	cs.deleteById(itemId);
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	model.put("items",items);
+	return "cartcontents";
     }
     
     @PostMapping("/cart_add") //adding some merch
@@ -54,7 +117,7 @@ public class ConsmController {
     @Transactional
     public String addToCart(/*@RequestParam(name="action",required=true)String action,*/
     	    @RequestParam(name="id",required=true) Long merchId,
-	    @RequestParam(name="amount",required=true) int amount,
+	    @RequestParam(name="amount",required=true) Long amount,
 	    @RequestParam(name="size",required=true) Long sizeId,
 	    Map<String,Object> model,
 	    Principal principal) {
