@@ -5,8 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <tr th:each="merch:${merchList}">
-    	<td th:text=${merch.getImgsrc()}></td>
+    <tr th:each="merch:${list}">
+    	<p th:text=${merch.getId_PK()}></p>
+    	<p th:text=${merch.getMerchFK()}></p>
+    	<p th:text=${merch.getSizeFK()}></p>
+    	<p th:text=${merch.getQuantity()}></p>
     </tr>
 </body>
 </html>

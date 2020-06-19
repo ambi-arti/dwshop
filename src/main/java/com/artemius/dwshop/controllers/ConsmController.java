@@ -21,6 +21,7 @@ import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.MerchDiscount;
 import com.artemius.dwshop.entities.Roles;
 import com.artemius.dwshop.repositories.CartItemRepository;
+import com.artemius.dwshop.repositories.MerchSizeRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.DiscountService;
 import com.artemius.dwshop.services.MerchService;
@@ -43,6 +44,8 @@ public class ConsmController {
     SizeService ss = new MSizeService();
     @Autowired
     CartItemRepository cs;   //to be replaced with service
+    @Autowired
+    MerchSizeRepository mss;
     
    @GetMapping("/cart")
     public String cart(Map<String,Object> model, Principal principal) { //redirects to the cart page
@@ -50,8 +53,13 @@ public class ConsmController {
        	    return "redirect:/login";
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
        	model.put("items",items);
        	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("totalCost",totalCost);
 	return "cart";
     }
    
@@ -74,8 +82,12 @@ public class ConsmController {
 	}
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
        	model.put("items",items);
-	    
+       	model.put("totalCost",totalCost);    
 	return "cartcontents";
    }
    
@@ -90,12 +102,16 @@ public class ConsmController {
 	if (quantity>0) {
 	    CartItem toSave = cs.findById(itemId).get();
 	    toSave.setQuantity(quantity-1);
-	    cs.save(toSave);
-	    cs.wait(1000);
+	    cs.saveAndFlush(toSave);
 	}
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
        	model.put("items",items);
+       	model.put("totalCost",totalCost);   
 	return "cartcontents";
    }
    
@@ -105,11 +121,17 @@ public class ConsmController {
 	    Principal principal) {
 	if (principal==null)
        	    return "redirect:/login";
-	cs.deleteById(itemId);
+	cs.removeById(itemId);
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
        	model.put("items",items);
 	return "cartcontents";
+    }
+    
+    @GetMapping("/test")
+    public String testing(Map<String,Object> model) {
+	model.put("list",mss.findAll());
+	return "test";
     }
     
     @PostMapping("/cart_add") //adding some merch
@@ -135,9 +157,9 @@ public class ConsmController {
     		values.add(md.getDiscountFK().getValue());
     	    for (Double val: values)
     		cost*=val;
-    	    cost*=amount;
     	    ci.setCost(cost);
     	    ci.setConsumerFK(ass.findByUsername(principal.getName()));
+    	    ci.setDiscarded(false);
     	    cs.save(ci);
     	    return "Готово!";
     	    

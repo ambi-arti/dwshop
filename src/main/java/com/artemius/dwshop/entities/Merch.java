@@ -29,7 +29,7 @@ public class Merch {
     private String title;
     
     @ManyToOne
-    @JoinColumn(name = "type_FK",nullable = false)
+    @JoinColumn(name = "type_fk",nullable = false)
     @Getter
     @Setter
     private MerchType typeFK;

@@ -6,11 +6,11 @@
 			<p class = "cartItemTitle" th:text="${item.getMerchFK().getTitle()}">D&W New Gigachad</p>
 			<span class = "cartItemInfo"><p>Размер: <span th:text="${item.getMerchSizeFK()
 			.getSizeFK()
-			.getTitle()}">М</span></p><p>Скидка: <span th:text="${item.getCost()/item.getMerchFK().getPrice()*100}">75</span>%</p></span>
+			.getTitle()}">М</span></p><p>Скидка: <span th:text="${(1-(item.getCost()/item.getMerchFK().getPrice()))*100}">75</span>%</p></span>
 		</div>
 		<div class = "innerItem" id = "cartItemPriceContainer">
 			<span>
-					Цена: <span th:text="${item.getCost()}">3600</span><span> р.</span>
+					Цена: <span th:text="${item.getCost()*item.getQuantity()}">3600</span><span> р.</span>
 			</span>
 			<div class="btn-group innerItem" role="group">
 				<button th:itemId=${item.getId_PK()} id="incrementButton" th:onclick="incrementItem(this.getAttribute('itemId'))" type="button"class="btn btn-secondary quantBut innerItem">+</button>
@@ -20,5 +20,6 @@
 		</div>
 		<a id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
 	</div>
+	<a th:if="${items}.is" href = "/purchase"><button type="submit"  id = "orderButton" class="btn btn-primary btn-lg">Оформить заказ на сумму: <span th:text="${totalCost}"></span><span> рублей</span></button></a>
 </body>
 </html>

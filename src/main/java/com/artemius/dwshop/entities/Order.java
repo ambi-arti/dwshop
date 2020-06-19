@@ -17,8 +17,8 @@ import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "cartitem")
-public class CartItem {
+@Table(name = "order")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
@@ -26,35 +26,24 @@ public class CartItem {
     private long id_PK;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "merch_FK",nullable = false)
+    @JoinColumn(name = "item_fk",nullable = false)
     @Getter
     @Setter
-    private Merch merchFK;
+    private CartItem itemFK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "merchsize_FK",nullable = false)
+    @Column(name = "date", nullable = false)
     @Getter
     @Setter
-    private MerchSize merchSizeFK;
+    private String date;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "consumer_fk",nullable = false)
+    @Column(name = "status", nullable = false)
     @Getter
     @Setter
-    private Account consumerFK;
+    private OrderStatus status;
     
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "comment", nullable = true)
     @Getter
     @Setter
-    private Long quantity;
-    
-    @Column(name = "cost", nullable = false)
-    @Getter
-    @Setter
-    private Double cost;
-    
-    @Column(name = "discarded")
-    @Getter
-    @Setter
-    private Boolean discarded;
+    private String comment;
+
 }

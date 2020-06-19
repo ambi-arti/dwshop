@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Merch;
+import com.artemius.dwshop.entities.MerchSize;
 import com.artemius.dwshop.repositories.MerchRepository;
+import com.artemius.dwshop.repositories.MerchSizeRepository;
 import com.artemius.dwshop.repositories.MerchTypeRepository;
 import com.artemius.dwshop.services.MerchService;
 
@@ -19,6 +21,8 @@ public class MerService implements MerchService {
     MerchRepository ms;
     @Autowired
     MerchTypeRepository ts;
+    @Autowired
+    MerchSizeRepository mss;
 
     @Override
     public List<Merch> findAll() {
@@ -46,6 +50,10 @@ public class MerService implements MerchService {
     @Override
     public Merch addNewMerch(Merch merch) {
 	return ms.save(merch);
+    }
+    
+    public Iterable<MerchSize> findAllMS() {
+	return mss.findAll();
     }
 
     @Override

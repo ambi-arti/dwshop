@@ -29,21 +29,30 @@ public class AuthController {
 	    flawed=true;
 	}
 	if (ass.isUsernameMatchingPattern(user.getUsername())==false) {
-	    model.put("notAnEmail","Введённый адрес электронной почти не соответствует формату email!");
+	    model.put("notAnEmail","Неверный формат E-mail!");
+	    flawed=true;
+	}
+	if (ass.isCityMatchingPattern(user.getCity())==false) {
+	    model.put("wrongCity","Неверный формат названия!");
+	    flawed=true;
+	}
+	if (ass.isDateOkay(user.getBirthdate())==false) {
+	    model.put("badDate","Неверный формат даты рождения!");
 	    flawed=true;
 	}
 	if (ass.isPasswordLongEnough(user.getPassword())==false) {
-	    model.put("passwordTooShort","Пароль слишком короткий: он должен содержать не менее 8 символов!");
+	    model.put("passwordTooShort","Пароль содержит менее 8 символов!");
 	    flawed=true;
 	}
 	if (!flawed) {
 	    user.setActive(true);
 	    user.setRoles(Role.CONSUMER);
+	    
 	    ass.saveNewAccount(user);
-	    return "redirect:/login";
+	    return "redirect:/index";
 	}
 	model.put("surname",user.getSurname());
-	model.put("firstтame",user.getFirstname());
+	model.put("firstname",user.getFirstname());
 	model.put("patronymic",user.getPatronymic());
 	model.put("city",user.getCity());
 	model.put("birthdate",user.getBirthdate());

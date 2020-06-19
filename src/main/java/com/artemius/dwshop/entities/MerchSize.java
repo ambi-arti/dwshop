@@ -26,15 +26,15 @@ public class MerchSize {
     @Setter
     private long id_PK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "merch_FK",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "merch_fk",nullable = false)
     @Getter
     @Setter
     private Merch merchFK;
     
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "size_FK",nullable = false)
+    @JoinColumn(name = "size_fk",nullable = false)
     @Getter
     @Setter
     private MSize sizeFK;
