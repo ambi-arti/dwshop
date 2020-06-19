@@ -57,7 +57,7 @@ public class AccService implements AccountService {
 
     @Override
     public Account saveNewAccount(Account account) {
-	return ass.saveAndFlush(account);
+	return ass.save(account);
     }
 
     @Override

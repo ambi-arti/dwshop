@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head th:replace="merchpagehead::merchpagehead"></head>
+    <body>
+        <div th:replace = "menubarauth::menubarauth(authTitle='Регистрация')"></div>
+        <div id = "formContainer">
+	       <form th:action="@{/editData}" method="post">
+	       	<div class = "field"><label> Фамилия:  </label><input required type="text" th:value="${surname}" name="surname"/></div>
+	       	<div class = "field"><label> Имя: </label><input required type="text" th:value="${firstname}" name="firstname"/></div>
+	       	<div class = "field"><label> Отчество:  </label><input type="text" th:value="${patronymic}" name="patronymic"/></div>
+	       	<div class = "field"><label> Дата рождения: </label><input required type="date" th:value="${birthdate}" name="birthdate"/>
+	       		<div class="authNote" th:if="${badDate}" th:text="${badDate}"></div>
+	       	</div>
+	       	<div class = "field"><label> Город: </label><input min required type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/>
+	       		<div class="authNote" th:if="${wrongCity}" th:text="${notAnEmail}"></div>
+	       	</div>
+	       	<div class = "field"><label> Адрес: </label><input min required type="text" th:value="${address}" name="address"/></div>
+	       	<div >
+	       		<div class = "field"><label> Новый пароль: </label><input required type="password" name="password"/>
+	        	<div class="authNote" th:if="${passwordTooShort}" th:text="${passwordTooShort}"></div>
+	        	</div>
+	        	<div class = "field"><label> Потдтверждаение пароля: </label><input required type="password" name="confirm"/>
+	        	<div class="authNote" th:if="${passwordTooShort}" th:text="${passwordTooShort}"></div>
+	        	</div>
+	       	</div>
+	        <div class = "field">
+	        	<input type="submit" style = "margin-top: 10%" class="btn btn-primary btn-lg">
+	        </div>
+	       </form>
+        </div>
+    </body>
+</html>

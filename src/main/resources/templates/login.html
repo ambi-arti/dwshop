@@ -6,10 +6,10 @@
     	<div th:replace = "menubarauth::menubarauth(authTitle='Вход в систему')"></div>
 	    <div id = "formContainer">
 	    <div>
-	    	<div class = "authNote field" th:if="${param.error}">
+	    	<div id = "purchaseStatus" style = "margin-bottom: 10%" class = "authNote field" th:if="${param.error}">
 	            Неверный адрес электронной почты или пароль!
 	        </div>
-	        <div class = "authNote field"  th:if="${param.logout}">
+	        <div id = "purchaseStatus" style = "margin-bottom: 10%" class = "authNote field"  th:if="${param.logout}">
 	            Вы вышли из системы!
 	        </div>
 	    </div>

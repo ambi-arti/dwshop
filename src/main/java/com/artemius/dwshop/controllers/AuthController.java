@@ -2,6 +2,7 @@ package com.artemius.dwshop.controllers;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.artemius.dwshop.services.imps.AccService;
 @Controller
 public class AuthController {
     
+    @Autowired
     AccountService ass = new AccService();
     
     @RequestMapping("/registration")
@@ -48,7 +50,7 @@ public class AuthController {
 	    user.setActive(true);
 	    user.setRoles(Role.CONSUMER);
 	    
-	    ass.saveNewAccount(user);
+	    
 	    return "redirect:/index";
 	}
 	model.put("surname",user.getSurname());

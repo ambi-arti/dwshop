@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.artemius.dwshop.entities.CartItem;
 import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.MerchDiscount;
+import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.entities.Roles;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.MerchSizeRepository;

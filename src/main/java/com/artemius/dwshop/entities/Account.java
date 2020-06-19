@@ -29,7 +29,7 @@ import lombok.Setter;
 @Table(name = "account")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
     private Long id_PK;
