@@ -14,12 +14,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.artemius.dwshop.entities.CartItem;
+import com.artemius.dwshop.entities.MerchSize;
 import com.artemius.dwshop.entities.Order;
 import com.artemius.dwshop.entities.OrderStatus;
 import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.OrderRepository;
+import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.MerchService;
+import com.artemius.dwshop.services.SizeService;
+import com.artemius.dwshop.services.imps.AccService;
+import com.artemius.dwshop.services.imps.MSizeService;
 import com.artemius.dwshop.services.imps.MerService;
 
 @Controller
@@ -30,6 +35,10 @@ public class PurchaseController {
     CartItemRepository cs; //to be replaced with service;
     @Autowired
     MerchService ms = new MerService();
+    @Autowired
+    SizeService ss = new MSizeService();
+    @Autowired
+    AccountService ass = new AccService();
     
     
     @GetMapping("/purchase")
@@ -40,7 +49,7 @@ public class PurchaseController {
 	boolean purchaseSuccess = true;
 	String purchaseDescription = "Ваш заказ был оплачен. В ближайшее время он поступит на доставку.";
 	String purchaseStatus = "Оплата заказа прошла успешно!";
-	DateFormat f = new SimpleDateFormat("DD.MM.YYYY");
+	DateFormat f = new SimpleDateFormat("D.MM.YYYY");
 	for (CartItem i: items) {
 	    if (i.getQuantity()>i.getMerchSizeFK().getQuantity()) {
 		purchaseSuccess=false;
@@ -55,11 +64,21 @@ public class PurchaseController {
 	    o.setDate(f.format(new Date()));
 	    o.setStatus(OrderStatus.Ожидается);	 
 	    i.setDiscarded(true);
+	    orders.add(o);
 	}
+	model.put("user",ass.findByUsername(principal.getName()));
 	model.put("purchaseStatus",purchaseStatus);
 	model.put("purchaseDescription",purchaseDescription);
-	if (purchaseSuccess)
+	if (purchaseSuccess) {
 	    os.saveAll(orders);
+	    for (CartItem i: items) {
+		MerchSize toSave = i.getMerchSizeFK();
+		long q = ss.getMerchSizeByID(toSave.getId_PK()).get().getQuantity();
+		toSave.setQuantity(q-i.getQuantity());
+		ss.save(toSave);
+	    }
+	}
+	    
 	return "/purchase";
     }
 }

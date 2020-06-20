@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.artemius.dwshop.entities.CartItem;
+import com.artemius.dwshop.entities.EditedAccount;
 import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.MerchDiscount;
+import com.artemius.dwshop.entities.Order;
 import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.entities.Roles;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.MerchSizeRepository;
+import com.artemius.dwshop.repositories.OrderRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.DiscountService;
 import com.artemius.dwshop.services.MerchService;
@@ -47,6 +51,94 @@ public class ConsmController {
     CartItemRepository cs;   //to be replaced with service
     @Autowired
     MerchSizeRepository mss;
+    @Autowired
+    OrderRepository os;
+    
+   @GetMapping("/account")
+   public String account(Map<String,Object> model, Principal principal) {
+      	if (principal==null)
+       	    return "redirect:/login";
+      	Account user = ass.findByUsername(principal.getName());
+      	if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) {
+  	    model.put("readOnly","В данный момент изменение личных данных невозможно: у вас есть ожидающие, или возвращаемые заказы");
+  	    model.put("ro","disabled");
+      	}
+      //	model.put("ro",(os.findAllUndeliveredByUsername(principal.getName()).size()));
+  	model.put("surname",user.getSurname());
+  	model.put("firstname",user.getFirstname());
+  	model.put("patronymic",user.getPatronymic());
+  	model.put("city",user.getCity());
+  	model.put("birthdate",user.getBirthdate());
+  	model.put("address",user.getAddress());
+      	return "account";
+   }
+   
+   @PostMapping("/account")
+   @Secured({"CONSUUMER"})
+   public String account(Map<String,Object> model, EditedAccount user, Principal principal) {
+       boolean passOnly=false;
+       if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) 
+	   passOnly=true;
+       Account current = ass.findByUsername(principal.getName());
+       boolean flawed = false;
+       boolean passwordChanged=false;
+       if (user.getPassword().length()>1)
+	   passwordChanged=true;
+       if (ass.isCityMatchingPattern(user.getCity())==false) {
+	   model.put("wrongCity","Неверный формат названия!");
+	   flawed=true;
+       }
+       if (ass.isDateOkay(user.getBirthdate())==false) {
+	   model.put("badDate","Неверный формат даты рождения!");
+	   flawed=true;
+       }
+       if (passwordChanged&&ass.isPasswordLongEnough(user.getPassword())==false) {
+	   model.put("passwordTooShort","Пароль содержит менее 8 символов!");
+	   flawed=true;
+       }
+       if (passwordChanged&&!(user.getPassword().equals(user.getConfirm()))) {
+	   model.put("passwordDoesntMatch","Пароли не совпадают!");
+	   flawed=true;
+       }
+       if (!flawed) {
+	   if (!passOnly) {
+		if (user.getFirstname().length()>2) {
+		   current.setFirstname(user.getFirstname());
+		}
+		if (user.getSurname().length()>2) {
+		   current.setSurname(user.getSurname());
+		}
+		if (user.getPatronymic().length()>2) {
+		   current.setPatronymic(user.getPatronymic());
+		}
+		if (user.getBirthdate().length()>2) {
+		   current.setBirthdate(user.getBirthdate());
+		}
+		if (user.getCity().length()>2) {
+		   current.setCity(user.getCity());
+		}
+		if (user.getAddress().length()>2) {
+		   current.setAddress(user.getAddress());
+		}
+		if (user.getCity().length()>2) {
+		   current.setCity(user.getCity());
+		}
+	   }
+
+	   if (passwordChanged) {
+	       current.setPassword(user.getPassword());
+	   }
+	   ass.saveNewAccount(current);
+	   return "redirect:/index";
+        }
+	model.put("surname",user.getSurname());
+	model.put("firstname",user.getFirstname());
+	model.put("patronymic",user.getPatronymic());
+	model.put("city",user.getCity());
+	model.put("birthdate",user.getBirthdate());
+	model.put("address",user.getAddress());
+	return "/account";
+   }
     
    @GetMapping("/cart")
     public String cart(Map<String,Object> model, Principal principal) { //redirects to the cart page
@@ -58,6 +150,9 @@ public class ConsmController {
        	for (CartItem i: items) {
        	    totalCost+= (i.getCost()*i.getQuantity());
        	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);       	
        	model.put("items",items);
        	model.put("user",ass.findByUsername(principal.getName()));
        	model.put("totalCost",totalCost);
@@ -87,6 +182,9 @@ public class ConsmController {
        	for (CartItem i: items) {
        	    totalCost+= (i.getCost()*i.getQuantity());
        	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true); 
        	model.put("items",items);
        	model.put("totalCost",totalCost);    
 	return "cartcontents";
@@ -111,6 +209,9 @@ public class ConsmController {
        	for (CartItem i: items) {
        	    totalCost+= (i.getCost()*i.getQuantity());
        	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true); 
        	model.put("items",items);
        	model.put("totalCost",totalCost);   
 	return "cartcontents";
@@ -125,6 +226,9 @@ public class ConsmController {
 	cs.removeById(itemId);
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true); 
        	model.put("items",items);
 	return "cartcontents";
     }
@@ -166,6 +270,20 @@ public class ConsmController {
     	    
     	}
     	return "Войдите в аккаунт!";
+    }
+    
+    @GetMapping("/orders")
+    public String orders(Map<String,Object> model, Principal principal) { //redirects to the cart page
+       	if (principal==null)
+       	    return "redirect:/login";
+       	List<Order> items = os.findAllByUsername(principal.getName());
+       	double totalCost = 0;
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);       	
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
+	return "orders";
     }
     
   /* @PostMapping("/cart") //removing cart items by item id

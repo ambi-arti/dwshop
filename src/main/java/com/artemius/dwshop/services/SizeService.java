@@ -14,5 +14,6 @@ public interface SizeService {
     public Optional<MerchSize> getMerchSizeByID(Long id_PK);
     public MSize addNewMSize(MSize material);
     public MerchSize addNewMerchSize(MerchSize merchMaterial);
+    public MerchSize save(MerchSize merchSize);
 
 }

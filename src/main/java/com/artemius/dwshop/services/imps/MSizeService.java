@@ -60,4 +60,9 @@ public class MSizeService implements com.artemius.dwshop.services.SizeService {
     public MerchSize addNewMerchSize(MerchSize merchSize) {
 	return mM.save(merchSize);
     }
+
+    @Override
+    public MerchSize save(MerchSize merchSize) {
+	return mM.save(merchSize);
+    }
 }

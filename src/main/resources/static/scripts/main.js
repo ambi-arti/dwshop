@@ -110,6 +110,18 @@ function decrementItem(itemId) {
 	}*/
 }
 
+function showPassChange() {
+	document.getElementById("passChange").style.display = "block";
+	document.getElementById("change").style.display = "none";
+}
+
+function hidePassChange() {
+	document.getElementById("passChange").style.display = "none";
+	document.getElementById("change").style.display = "block";
+	document.getElementsByName("password")[0].value = "";
+	document.getElementsByName("confirm")[0].value = "";
+}
+
 function sendRequest(type,url,params,target) {
 	const request = new XMLHttpRequest();
 	request.open(type, (url+"?"+params), true);

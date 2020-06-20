@@ -3,6 +3,8 @@ package com.artemius.dwshop.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +19,7 @@ import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +38,7 @@ public class Order {
     @Setter
     private String date;
     
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     @Getter
     @Setter

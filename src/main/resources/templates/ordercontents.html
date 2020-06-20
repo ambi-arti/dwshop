@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="ordercontents">
+	<div class = "cartItem" th:each="item:${items}">
+		<img class = "cartItemImg" th:src = "${item.getItemFK().getMerchFK().getImgsrc()}"></img>
+		<div class = " innerItem">
+			<p th:text="${item.getItemFK().getMerchFK().getTitle()}">D&W New Gigachad</p>
+			<span class = "cartItemInfo"><p>Размер: <span class = "cartItemInfo" th:text="${item.getItemFK().getMerchSizeFK()
+			.getSizeFK()
+			.getTitle()}">М</span></p><p>Скидка: <span class = "cartItemInfo" th:text="${(1-(item.getItemFK().getCost()/item.getItemFK().getMerchFK().getPrice()))*100}">75</span>%</p></span>
+		</div>
+		<div class = "innerItem">
+			<p><span class = "cartItemInfo">Дата оформления: </span><span class = "cartItemInfo" th:text="${item.getDate()}"></span></p>
+			<p></p>
+			<p><span class = "cartItemInfo">Статус заказа: </span><span class = "cartItemInfo" th:text="${item.getStatus()}"></span></p>
+		</div>
+		<div class = "innerItem" id = "cartItemPriceContainer">
+			<span class="cartItemInfo" style = "font-size: 3vh">
+					Цена: <span class = "cartItemInfo" th:text="${item.getItemFK().getCost()*item.getItemFK().getQuantity()}">3600</span><span> р.</span>
+			</span>
+		</div>
+		<a th:if="${item.getStatus()=='Ожидается'}" id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
+		<a th:unless="${item.getStatus()=='Ожидается'}" disabled id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
+	</div>
+	<p><h2 th:unless="${hasItems}">В данный момент у вас нет заказов!</h2></p>
+</body>
+</html>
