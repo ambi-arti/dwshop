@@ -6,7 +6,7 @@
         <div id = "formContainer">
 	       <form th:action="@{/account}" method="post">
 	       	<h5 class = "field" style = "text-align: center" th:if="${ro}" th:text="${readOnly}"></h5>
-	       	<div class = "field"><label> Фамилия:  </label><input th:disabled="${ro}" type="text" th:value="${ro}" name="surname"/></input></div>
+	       	<div class = "field"><label> Фамилия:  </label><input th:disabled="${ro}" type="text" th:value="${surname}" name="surname"/></input></div>
 	       	<div class = "field"><label> Имя: </label><input th:disabled="${ro}"  type="text" th:value="${firstname}" name="firstname"/></input></div>
 	       	<div class = "field"><label> Отчество:  </label><input th:disabled="${ro}"  type="text" th:value="${patronymic}" name="patronymic"/></input></div>
 	       	<div class = "field"><label> Дата рождения: </label><input th:disabled="${ro}"  type="date" th:value="${birthdate}" name="birthdate"/></input>

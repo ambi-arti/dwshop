@@ -65,4 +65,11 @@ public class MSizeService implements com.artemius.dwshop.services.SizeService {
     public MerchSize save(MerchSize merchSize) {
 	return mM.save(merchSize);
     }
+    
+    public List<MerchSize> findAllMerchSizes() {
+	List<MerchSize> toReturn = new ArrayList<>();
+	for (MerchSize e: mM.findAll())
+	    toReturn.add(e);
+	return toReturn;
+    }
 }

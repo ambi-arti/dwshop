@@ -10,6 +10,7 @@ public interface SizeService {
     
     public List<MSize> getMSizesByMerchID(Long merchID);
     public List<MerchSize> getMerchSizesByMerchID(Long merchID);
+    public List<MerchSize> findAllMerchSizes();
     public Optional<MSize> getMSizeByID(Long id_PK);
     public Optional<MerchSize> getMerchSizeByID(Long id_PK);
     public MSize addNewMSize(MSize material);

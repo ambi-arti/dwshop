@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(new AuthenticationSuccessHandler() {
 				    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 				            Authentication authentication) throws IOException, ServletException {
-				        redirectStrategy.sendRedirect(request, response, "/index");
+				        redirectStrategy.sendRedirect(request, response, "/");
 				    }
 				})
 				.and()

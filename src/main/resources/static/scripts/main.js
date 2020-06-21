@@ -20,10 +20,11 @@ function resetContents()  {
 	//Resets all the contents to their default view
 }
 function rejectItem(itemId) {
+	let comment = prompt("Причина отказа: ");
 	let delcontents=document.getElementById("delcontents");
 	const request = sendRequest("POST",
 			"/delivery_reject",
-			("itemId="+itemId),
+			("itemId="+itemId+"&comment="+comment),
 			delcontents);
 }
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
+import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.AccountRepository;
 import com.artemius.dwshop.services.AccountService;
 
@@ -24,8 +25,42 @@ public class AccService implements AccountService {
     @Autowired
     AccountRepository ass;
     
-    public void registration(Map<String,Object> model, Account user) {
-	
+    public boolean registration(Map<String,Object> model, Account user) {
+	boolean flawed = false;
+	if (isUsernameUnique(user.getUsername())==false) {
+	    model.put("nicknameExists","Данный email уже занят!");
+	    flawed=true;
+	}
+	if (isUsernameMatchingPattern(user.getUsername())==false) {
+	    model.put("notAnEmail","Неверный формат E-mail!");
+	    flawed=true;
+	}
+	if (isCityMatchingPattern(user.getCity())==false) {
+	    model.put("wrongCity","Неверный формат названия!");
+	    flawed=true;
+	}
+	if (isDateOkay(user.getBirthdate())==false) {
+	    model.put("badDate","Неверный формат даты рождения!");
+	    flawed=true;
+	}
+	if (isPasswordLongEnough(user.getPassword())==false) {
+	    model.put("passwordTooShort","Пароль содержит менее 8 символов!");
+	    flawed=true;
+	}
+	if (!flawed) {
+	    user.setActive(true);
+	    user.setRoles(Role.CONSUMER);	    
+	    ass.save(user);
+	    return true;
+	}
+	model.put("surname",user.getSurname());
+	model.put("firstname",user.getFirstname());
+	model.put("patronymic",user.getPatronymic());
+	model.put("city",user.getCity());
+	model.put("birthdate",user.getBirthdate());
+	model.put("address",user.getAddress());
+	model.put("username",user.getUsername());
+	return false;
     }
     
     public boolean isUsernameUnique(String username) {
@@ -57,6 +92,10 @@ public class AccService implements AccountService {
     
     public boolean isPasswordLongEnough(String password) {
 	return (password.length()>=8);
+    }
+    
+    public boolean isPasswordUnique(String password, Account account) {
+	return !password.equals(account.getPassword());
     }
 
 

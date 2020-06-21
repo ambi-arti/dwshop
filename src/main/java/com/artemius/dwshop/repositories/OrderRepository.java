@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<Order,Long>{
     public List<Order> findAllUndeliveredByUsername(@Param("username")String username);
     
    // @Query("select o from order a where o.item_fk.consumer_fk.city=:city")
-    @Query(value = "SELECT * FROM orders o JOIN cartitem c ON o.item_fk = c.id_pk JOIN account a ON c.consumer_fk = a.id_pk WHERE city=:city AND o.status = 'Ожидается'",nativeQuery = true)
+    @Query(value = "SELECT * FROM orders o JOIN cartitem c ON o.item_fk = c.id_pk JOIN account a ON c.consumer_fk = a.id_pk WHERE city=:city AND o.status='Ожидается'",nativeQuery = true)
     public List<Order> findAllByCity(@Param("city")String city);
     
     @Modifying(clearAutomatically = true)
