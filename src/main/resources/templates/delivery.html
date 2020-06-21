@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<!--Made by: Ryakhovky A.V, b1-IFST-21; started at: 18.05.2020-->
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="merchpagehead::merchpagehead"></head>
+	<body onload = "loadContent('Cart')">
+		<div th:replace = "menubardelivery::menubardelivery(user=${user})"></div>
+		<div id = "mainContainer">
+			<div id = "delcontents" th:insert = "delcontents::delcontents(user=${user},items=${items},hasItems=${hasItems})" class = "flexElems"></div>
+			<div th:replace="footer::footer"></div>
+		</div>
+	</body>
+</html>

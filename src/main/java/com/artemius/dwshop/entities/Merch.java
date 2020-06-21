@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,7 +29,7 @@ public class Merch {
     @Setter
     private String title;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "type_fk",nullable = false)
     @Getter
     @Setter
@@ -53,4 +54,19 @@ public class Merch {
     @Getter
     @Setter
     private String description;
+    
+    @Column(name = "score", nullable = false)
+    @Getter
+    @Setter
+    private Long score;
+    
+    @Column(name = "marks", nullable = false)
+    @Getter
+    @Setter
+    private Long marks;
+       
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "overall", nullable = false)
+    @Getter
+    private Double overall;
 }

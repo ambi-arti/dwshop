@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="delcontents">
+	<div class = "cartItem" th:each="item:${items}">
+		<img class = "cartItemImg" th:src = "${item.getItemFK().getMerchFK().getImgsrc()}"></img>
+		<div class = " innerItem">
+			<p th:text="${item.getItemFK().getMerchFK().getTitle()}">D&W New Gigachad</p>
+			<span class = "cartItemInfo"><p>Размер: <span class = "cartItemInfo" th:text="${item.getItemFK().getMerchSizeFK()
+			.getSizeFK()
+			.getTitle()}">М</span></p><p>Скидка: <span class = "cartItemInfo" th:text="${(1-(item.getItemFK().getCost()/item.getItemFK().getMerchFK().getPrice()))*100}">75</span>%</p></span>
+		</div>
+		<div class = "innerItem">
+			<p><span class = "cartItemInfo">Адрес: </span><span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getAddress()}"></span></p>
+			<p></p>
+			<p><span class = "cartItemInfo">Получатель: </span><span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getSurname()}"></span> <span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getFirstname()}"></span> <span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getPatronymic()}"></span></p>
+		</div>
+		<div class = "innerItem" id = "cartItemPriceContainer">
+			<span class="cartItemInfo" style = "font-size: 3vh">
+					Цена: <span class = "cartItemInfo" th:text="${item.getItemFK().getCost()*item.getItemFK().getQuantity()}">3600</span><span> р.</span>
+			</span>
+		</div>
+		<div class = "innerItem">
+				<div class="dropdown show">
+					  <a class="btn btn-secondary dropdown-toggle statusMenu" style = "color: black; background: transparent; border: none;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					   Статус:</a>
+					  <div id = "statusDrop" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" th:itemId = "${item.getId_PK()}" onclick = "acceptItem(this.getAttribute('itemId'))" href="#">Доставлен</a>
+					    <a class="dropdown-item" th:itemId = "${item.getId_PK()}" onclick = "rejectItem(this.getAttribute('itemId'))" href="#">Отказ</a>
+					  </div>
+				 </div>
+		</div>
+	</div>
+	<p><h2 th:unless="${hasItems}">В данный момент у вас нет заказов для доставки!</h2></p>
+</body>
+</html>

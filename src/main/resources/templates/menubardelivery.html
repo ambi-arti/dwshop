@@ -6,8 +6,8 @@
     	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	</head>
 	<body>	
-		<nav th:fragment="menubar" id = "menu" class="navbar navbar-expand-lg navbar-light">
-			<a id = "dw_logo_button"class="navbar-brand" href="#" onclick = "resetContents()">D&W Fashion</a>
+		<nav th:fragment="menubardelivery" id = "menu" class="navbar navbar-expand-lg navbar-light">
+			<a id = "dw_logo_button"class="navbar-brand" href="#" onclick = "resetContents()">D&W Delivery</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -15,29 +15,13 @@
 				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto" id = "menuBar">
 					  <li class="nav-item active">
-						<a class="nav-link" href="/casual">Кэжуал</a>
 					  </li>
-					  <li class="nav-item active">
-						<a class="nav-link" href="/business">Деловая</a>
-					  </li>
-					  <li class="nav-item active">
-						<a class="nav-link" href="/sportswear">Спортивная</a>
-					  </li>
-					</ul>
-				  </div>
-				  <div th:if="not ${user}">
-				  	<a href="/login">
-				  		<button id="loginButton" type="button" class="btn btn-secondary">Войти в аккаунт
-				  		</button>
-				  	</a>
 				  </div>
 				  <div class="dropdown show dropleft" th:if="${user}">
 					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    <span th:text="${user.getSurname()}"></span>  <span th:text="${user.getFirstname()}"></span></a>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="/cart">Корзина</a>
-					    <a class="dropdown-item" href="/orders">Заказы</a>
-					    <a class="dropdown-item" href="/account">Настройки</a>
+					  <a class="dropdown-item" href="/logout">Город: <span th:text="${user.getCity()}"></span></a>
 					    <a class="dropdown-item" href="/logout">Выход</a>
 					  </div>
 				 </div>

@@ -9,6 +9,11 @@
 	margin-left: 5%;
 }
 
+.slick-slide img {
+	display: inline;
+	width: 25px;
+}
+
 #loginButton {
 	background-color: transparent;
 	border: 2px solid white;
@@ -267,7 +272,7 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-warp: none;
-	width: 85%;
+	width: 95%;
 	height: 200px;
 	padding: 2%;
 	border: 3px solid white;
@@ -318,12 +323,40 @@
 	font-size: 5vh;
 }
 
+.innerItem .dropdown #statusDrop a {
+	font-size: 3vh;
+	color: black;
+}
+
 .cartItem a:hover {
 	font-style: bold;
 	color: black;
 	opacity: 0.8;
 }
 
+.innerItem div .statusMenu {
+	font-size: 3vh;
+	color: black;
+	background: transparent;
+	border: none;
+}
+
+/*.innerItem .btn-secondary:not(:disabled):not(.disabled).active,
+ .btn-secondary:not(:disabled):not(.disabled):active,
+  .show>.btn-secondary.dropdown-toggle {
+  	color: black;
+	background: transparent;
+	border: none;
+  }*/
+
+.innerItem .statusMenu .dropdown-menu {
+	font-size: 3vh;
+	color: black;
+}
+
+.innerItem div .statusMenu :: active {
+	border: none;
+}
 
 
 .merchItem {

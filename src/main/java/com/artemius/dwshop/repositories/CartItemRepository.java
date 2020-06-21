@@ -20,6 +20,9 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Query(value="SELECT * FROM cartitem c RIGHT JOIN account a ON c.consumer_fk = a.id_pk WHERE username = :username AND discarded != true ORDER BY c.id_pk ASC", nativeQuery = true)
     public List<CartItem> findAllByUsername(@Param("username")String username);
     
+    @Query(value="SELECT * FROM cartitem c RIGHT JOIN account a ON c.consumer_fk = a.id_pk WHERE username = :username AND discarded != true AND merchsize_fk = :merchsize ORDER BY c.id_pk ASC", nativeQuery = true)
+    public CartItem findByUsernameAndMerchSize(@Param("username")String username, Long merchsize);
+    
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "UPDATE cartitem SET discarded = true WHERE id_pk = :id", nativeQuery = true)

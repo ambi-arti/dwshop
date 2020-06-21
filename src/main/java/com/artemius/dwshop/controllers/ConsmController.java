@@ -223,7 +223,7 @@ public class ConsmController {
 	    Principal principal) {
 	if (principal==null)
        	    return "redirect:/login";
-	cs.removeById(itemId);
+	cs.deleteById(itemId);
        	List<CartItem> items = cs.findAllByConsumerFK(ass
        		.findByUsername(principal.getName()));
        	if (items.isEmpty())
@@ -251,22 +251,31 @@ public class ConsmController {
     	if (principal!=null) {
     	    if (amount>ss.getMerchSizeByID(sizeId).get().getQuantity())
     		return "Слишком мало товара на складе!";
-    	    CartItem ci = new CartItem();
-    	    ci.setMerchFK(ms.findById(merchId).get());
-    	    ci.setMerchSizeFK(ss.getMerchSizeByID(sizeId).get());
-    	    ci.setQuantity(amount);
-    	    double cost = ms.findById(merchId).get().getPrice();
-    	    List<MerchDiscount> discs = ds.getMerchDiscountsByMerchID(merchId);
-    	    List<Double> values = new ArrayList<>();
-    	    for (MerchDiscount md:discs) 
-    		values.add(md.getDiscountFK().getValue());
-    	    for (Double val: values)
-    		cost*=val;
-    	    ci.setCost(cost);
-    	    ci.setConsumerFK(ass.findByUsername(principal.getName()));
-    	    ci.setDiscarded(false);
-    	    cs.save(ci);
-    	    return "Готово!";
+    	    CartItem ex = cs.findByUsernameAndMerchSize(principal.getName(),sizeId);
+    	    if (ex!= null) {
+    		long init = ex.getQuantity();
+    		if (init+amount>ss.getMerchSizeByID(sizeId).get().getQuantity())
+    		    return "Слишком мало товара на складе!";
+    		ex.setQuantity(init+amount);
+    		cs.save(ex);
+    		return "Готово!";
+    	    }
+	    CartItem ci = new CartItem();
+	    ci.setMerchFK(ms.findById(merchId).get());
+	    ci.setMerchSizeFK(ss.getMerchSizeByID(sizeId).get());
+	    ci.setQuantity(amount);
+	    double cost = ms.findById(merchId).get().getPrice();
+	    List<MerchDiscount> discs = ds.getMerchDiscountsByMerchID(merchId);
+	    List<Double> values = new ArrayList<>();
+	    for (MerchDiscount md:discs) 
+		values.add(md.getDiscountFK().getValue());
+	    for (Double val: values)
+		cost*=val;
+	    ci.setCost(cost);
+	    ci.setConsumerFK(ass.findByUsername(principal.getName()));
+	    ci.setDiscarded(false);
+	    cs.save(ci);
+	    return "Готово!";
     	    
     	}
     	return "Войдите в аккаунт!";
@@ -283,6 +292,14 @@ public class ConsmController {
        	else model.put("hasItems",true);       	
        	model.put("items",items);
        	model.put("user",ass.findByUsername(principal.getName()));
+	return "orders";
+    }
+    
+    @PostMapping("/orders_remove")
+    public String ordersRemove(@RequestParam(name = "orderId", required = true)Long orderId, 
+	    Map<String,Object> model, 
+	    Principal principal) {
+	//some functionality here
 	return "orders";
     }
     

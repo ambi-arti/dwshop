@@ -63,8 +63,9 @@ public class PurchaseController {
 	    o.setItemFK(i);
 	    o.setDate(f.format(new Date()));
 	    o.setStatus(OrderStatus.Ожидается);	 
-	    i.setDiscarded(true);
+	    //i.setDiscarded(true);
 	    orders.add(o);
+	    cs.removeById(i.getId_PK());
 	}
 	model.put("user",ass.findByUsername(principal.getName()));
 	model.put("purchaseStatus",purchaseStatus);

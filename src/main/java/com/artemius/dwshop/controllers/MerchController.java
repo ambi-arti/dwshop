@@ -65,13 +65,7 @@ public class MerchController {
     public String index(Map<String,Object> model) {
         return "redirect:/casual";
     }
-    
-    @RequestMapping("/")
-    public String root(Map<String,Object> model) {
-        return "redirect:/casual";
-    }
-    
-    
+      
     
     @PostMapping("/merchInfo")
     public String merchInfo(@RequestParam(name = "merchID",required=true)Long merchID, Map<String,Object> model) {

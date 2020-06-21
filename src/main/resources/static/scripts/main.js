@@ -19,6 +19,21 @@ $.ajaxSetup({
 function resetContents()  {
 	//Resets all the contents to their default view
 }
+function rejectItem(itemId) {
+	let delcontents=document.getElementById("delcontents");
+	const request = sendRequest("POST",
+			"/delivery_reject",
+			("itemId="+itemId),
+			delcontents);
+}
+
+function acceptItem(itemId) {
+	let dekcontents=document.getElementById("delcontents");
+	const request = sendRequest("POST",
+			"/delivery_accept",
+			("itemId="+itemId),
+			delcontents);
+}
 
 function setCurrentMerch(merchID) {
 	currentMerch.merchID = parseInt(merchID);

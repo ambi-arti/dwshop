@@ -18,8 +18,21 @@
 					Цена: <span class = "cartItemInfo" th:text="${item.getItemFK().getCost()*item.getItemFK().getQuantity()}">3600</span><span> р.</span>
 			</span>
 		</div>
-		<a th:if="${item.getStatus()=='Ожидается'}" id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
-		<a th:unless="${item.getStatus()=='Ожидается'}" disabled id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
+		<div class = "innerItem" th:if="${item.getStatus()=='Ожидается'}">
+				<div class="dropdown show">
+					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					   Оценка:</a>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    <a class="dropdown-item" href="#">1</a>
+					    <a class="dropdown-item" href="#">2</a>
+					    <a class="dropdown-item" href="#">3</a>
+					    <a class="dropdown-item" href="#">4</a>
+					    <a class="dropdown-item" href="#">5</a>
+					  </div>
+				 </div>
+		</div>
+		<a th:if="${item.getStatus()=='Ожидается'}" id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeOrder(this.getAttribute('itemId'))">X</a>
+		<a style = "color: gray" th:unless="${item.getStatus()=='Ожидается'}" disabled id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#">X</a>
 	</div>
 	<p><h2 th:unless="${hasItems}">В данный момент у вас нет заказов!</h2></p>
 </body>
