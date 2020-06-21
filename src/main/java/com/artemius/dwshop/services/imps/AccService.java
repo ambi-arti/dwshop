@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,10 @@ public class AccService implements AccountService {
 
     @Autowired
     AccountRepository ass;
+    
+    public void registration(Map<String,Object> model, Account user) {
+	
+    }
     
     public boolean isUsernameUnique(String username) {
 	try {
