@@ -29,7 +29,7 @@ public class RedirectController {
 		    return "redirect:/delivery";
 		    
 		default:
-		    return "redirect:/index";
+		    return "redirect:/orders";
 	    
 	}
     }	

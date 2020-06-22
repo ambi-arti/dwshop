@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.CartItem;
 import com.artemius.dwshop.entities.EditedAccount;
+import com.artemius.dwshop.entities.Merch;
 import com.artemius.dwshop.entities.MerchDiscount;
 import com.artemius.dwshop.entities.Order;
+import com.artemius.dwshop.entities.OrderStatus;
+import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.OrderRepository;
 import com.artemius.dwshop.services.AccountService;
@@ -153,6 +156,18 @@ public class ConService implements ConsumerService {
 	   CartItem toSave = cs.findById(itemId).get();
 	   toSave.setQuantity(quantity+1);
 	   cs.save(toSave);
+	       	List<CartItem> items = cs.findAllByConsumerFK(ass
+	       		.findByUsername(principal.getName()));
+	       	double totalCost = 0;
+	       	for (CartItem i: items) {
+	       	    totalCost+= (i.getCost()*i.getQuantity());
+	       	}
+	       	if (items.isEmpty())
+	       	    model.put("hasItems",false);
+	       	else model.put("hasItems",true);       	
+	       	model.put("items",items);
+	       	model.put("user",ass.findByUsername(principal.getName()));
+	       	model.put("totalCost",totalCost);   
 	}
     }
 
@@ -164,12 +179,36 @@ public class ConService implements ConsumerService {
 	    CartItem toSave = cs.findById(itemId).get();
 	    toSave.setQuantity(quantity-1);
 	    cs.saveAndFlush(toSave);
+	       	List<CartItem> items = cs.findAllByConsumerFK(ass
+	       		.findByUsername(principal.getName()));
+	       	double totalCost = 0;
+	       	for (CartItem i: items) {
+	       	    totalCost+= (i.getCost()*i.getQuantity());
+	       	}
+	       	if (items.isEmpty())
+	       	    model.put("hasItems",false);
+	       	else model.put("hasItems",true);       	
+	       	model.put("items",items);
+	       	model.put("user",ass.findByUsername(principal.getName()));
+	       	model.put("totalCost",totalCost);
 	}
     }
 
     @Override
     public void removeCart(Long itemId, Map<String, Object> model, Principal principal) {
 	cs.deleteById(itemId);
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);       	
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("totalCost",totalCost);
     }
 
     @Override
@@ -210,16 +249,50 @@ public class ConService implements ConsumerService {
     public void orders(Map<String, Object> model, Principal principal) {
        	List<Order> items = os.findAllByUsername(principal.getName());
        	double totalCost = 0;
+       	OrderStatus[] r = OrderStatus.values();
        	if (items.isEmpty())
        	    model.put("hasItems",false);
-       	else model.put("hasItems",true);       	
+       	else model.put("hasItems",true);     
+       	model.put("Status",r);
        	model.put("items",items);
        	model.put("user",ass.findByUsername(principal.getName()));	
     }
 
     @Override
     public void ordersRemove(Long itemId, Map<String, Object> model, Principal principal) {
-	//some functionality here
+	List<Order> items = os.findAllByUsername(principal.getName());
+	Order o = os.findById(itemId).get();
+	os.delete(o);
+	OrderStatus[] r = OrderStatus.values();
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);     
+       	model.put("Status",r);
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
+    }
+
+    @Override
+    public void ordersRate(Long itemId, Long mark, Map<String, Object> model, Principal principal) {
+	Merch o = os.findById(itemId)
+		.get()
+		.getItemFK()
+		.getMerchFK();
+	List<Order> items = os.findAllByUsername(principal.getName());
+	Long initScore = o.getScore();
+	Long initMarks = o.getMarks();
+	o.setScore(initScore+mark);
+	o.setMarks(initMarks+1);
+	Order r = os.findById(itemId).get();
+	r.setStatus(OrderStatus.DISCARDED);
+	os.save(r);
+	ms.addNewMerch(o);
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);     
+       	model.put("Status",r);
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
     }
 
 }

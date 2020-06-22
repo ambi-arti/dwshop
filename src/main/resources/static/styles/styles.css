@@ -228,12 +228,27 @@
 	margin-bottom: 5%;
 }
 
+body .btn:focus {
+	box-shadow: none;
+}
+
+#profileMenu:focus {
+	box-shadow: none;
+	border: none;
+}
+
 .field input {
 	width: 200px;
 }
 
 .field .authNote {
 	font-size: 1.5vh;
+}
+
+.star {
+	display: inline;
+	align-self: center;
+	width: 25px;
 }
 
 #mainContainer #footer {

@@ -15,4 +15,5 @@ public interface ConsumerService {
     public String addCart(Long merchId, Long amount, Long sizeId, Map<String,Object> model, Principal principal);
     public void orders(Map<String,Object> model, Principal principal);
     public void ordersRemove(Long itemId, Map<String,Object> model, Principal principal);
+    public void ordersRate(Long itemId, Long mark, Map<String,Object> model, Principal principal);
 }

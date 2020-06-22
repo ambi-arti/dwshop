@@ -21,6 +21,6 @@
 		<a id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeItem(this.getAttribute('itemId'))">X</a>
 	</div>
 	<a th:if="${hasItems}" href = "/purchase"><button type="submit"  id = "orderButton" class="btn btn-primary btn-lg">Оформить заказ на сумму: <span th:text="${totalCost}"></span><span> рублей</span></button></a>
-	<p><h2 th:unless="${hasItems}">В данный момент ваша корзина пуста!</h2></p>
+	<h2 th:unless="${hasItems}"><br><br><br>В данный момент ваша корзина пуста!<br><br><br></h2>
 </body>
 </html>

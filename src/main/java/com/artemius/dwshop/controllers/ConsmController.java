@@ -118,12 +118,21 @@ public class ConsmController {
 	return "orders";
     }
     
-    @PostMapping("/orders_remove")
+    @PostMapping("/order_remove")
     public String ordersRemove(@RequestParam(name = "orderId", required = true)Long orderId, 
 	    Map<String,Object> model, 
 	    Principal principal) {
 	css.ordersRemove(orderId,model,principal);
-	return "orders";
+	return "ordercontents";
+    }
+    
+    @PostMapping("/order_rate")
+    public String ordersRate(@RequestParam(name = "orderId", required = true)Long orderId, 
+	    @RequestParam(name = "mark", required = true)Long mark, 
+	    Map<String,Object> model, 
+	    Principal principal) {
+	css.ordersRate(orderId,mark,model,principal);
+	return "ordercontents";
     }
 
 }

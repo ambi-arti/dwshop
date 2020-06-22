@@ -19,7 +19,8 @@ public class PurchaseController {
     
     @GetMapping("/purchase")
     @Secured("CONSUMER")
-    public String purchase(Map<String,Object> model, Principal principal) {	    
+    public String purchase(Map<String,Object> model, Principal principal) {
+	ps.purchse(model,principal);
 	return "/purchase";
     }
 }

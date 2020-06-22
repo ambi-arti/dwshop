@@ -9,31 +9,33 @@
 			.getTitle()}">М</span></p><p>Скидка: <span class = "cartItemInfo" th:text="${(1-(item.getItemFK().getCost()/item.getItemFK().getMerchFK().getPrice()))*100}">75</span>%</p></span>
 		</div>
 		<div class = "innerItem">
-			<p><span class = "cartItemInfo">Дата оформления: </span><span class = "cartItemInfo" th:text="${item.getDate()}"></span></p>
+			<p><span class = "cartItemInfo">Дата: </span><span class = "cartItemInfo" th:text="${item.getDate()}"></span></p>
 			<p></p>
-			<p><span class = "cartItemInfo">Статус заказа: </span><span class = "cartItemInfo" th:text="${item.getStatus()}"></span></p>
+			<p><span class = "cartItemInfo">Статус: </span><span class = "cartItemInfo" th:text="${item.getStatus()}"></span></p>
 		</div>
 		<div class = "innerItem" id = "cartItemPriceContainer">
 			<span class="cartItemInfo" style = "font-size: 3vh">
 					Цена: <span class = "cartItemInfo" th:text="${item.getItemFK().getCost()*item.getItemFK().getQuantity()}">3600</span><span> р.</span>
 			</span>
 		</div>
-		<div class = "innerItem" th:if="${item.getStatus()=='Ожидается'}">
-				<div class="dropdown show">
-					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	  	<div class = "innerItem" th:if="${item.getStatus()==Status[1] and rated!=true}">
+				<div class="dropdown show" style = "border: none; color: black">
+					  <a style = "border: none; color: black" class="btn dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					   Оценка:</a>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    <a class="dropdown-item" href="#">1</a>
-					    <a class="dropdown-item" href="#">2</a>
-					    <a class="dropdown-item" href="#">3</a>
-					    <a class="dropdown-item" href="#">4</a>
-					    <a class="dropdown-item" href="#">5</a>
+					    <a style = "color: black; font-size: 2vh" th:itemId=${item.getId_PK()} class="dropdown-item" onclick="rateItem(this.getAttribute('itemId'),1)" href="#">1<img class="star" src ="/graphics/star.png"></a>
+					    <a style = "color: black; font-size: 2vh" th:itemId=${item.getId_PK()} class="dropdown-item" onclick="rateItem(this.getAttribute('itemId'),2)" href="#">2<img class="star" src ="/graphics/star.png"></a>
+					    <a style = "color: black; font-size: 2vh" th:itemId=${item.getId_PK()} class="dropdown-item" onclick="rateItem(this.getAttribute('itemId'),3)" href="#">3<img class="star" src ="/graphics/star.png"></a>
+					    <a style = "color: black; font-size: 2vh" th:itemId=${item.getId_PK()} class="dropdown-item" onclick="rateItem(this.getAttribute('itemId'),4)" href="#">4<img class="star" src ="/graphics/star.png"></a>
+					    <a style = "color: black; font-size: 2vh" th:itemId=${item.getId_PK()} class="dropdown-item" onclick="rateItem(this.getAttribute('itemId'),5)" href="#">5<img class="star" src ="/graphics/star.png"></a>
 					  </div>
-				 </div>
+				</div>
 		</div>
-		<a th:if="${item.getStatus()=='Ожидается'}" id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeOrder(this.getAttribute('itemId'))">X</a>
-		<a style = "color: gray" th:unless="${item.getStatus()=='Ожидается'}" disabled id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#">X</a>
+	  <div class = "innerItem">
+		 	  <a th:if="${item.getStatus()==Status[2]}" id = "cartItemRemove" th:itemId=${item.getId_PK()} href="#" th:onclick="removeOrder(this.getAttribute('itemId'))">X</a>	
+		     <!--  <a style = "color: gray" th:unless="${item.getStatus()==Status[1]}" id = "cartItemRemove" disabled href="#">X</a>-->
+		</div>
 	</div>
-	<p><h2 th:unless="${hasItems}">В данный момент у вас нет заказов!</h2></p>
+	<p style = "width: 100%; height: 100%"><h2 th:unless="${hasItems}"><br><br><br>В данный момент у вас нет заказов!<br><br><br></h2></p>
 </body>
 </html>

@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -64,8 +67,8 @@ public class Merch {
     @Getter
     @Setter
     private Long marks;
-       
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Generated(GenerationTime.ALWAYS)
     @Column(name = "overall", nullable = false)
     @Getter
     private Double overall;

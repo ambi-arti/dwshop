@@ -36,6 +36,22 @@ function acceptItem(itemId) {
 			delcontents);
 }
 
+function removeOrder(itemId) {
+	let dekcontents=document.getElementById("ordercontents");
+	const request = sendRequest("POST",
+			"/order_remove",
+			("orderId="+itemId),
+			delcontents);
+}
+
+function rateItem(itemId, mark) {
+	let delcontents=document.getElementById("ordercontents");
+	const request = sendRequest("POST",
+			"/order_rate",
+			("orderId="+itemId+"&mark="+mark),
+			delcontents);
+}
+
 function setCurrentMerch(merchID) {
 	currentMerch.merchID = parseInt(merchID);
 	currentMerch.sizeFK = null;
