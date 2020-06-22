@@ -15,7 +15,7 @@ import com.artemius.dwshop.entities.OrderStatus;
 public interface OrderRepository extends JpaRepository<Order,Long>{
     
     //@Query("select o from order a where o.item_fk.consumer_fk.username=:username")
-    @Query(value = "SELECT * FROM orders o JOIN cartitem c ON o.item_fk = c.id_pk JOIN account a ON c.consumer_fk = a.id_pk WHERE username=:username",nativeQuery = true)
+    @Query(value = "SELECT * FROM orders o JOIN cartitem c ON o.item_fk = c.id_pk JOIN account a ON c.consumer_fk = a.id_pk WHERE username=:username AND o.status != 'DISCARDED'",nativeQuery = true)
     public List<Order> findAllByUsername(@Param("username")String username);
     
     @Query(value = "SELECT * FROM orders o JOIN cartitem c "

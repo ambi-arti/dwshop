@@ -1,8 +1,16 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: absolute;
+	width: 100%;
+	min-height: 100%;
+}
 
 #menu {
 	/*background: #b5dafd;*/
 	background-color: #44a3fc;
-	z-index: 2;
+	z-index: 10;
 }
 
 #menuBar {
@@ -251,9 +259,17 @@ body .btn:focus {
 	width: 25px;
 }
 
-#mainContainer #footer {
+#footer {
 	color: white;
-	/*background-color: #b5dafd;*/
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-top: 1%;
+	padding-bottom: 1%;
 	background-color: #44a3fc;
 	margin-top: 5%;
 	padding-bottom: 1%;

@@ -4,9 +4,9 @@
 	<head th:replace="merchpagehead::merchpagehead"></head>
 	<body onload = "loadContent('Cart')">
 		<div th:replace = "menubar::menubar(user=${user})"></div>
-		<div id = "mainContainer">
-			<div id = "cartcontents" th:insert = "cartcontents::cartcontents(items=${items})" class = "flexElems"></div>
-			<div th:replace="footer::footer"></div>
-		</div>
+			<div id = "mainContainer">
+				<div id = "cartcontents" th:insert = "cartcontents::cartcontents(items=${items})" class = "flexElems"></div>
+			</div>
+		<div th:replace="footer::footer"></div>
 	</body>
 </html>

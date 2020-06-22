@@ -156,19 +156,19 @@ public class ConService implements ConsumerService {
 	   CartItem toSave = cs.findById(itemId).get();
 	   toSave.setQuantity(quantity+1);
 	   cs.save(toSave);
-	       	List<CartItem> items = cs.findAllByConsumerFK(ass
-	       		.findByUsername(principal.getName()));
-	       	double totalCost = 0;
-	       	for (CartItem i: items) {
-	       	    totalCost+= (i.getCost()*i.getQuantity());
-	       	}
-	       	if (items.isEmpty())
-	       	    model.put("hasItems",false);
-	       	else model.put("hasItems",true);       	
-	       	model.put("items",items);
-	       	model.put("user",ass.findByUsername(principal.getName()));
-	       	model.put("totalCost",totalCost);   
 	}
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);       	
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("totalCost",totalCost);   
     }
 
     @Override
@@ -179,19 +179,19 @@ public class ConService implements ConsumerService {
 	    CartItem toSave = cs.findById(itemId).get();
 	    toSave.setQuantity(quantity-1);
 	    cs.saveAndFlush(toSave);
-	       	List<CartItem> items = cs.findAllByConsumerFK(ass
-	       		.findByUsername(principal.getName()));
-	       	double totalCost = 0;
-	       	for (CartItem i: items) {
-	       	    totalCost+= (i.getCost()*i.getQuantity());
-	       	}
-	       	if (items.isEmpty())
-	       	    model.put("hasItems",false);
-	       	else model.put("hasItems",true);       	
-	       	model.put("items",items);
-	       	model.put("user",ass.findByUsername(principal.getName()));
-	       	model.put("totalCost",totalCost);
 	}
+       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       		.findByUsername(principal.getName()));
+       	double totalCost = 0;
+       	for (CartItem i: items) {
+       	    totalCost+= (i.getCost()*i.getQuantity());
+       	}
+       	if (items.isEmpty())
+       	    model.put("hasItems",false);
+       	else model.put("hasItems",true);       	
+       	model.put("items",items);
+       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("totalCost",totalCost);
     }
 
     @Override
