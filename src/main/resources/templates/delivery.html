@@ -6,7 +6,7 @@
 		<div th:replace = "menubardelivery::menubardelivery(user=${user})"></div>
 		<div id = "mainContainer">
 			<div id = "delcontents" th:insert = "delcontents::delcontents(user=${user},items=${items},hasItems=${hasItems})" class = "flexElems"></div>
-			<div th:replace="footer::footer"></div>
 		</div>
+		<div th:replace="footer::footer"></div>
 	</body>
 </html>

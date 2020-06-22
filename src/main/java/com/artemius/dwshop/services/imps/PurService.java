@@ -39,7 +39,7 @@ public class PurService implements PurchaseService {
 	boolean purchaseSuccess = true;
 	String purchaseDescription = "Ваш заказ был оплачен. В ближайшее время он поступит на доставку.";
 	String purchaseStatus = "Оплата заказа прошла успешно!";
-	DateFormat f = new SimpleDateFormat("D.MM.YYYY");
+	DateFormat f = new SimpleDateFormat("d MMMM YYYY");
 	for (CartItem i: items) {
 	    if (i.getQuantity()>i.getMerchSizeFK().getQuantity()) {
 		purchaseSuccess=false;

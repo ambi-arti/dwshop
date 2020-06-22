@@ -29,7 +29,7 @@ function rejectItem(itemId) {
 }
 
 function acceptItem(itemId) {
-	let dekcontents=document.getElementById("delcontents");
+	let delcontents=document.getElementById("delcontents");
 	const request = sendRequest("POST",
 			"/delivery_accept",
 			("itemId="+itemId),
@@ -37,7 +37,7 @@ function acceptItem(itemId) {
 }
 
 function removeOrder(itemId) {
-	let dekcontents=document.getElementById("ordercontents");
+	let delcontents=document.getElementById("ordercontents");
 	const request = sendRequest("POST",
 			"/order_remove",
 			("orderId="+itemId),

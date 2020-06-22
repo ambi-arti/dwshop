@@ -19,9 +19,9 @@
 				  </div>
 				  <div class="dropdown show dropleft" th:if="${user}">
 					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    <span th:text="${user.getSurname()}"></span>  <span th:text="${user.getFirstname()}"></span></a>
+					    <span th:text="${user.getSurname()}"></span>  <span th:text="${user.getFirstname()}"></span> (<span th:text="${user.getCity()}"></span>)</a>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					  <a class="dropdown-item" href="/logout">Город: <span th:text="${user.getCity()}"></span></a>
+					  <!--  <a class="dropdown-item" href="/logout">Город: <span th:text="${user.getCity()}"></span></a>-->
 					    <a class="dropdown-item" href="/logout">Выход</a>
 					  </div>
 				 </div>
