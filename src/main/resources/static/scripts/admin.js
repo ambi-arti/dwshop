@@ -3,6 +3,7 @@ function submitForm(itemId,url) {
 	xhr.open("POST", url); 
 	xhr.onload = function(event){ 
 	    admincontents.innerHTML=event.target.response;
+		//console.log(event.target.response);
 	}; 
 	const data = new FormData(document.getElementById(itemId)); 
 	xhr.send(data);
@@ -23,14 +24,21 @@ function editAccount(itemId,action) {
 	if (action=="EDIT") {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].removeAttribute("disabled");
-		document.getElementById("editLink").setAttribute("text","SAVE");
+		document.getElementById("editLink"+itemId).setAttribute("state","SAVE");
+		document.getElementById("editLink"+itemId).innerHTML = "SAVE";
 		console.log("Editiing!");
 	}
 	else {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].setAttribute("disabled","disabled");
 		submitForm(itemId,"/adminium/edit_account");	
-		document.getElementById("editLink").setAttribute("text","EDIT");
+		document.getElementById("editLink"+itemId).setAttribute("state","EDIT");
+		document.getElementById("editLink"+itemId).innerHTML = "EDIT";
 		console.log("Saving!");
 	}	
+}
+
+function newAccount() {
+		submitForm("new","/adminium/edit_account");	
+		console.log("Saving!");	
 }

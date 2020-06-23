@@ -33,6 +33,8 @@ public class AdmService implements AdminiumService {
 	fillTheModel(model,principal);
 	
     }
+    
+    
 
     @Override
     public void editAccount(Account a, Map<String, Object> model, Principal principal) {
@@ -48,7 +50,19 @@ public class AdmService implements AdminiumService {
 	    toEdit.setUsername(a.getUsername());
 	    toEdit.setPassword(a.getPassword());
 	    toEdit.setRoles(a.getRoles());
-	    acc.saveAndFlush(toEdit);
+	    acc.save(toEdit);
+	}
+	catch(Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillTheModel(model,principal);
+
+    }
+    
+    @Override
+    public void newAccount(Account a, Map<String, Object> model, Principal principal) {
+	try {
+	    acc.saveAndFlush(a);
 	}
 	catch(Exception e) {
 	    model.put("error",e.getLocalizedMessage());

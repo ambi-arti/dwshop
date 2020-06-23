@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<body th:fragment="admincontents">
 		<div id="admincontents" class = "flexTable">
-			<form th:id="${item.getId_PK()}" th:action="@{/newAccount}" method="post" class = "flexTableRow" th:each="item:${items}">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_account}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "font-size: 4vh" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="removeAccount(this.getAttribute('itemId'))">X</a>
 					<input style = "width:50px;" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
@@ -15,31 +15,36 @@
 					<input name = "password" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPassword()}">
 					<input name = "active" style = "width: 50px;" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "checkbox" th:value = "${item.getActive()}">
 					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
-					<select name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled th:value = "${item.getRoles()}" th:text = "${item.getRoles()}">
+					<select name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled th:value = "${item.getRoles()}">
 						<option value="CONSUMER">CONSUMER</option>
 						<option value="DELIVERY">DELIVERY</option>
 						<option value="ADMIN">ADMIN</option>
 					</select>
-					<a id = "editLink" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="editAccount(this.getAttribute('itemId',this.getAttribute('text')))" th:text="EDIT"></a>
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="editAccount(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">EDIT</a>
 				<!--</form>-->
 			</form>
-	<!--  	<tr>
-				<!--  <form id = "new" th:action="@{/newAccount}" method="post">
-					<td>Создание</td>
-					<td>AUTO</td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getSurname()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getFirstname()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getPatronymic()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "date" th:value = "${item.getBirthdate()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getCity()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getAddress()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getUsername()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getPassword()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "checkbox" th:value = "${item.getStatus()}"></td>
-					<td><input th:class="${item.getId_PK()}" type = "text" th:value = "${item.getRoles()}"></td>
-					<td><a th:itemId="${item.getId_PK()}" href="#" onclick="document.getElementById('new').submit()">Создать</a></td>
-				<!--  </form>
-			</tr>-->	
+			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#">X</a>
+					<input style = "width:50px;" type = "text" disabled value = "ID">
+					<input name = "surname" type = "text">
+					<input name = "firstname" type = "text">
+					<input name = "patronymic" type = "text">
+					<input name = "birthdate" type = "date">
+					<input name = "city" type = "text">
+					<input name = "address" type = "text">
+					<input name = "username" type = "text">
+					<input name = "password" type = "text">
+					<input name = "active" style = "width: 50px;" type = "checkbox">
+					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
+					<select name = "roles">
+						<option value="CONSUMER">CONSUMER</option>
+						<option value="DELIVERY">DELIVERY</option>
+						<option value="ADMIN">ADMIN</option>
+					</select>
+					<a href="#" onclick="newAccount()" state="EDIT">SAVE</a>
+				<!--</form>-->
+			</form>
 		</div>
 		<br>
 		<h3 style = "align-self:center" th:text="${error}"></h3>	

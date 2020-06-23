@@ -43,4 +43,12 @@ public class AdminiumController {
 	return "admincontents";
     }
     
+    @PostMapping("adminium/new_account")
+    public String newAccount(Account acc,
+	    Map<String,Object> model,
+	    Principal principal) {
+	as.newAccount(acc,model,principal);
+	return "admincontents";
+    }
+    
 }
