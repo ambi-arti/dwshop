@@ -420,3 +420,27 @@ body .btn:focus {
 	height: 600px; /*Gonna fix that later*/
 	width: auto;
 }
+
+.flexTable {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: no-wrap;
+	overflow-x: auto;
+	overflow-y: aut0;
+	box-sizing: border-box;
+	width: 95%;
+}
+.flexTable .flexTableRow {
+	width: 100%;
+	padding-right: 2%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 0.5%;
+}
+.flexTable .flexTableRow .rowElem {
+	margin-right:10px;
+	margin-left:10px;
+}

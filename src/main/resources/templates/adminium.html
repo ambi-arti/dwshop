@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!--Made by: Ryakhovky A.V, b1-IFST-21; started at: 18.05.2020-->
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="merchpagehead::merchpagehead"></head>
+	<body onload = "loadContent('ADMIN')">
+		<SCRIPT src = "/scripts/admin.js" type = "text/javascript"></SCRIPT>
+		<div th:replace = "menubaradmin::menubaradmin(user=${user})"></div>
+		<div id = "mainContainer">
+			<div id = "admincontents" th:replace = "admincontents::admincontents(currentItem=${currentItem},items=${items})" class = "flexElems"></div>
+		</div>
+		<div th:replace="footer::footer"></div>
+	</body>
+</html>

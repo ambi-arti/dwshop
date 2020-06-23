@@ -39,7 +39,7 @@ public class CartItem {
     @Setter
     private MerchSize merchSizeFK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "consumer_fk",nullable = false)
     @Getter
     @Setter
