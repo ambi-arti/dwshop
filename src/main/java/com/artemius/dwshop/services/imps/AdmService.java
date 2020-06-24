@@ -189,7 +189,7 @@ public class AdmService implements AdminiumService {
 	model.put("merchList",mer.findAll());
 	model.put("discList",dsr.findAll());
 	model.put("items",mdr.findAll());
-	model.put("currentItem","merchdiscount");
+	model.put("currentItem","merchdisc");
 	
     }
 
@@ -198,79 +198,164 @@ public class AdmService implements AdminiumService {
 	model.put("merchList",mer.findAll());
 	model.put("props",prp.findAll());
 	model.put("items",mpr.findAll());
-	model.put("currentItem","merchproperty");
+	model.put("currentItem","merchprops");
 	
     }
 
     @Override
     public void editMerchSize(MerchSize m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	MerchSize toEdit = msr.findById(m.getId_PK()).get();
+	try {
+	    toEdit.setMerchFK(m.getMerchFK());
+	    toEdit.setSizeFK(m.getSizeFK());
+	    toEdit.setQuantity(m.getQuantity());
+	    msr.save(toEdit);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
 	
     }
 
     @Override
     public void newMerchSize(MerchSize m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    msr.save(m);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void removeMerchSize(Long itemId, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    if (msr.findById(itemId).isPresent())
+		msr.deleteById(itemId);
+	}
+	catch(Exception e) {
+	   // model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void editMerchСolour(MerchColour m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	MerchColour toEdit = mcs.findById(m.getId_PK()).get();
+	try {
+	    toEdit.setMerchFK(m.getMerchFK());
+	    toEdit.setColourFK(m.getColourFK());
+	    mcs.save(toEdit);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
 	
     }
 
     @Override
     public void newMerchColour(MerchColour m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    mcs.save(m);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void removeMerchColour(Long itemId, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    if (mcs.findById(itemId).isPresent())
+		mcs.deleteById(itemId);
+	}
+	catch(Exception e) {
+	   // model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void editMerchDisc(MerchDiscount m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	MerchDiscount toEdit = mdr.findById(m.getId_PK()).get();
+	try {
+	    toEdit.setMerchFK(m.getMerchFK());
+	    toEdit.setDiscountFK(m.getDiscountFK());
+	    mdr.save(toEdit);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
 	
     }
 
     @Override
     public void newMerchDisc(MerchDiscount m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    mdr.save(m);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void removeMerchDisc(Long itemId, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    if (mdr.findById(itemId).isPresent())
+		mdr.deleteById(itemId);
+	}
+	catch(Exception e) {
+	   // model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void editMerchProps(MerchProperty m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	MerchProperty toEdit = mpr.findById(m.getId_PK()).get();
+	try {
+	    toEdit.setMerchFK(m.getMerchFK());
+	    toEdit.setPropertyFK(m.getPropertyFK());
+	    mpr.save(toEdit);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
 	
     }
 
     @Override
     public void newMerchProps(MerchProperty m, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    mpr.save(m);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 
     @Override
     public void removeMerchProps(Long itemId, Map<String, Object> model, Principal principal) {
-	// TODO Auto-generated method stub
+	try {
+	    if (mpr.findById(itemId).isPresent())
+		mpr.deleteById(itemId);
+	}
+	catch(Exception e) {
+	   // model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
 	
     }
 

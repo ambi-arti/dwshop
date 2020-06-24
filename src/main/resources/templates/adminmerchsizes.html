@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	<body th:fragment="adminaccounts">
+	<body th:fragment="adminmerchsizes">
 		<div id="admincontents" class = "flexTable">
-			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merch}" method="post" class = "flexTableRow" th:each="item:${items}">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merchsize}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
@@ -13,26 +13,23 @@
 						<option style="width:200px" th:value="${item.getSizeFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getSizeFK().getTitle()}"></option>
 						<option th:each="size:${sizeList}" style="width:200px" th:text = "${size.getTitle()}" th:value = "${size.getId_PK()}"></option>
 					</select>
-					<input title = "Количество" size="3" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getQuantity()}">
+					<input title = "Количество" size="3" required name = "quantity" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getQuantity()}">
 					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
 				<!--</form>-->
 			</form>
-			<form id="new" th:action="@{/adminium/new_merch}" method="post" class = "flexTableRow">
+			<form id="new" th:action="@{/adminium/new_merchsize}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
 					<input style = "width:50px;" type = "text" disabled value = "ID">
-					<input title = "Название" required name = "title" type = "text">
-					<select title = "Тип" style="width:200px" required name = "typeFK">
+					<select title = "Товар" style="width:200px" required name = "merchFK">
 						<option style="width:200px" value="" selected disabled hidden></option>
-						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
+						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
 					</select>
-					<input title = "Цена" name = "price" type = "number">
-					<input title = "Изображение" required name = "imgsrc" type = "text">
-					<input title = "Категория" required name = "section" type = "text">
-					<input title = "Описание" required size = "200" name = "description" type = "text">
-					<input title = "Суммарный балл" required size="6" name = "score" value = "5" type = "number">
-					<input title = "Количество оценок" required size="6" name = "marks" value = "1" type = "number">
-					<input title = "Оценка (вычисляемый столбец)" size="6" disabled type = "number" >
+					<select title = "Размер" style="width:200px" required name = "sizeFK">
+						<option style="width:200px" value="" selected disabled hidden></option>
+						<option th:each="size:${sizeList}" style="width:200px" th:text = "${size.getTitle()}" th:value = "${size.getId_PK()}"></option>
+					</select>
+					<input title = "Количество" required size="6" name = "quantity" value = "1" type = "number">
 					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT"><b>[SAVE]</b></a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->
