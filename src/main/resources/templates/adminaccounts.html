@@ -21,7 +21,7 @@
 						<option th:unless="${item.getRoles()=='DELIVERY'}"  value="DELIVERY">DELIVERY</option>
 						<option th:unless="${item.getRoles()=='ADMIN'}" value="ADMIN">ADMIN</option>
 					</select>
-					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">[EDIT]</a>
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
 				<!--</form>-->
 			</form>
 			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
@@ -43,7 +43,7 @@
 						<option value="DELIVERY">DELIVERY</option>
 						<option value="ADMIN">ADMIN</option>
 					</select>
-					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">[SAVE]</a>
+					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT"><b>[SAVE]</b></a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->
 			</form>

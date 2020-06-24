@@ -5,18 +5,15 @@
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
-					<input title = "Название" required name = "title" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getTitle()}">
-					<select title = "Тип" style="width:200px" required disabled name = "typeFK" th:class="${item.getId_PK()}" class = "rowElem">
-						<option style="width:200px" th:value="${item.getTypeFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getTypeFK().getTitle()}"></option>
-						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
+					<select title = "Товар" style="width:200px" required disabled name = "merchFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" th:value="${item.getMerchFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getMerchFK().getTitle()}"></option>
+						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
 					</select>
-					<input title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getPrice()}">
-					<input title = "Изображение" required name = "imgsrc" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getImgsrc()}">
-					<input title = "Категория" required name = "section" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSection()}">
-					<input title = "Описание" required name = "description" th:class="${item.getId_PK()}" class = "rowElem" disabled type="text" size = "200" th:value = "${item.getDescription()}">
-					<input title = "Суммарный балл" size="6" required name = "score" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getScore()}">
-					<input title = "Количество оценок" size="6" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getMarks()}">
-					<input title = "Оценка (вычисляемый столбец)" size="6" required name = "overall"  disabled type = "number" th:checked="${item.getOverall()}">
+					<select title = "Размер" style="width:200px" required disabled name = "sizeFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" th:value="${item.getSizeFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getSizeFK().getTitle()}"></option>
+						<option th:each="size:${sizeList}" style="width:200px" th:text = "${size.getTitle()}" th:value = "${size.getId_PK()}"></option>
+					</select>
+					<input title = "Количество" size="3" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getQuantity()}">
 					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
 				<!--</form>-->
 			</form>

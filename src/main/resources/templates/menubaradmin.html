@@ -17,7 +17,7 @@
 					  <li class="nav-item active">
 					  	<div class="dropdown show dropdown" th:if="${user}">
 					  		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    		CRUD
+					    		BASIC
 					    	</a>
 					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					    		<a class="dropdown-item" href="#" onclick = "accounts()">Аккаунты</a>
@@ -31,9 +31,10 @@
 					    		EAV
 					    	</a>
 					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    		<a class="dropdown-item" href="/account">Товар-Свойства</a>
-					    		<a class="dropdown-item" href="/account">Товар-Цвета</a>
-					    		<a class="dropdown-item" href="/account">Товар-Скидки</a>
+					  			<a class="dropdown-item" href="#" onclick = "merchsize()">Размеры товара</a>
+					    		<a class="dropdown-item" href="#" onclick = "merchprops()">Товар-Свойства</a>
+					    		<a class="dropdown-item" href="#" onclick = "merchcolours()">Товар-Цвета</a>
+					    		<a class="dropdown-item" href="#" onclick = "merchdiscs()">Товар-Скидки</a>
 					  		</div>
 				 		</div>
 					  </li>

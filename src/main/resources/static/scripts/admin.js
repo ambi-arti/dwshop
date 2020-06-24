@@ -14,7 +14,7 @@ function remove(itemType,itemId) {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
 			"/adminium/remove_"+itemType,
-			("itemId="+itemId),
+			("&itemId="+itemId),
 			admincontents);
 }
 
@@ -26,7 +26,7 @@ function edit(itemId,action) {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].removeAttribute("disabled");
 		document.getElementById("editLink"+itemId).setAttribute("state","SAVE");
-		document.getElementById("editLink"+itemId).innerHTML = "[SAVE]";
+		document.getElementById("editLink"+itemId).innerHTML = "<b>[SAVE]</b>";
 		console.log("Editiing!");
 	}
 	else {
@@ -34,7 +34,7 @@ function edit(itemId,action) {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].setAttribute("disabled","disabled");
 		document.getElementById("editLink"+itemId).setAttribute("state","EDIT");
-		document.getElementById("editLink"+itemId).innerHTML = "[EDIT]";
+		document.getElementById("editLink"+itemId).innerHTML = "<b>[EDIT]</b>";
 		console.log("Saving!");
 	}	
 }
@@ -50,6 +50,34 @@ function merch() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
 			"/adminium/merch",null,
+			admincontents);
+}
+
+function merchsize() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/merchsize",null,
+			admincontents);
+}
+
+function merchprops() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/merchprops",null,
+			admincontents);
+}
+
+function merchcolours() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/merchcolours",null,
+			admincontents);
+}
+
+function merchdiscs() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/merchdiscs",null,
 			admincontents);
 }
 

@@ -1,5 +1,6 @@
 package com.artemius.dwshop.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Merch {
     @Setter
     private String title;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "type_fk",nullable = false)
     @Getter
     @Setter

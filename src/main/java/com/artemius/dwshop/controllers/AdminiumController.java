@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.artemius.dwshop.entities.Account;
+import com.artemius.dwshop.entities.Merch;
 import com.artemius.dwshop.services.AdminiumService;
 import com.artemius.dwshop.services.imps.AdmService;
 
@@ -41,6 +42,13 @@ public class AdminiumController {
 	return "adminmerch";
     }
     
+    @PostMapping("/adminium/merchsize")
+    @Secured("ADMIN")
+    public String merchSize(Map<String,Object> model, Principal principal) {
+	as.merchsize(model,principal);
+	return "adminmerchsizes";
+    }
+    
     @PostMapping("/adminium/remove_account")
     @Secured("ADMIN")
     public String removeAccount(@RequestParam(name="itemId",required=true)Long itemId,
@@ -66,6 +74,33 @@ public class AdminiumController {
 	    Principal principal) {
 	as.newAccount(acc,model,principal);
 	return "adminaccounts";
+    }
+    
+    @PostMapping("/adminium/remove_merch")
+    @Secured("ADMIN")
+    public String removeMerch(@RequestParam(name="itemId",required=true)Long itemId,
+	    Map<String,Object> model,
+	    Principal principal) {
+	as.removeMerch(itemId,model,principal);
+	return "adminmerch";
+    }
+    
+    @PostMapping("/adminium/edit_merch")
+    @Secured("ADMIN")
+    public String editMerch(Merch m,
+	    Map<String,Object> model,
+	    Principal principal) {
+	as.editMerch(m,model,principal);
+	return "adminmerch";
+    }
+    
+    @PostMapping("/adminium/new_merch")
+    @Secured("ADMIN")
+    public String newAccount(Merch m,
+	    Map<String,Object> model,
+	    Principal principal) {
+	as.newMerch(m,model,principal);
+	return "adminmerch";
     }
     
 }

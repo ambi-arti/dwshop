@@ -7,7 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
+import com.artemius.dwshop.entities.Merch;
+import com.artemius.dwshop.entities.MerchColour;
+import com.artemius.dwshop.entities.MerchDiscount;
+import com.artemius.dwshop.entities.MerchProperty;
+import com.artemius.dwshop.entities.MerchSize;
 import com.artemius.dwshop.repositories.AccountRepository;
+import com.artemius.dwshop.repositories.ColourRepository;
+import com.artemius.dwshop.repositories.DiscountRepository;
+import com.artemius.dwshop.repositories.MSizeRepository;
+import com.artemius.dwshop.repositories.MerchColourRepository;
+import com.artemius.dwshop.repositories.MerchDiscountRepository;
 import com.artemius.dwshop.repositories.MerchPropertyRepository;
 import com.artemius.dwshop.repositories.MerchRepository;
 import com.artemius.dwshop.repositories.MerchSizeRepository;
@@ -26,11 +36,21 @@ public class AdmService implements AdminiumService {
     @Autowired
     MerchSizeRepository msr;
     @Autowired
+    MSizeRepository ssr;
+    @Autowired
     MerchTypeRepository mtr;
     @Autowired
     MerchPropertyRepository mpr;
     @Autowired
     PropertyRepository prp;
+    @Autowired
+    ColourRepository clr;
+    @Autowired
+    MerchColourRepository mcs;
+    @Autowired
+    DiscountRepository dsr;
+    @Autowired
+    MerchDiscountRepository mdr;
 
     @Override
     public void accounts(Map<String, Object> model, Principal principal) {
@@ -88,7 +108,6 @@ public class AdmService implements AdminiumService {
 	    model.put("error",e.getLocalizedMessage());
 	}
 	fillAccounts(model,principal);
-
     }
     
     private void fillAccounts(Map<String, Object> model, Principal principal) {
@@ -102,6 +121,157 @@ public class AdmService implements AdminiumService {
 	model.put("types",mtr.findAll());
 	model.put("user",acc.findByUsername(principal.getName()));
 	model.put("currentItem","merch");
+    }
+
+    @Override
+    public void editMerch(Merch m, Map<String, Object> model, Principal principal) {
+	try {
+	    Merch toEdit = mer.findById(m.getId_PK()).get();
+	    toEdit.setTitle(m.getTitle());
+	    toEdit.setTypeFK(m.getTypeFK());
+	    toEdit.setImgsrc(m.getImgsrc());
+	    toEdit.setSection(m.getSection());
+	    toEdit.setPrice(m.getPrice());
+	    toEdit.setDescription(m.getDescription());
+	    toEdit.setScore(m.getScore());
+	    toEdit.setMarks(m.getMarks());
+	    mer.save(toEdit);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
+    }
+
+    @Override
+    public void newMerch(Merch m, Map<String, Object> model, Principal principal) {
+	try {
+	    mer.save(m);
+	}
+	catch (Exception e) {
+	    model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
+    }
+
+    @Override
+    public void removeMerch(Long itemId, Map<String, Object> model, Principal principal) {
+	try {
+	    if (mer.findById(itemId).isPresent())
+		mer.deleteById(itemId);
+	}
+	catch(Exception e) {
+	   // model.put("error",e.getLocalizedMessage());
+	}
+	fillMerch(model,principal);
+	
+    }
+
+    @Override
+    public void merchsize(Map<String, Object> model, Principal principal) {
+	model.put("merchList",mer.findAll());
+	model.put("sizeList",ssr.findAll());
+	model.put("items",msr.findAll());
+	model.put("currentItem","merchsize");
+    }
+
+    @Override
+    public void merchcolour(Map<String, Object> model, Principal principal) {
+	model.put("merchList",mer.findAll());
+	model.put("colours",clr.findAll());
+	model.put("items",mcs.findAll());
+	model.put("currentItem","merchcolour");
+	
+    }
+
+    @Override
+    public void merchdisc(Map<String, Object> model, Principal principal) {
+	model.put("merchList",mer.findAll());
+	model.put("discList",dsr.findAll());
+	model.put("items",mdr.findAll());
+	model.put("currentItem","merchdiscount");
+	
+    }
+
+    @Override
+    public void merchprops(Map<String, Object> model, Principal principal) {
+	model.put("merchList",mer.findAll());
+	model.put("props",prp.findAll());
+	model.put("items",mpr.findAll());
+	model.put("currentItem","merchproperty");
+	
+    }
+
+    @Override
+    public void editMerchSize(MerchSize m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void newMerchSize(MerchSize m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void removeMerchSize(Long itemId, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void editMerchСolour(MerchColour m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void newMerchColour(MerchColour m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void removeMerchColour(Long itemId, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void editMerchDisc(MerchDiscount m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void newMerchDisc(MerchDiscount m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void removeMerchDisc(Long itemId, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void editMerchProps(MerchProperty m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void newMerchProps(MerchProperty m, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
+    }
+
+    @Override
+    public void removeMerchProps(Long itemId, Map<String, Object> model, Principal principal) {
+	// TODO Auto-generated method stub
+	
     }
 
 }
