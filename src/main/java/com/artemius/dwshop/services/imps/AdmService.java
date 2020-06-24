@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.repositories.AccountRepository;
+import com.artemius.dwshop.repositories.MerchPropertyRepository;
+import com.artemius.dwshop.repositories.MerchRepository;
+import com.artemius.dwshop.repositories.MerchSizeRepository;
+import com.artemius.dwshop.repositories.MerchTypeRepository;
+import com.artemius.dwshop.repositories.PropertyRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.AdminiumService;
 
@@ -16,10 +21,25 @@ public class AdmService implements AdminiumService {
     
     @Autowired
     AccountRepository acc;
+    @Autowired
+    MerchRepository mer;
+    @Autowired
+    MerchSizeRepository msr;
+    @Autowired
+    MerchTypeRepository mtr;
+    @Autowired
+    MerchPropertyRepository mpr;
+    @Autowired
+    PropertyRepository prp;
 
     @Override
     public void accounts(Map<String, Object> model, Principal principal) {
-	fillTheModel(model,principal);
+	fillAccounts(model,principal);
+    }
+    
+    @Override
+    public void merch(Map<String, Object> model, Principal principal) {
+	fillMerch(model,principal);	
     }
     
     public void removeAccount(Long itemId, Map<String, Object> model, Principal principal) {
@@ -28,9 +48,9 @@ public class AdmService implements AdminiumService {
 		acc.removeByIdPK(itemId);
 	}
 	catch(Exception e) {
-	    model.put("error",e.getLocalizedMessage());
+	   // model.put("error",e.getLocalizedMessage());
 	}
-	fillTheModel(model,principal);
+	fillAccounts(model,principal);
 	
     }
     
@@ -55,7 +75,7 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillTheModel(model,principal);
+	fillAccounts(model,principal);
 
     }
     
@@ -67,14 +87,20 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillTheModel(model,principal);
+	fillAccounts(model,principal);
 
     }
     
-    private void fillTheModel(Map<String, Object> model, Principal principal) {
+    private void fillAccounts(Map<String, Object> model, Principal principal) {
 	model.put("items",acc.findAll());
 	model.put("user",acc.findByUsername(principal.getName()));
 	model.put("currentItem","account");
+    }
+    
+    private void fillMerch(Map<String, Object> model, Principal principal) {
+	model.put("items",mer.findAll());
+	model.put("user",acc.findByUsername(principal.getName()));
+	model.put("currentItem","merch");
     }
 
 }

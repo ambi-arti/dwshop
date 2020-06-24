@@ -156,6 +156,8 @@ function hidePassChange() {
 
 function sendRequest(type,url,params,target) {
 	const request = new XMLHttpRequest();
+	if (params==null)
+		params="";
 	request.open(type, (url+"?"+params), true);
 	request.addEventListener("readystatechange", () => {
 	    if(request.readyState === 4 && request.status === 200) {

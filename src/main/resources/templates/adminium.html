@@ -6,7 +6,7 @@
 		<SCRIPT src = "/scripts/admin.js" type = "text/javascript"></SCRIPT>
 		<div th:replace = "menubaradmin::menubaradmin(user=${user})"></div>
 		<div id = "mainContainer">
-			<div id = "admincontents" th:replace = "admincontents::admincontents(currentItem=${currentItem},items=${items})" class = "flexElems"></div>
+			<div id = "admincontents" class = "flexElems"></div>
 		</div>
 		<div th:replace="footer::footer"></div>
 	</body>

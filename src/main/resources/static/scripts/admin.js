@@ -1,4 +1,5 @@
 function submitForm(itemId) {
+	let admincontents=document.getElementById("admincontents");
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", document.getElementById(itemId).action); 
 	xhr.onload = function(event){ 
@@ -9,15 +10,15 @@ function submitForm(itemId) {
 	xhr.send(data);
 }
 
-function removeAccount(itemId) {
+function remove(itemType,itemId) {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
-			"/adminium/remove_account",
+			"/adminium/remove_"+itemType,
 			("itemId="+itemId),
 			admincontents);
 }
 
-function editAccount(itemId,action) {
+function edit(itemId,action) {
 	let admincontents=document.getElementById("admincontents");
 	let itemElems = document.getElementsByClassName(itemId);
 	console.log(action);
@@ -38,7 +39,21 @@ function editAccount(itemId,action) {
 	}	
 }
 
-function newAccount() {
+function accounts() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/accounts",null,
+			admincontents);
+}
+
+function merch() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/merch",null,
+			admincontents);
+}
+
+function newItem() {
 		submitForm("new");	
 		console.log("Saving!");	
 }

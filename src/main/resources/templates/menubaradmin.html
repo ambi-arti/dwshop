@@ -17,10 +17,36 @@
 					  <li class="nav-item active">
 					  	<div class="dropdown show dropdown" th:if="${user}">
 					  		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    		Аккаунты
+					    		CRUD
 					    	</a>
 					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					    		<a class="dropdown-item" href="/account">CRUD</a>
+					    		<a class="dropdown-item" href="#" onclick = "accounts()">Аккаунты</a>
+					    		<a class="dropdown-item" href="#" onclick = "merch()">Товары</a>
+					  		</div>
+				 		</div>
+					  </li>
+					  <li class="nav-item active">
+					  	<div class="dropdown show dropdown" th:if="${user}">
+					  		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    		EAV
+					    	</a>
+					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    		<a class="dropdown-item" href="/account">Товар-Свойства</a>
+					    		<a class="dropdown-item" href="/account">Товар-Цвета</a>
+					    		<a class="dropdown-item" href="/account">Товар-Скидки</a>
+					  		</div>
+				 		</div>
+					  </li>
+					  <li class="nav-item active">
+					  	<div class="dropdown show dropdown" th:if="${user}">
+					  		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    		NATIVE
+					    	</a>
+					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					    		<a class="dropdown-item" href="/account">SELECT FROM</a>
+					    		<a class="dropdown-item" href="/account">UPDATE</a>
+					    		<a class="dropdown-item" href="/account">DELETE</a>
+					    		<a class="dropdown-item" href="/account">ALTER TABLE</a>
 					  		</div>
 				 		</div>
 					  </li>

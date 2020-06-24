@@ -27,28 +27,45 @@ public class AdminiumController {
 	return "adminium";
     }
     
+    @PostMapping("/adminium/accounts")
+    @Secured("ADMIN")
+    public String accounts(Map<String,Object> model, Principal principal) {
+	as.accounts(model,principal);
+	return "adminaccounts";
+    }
+    
+    @PostMapping("/adminium/merch")
+    @Secured("ADMIN")
+    public String merch(Map<String,Object> model, Principal principal) {
+	as.merch(model,principal);
+	return "adminmerch";
+    }
+    
     @PostMapping("/adminium/remove_account")
+    @Secured("ADMIN")
     public String removeAccount(@RequestParam(name="itemId",required=true)Long itemId,
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.removeAccount(itemId,model,principal);
-	return "admincontents";
+	return "adminaccounts";
     }
     
     @PostMapping("/adminium/edit_account")
+    @Secured("ADMIN")
     public String editAccount(Account acc,
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.editAccount(acc,model,principal);
-	return "admincontents";
+	return "adminaccounts";
     }
     
     @PostMapping("/adminium/new_account")
+    @Secured("ADMIN")
     public String newAccount(Account acc,
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.newAccount(acc,model,principal);
-	return "admincontents";
+	return "adminaccounts";
     }
     
 }

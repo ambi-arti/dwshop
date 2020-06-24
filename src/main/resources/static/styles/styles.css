@@ -439,8 +439,10 @@ body .btn:focus {
 	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 0.5%;
+	flex: 1 1 0;
 }
 .flexTable .flexTableRow .rowElem {
 	margin-right:10px;
 	margin-left:10px;
+	flex: 1 1 0;
 }

@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<body th:fragment="adminaccounts">
+		<div id="admincontents" class = "flexTable">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merch}" method="post" class = "flexTableRow" th:each="item:${items}">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))">X</a>
+					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
+					<input title = "Название" required name = "title" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getTitle()}">
+					<select title = "Тип" required name = "typeFK" th:class="${item.getId_PK()}" class = "rowElem" disabled>
+						<option value="" selected disabled hidden th:text="${item.getTypeFK().getTitle()}"></option>
+						<option th:each="${type:types}" th:text = "${item.getTypeFK().getTitle()}" th:value = "${item.getTypeFK()}"></option>
+					</select>
+					<input title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPatronymic()}">
+					<input title = "Изображение" required name = "birthdate" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "date" th:value = "${item.getBirthdate()}">
+					<input title = "Категория" required name = "city" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getCity()}">
+					<input title = "Описание" required name = "address" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getAddress()}">
+					<input title = "Суммарный балл" required name = "username" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getUsername()}">
+					<input title = "Количество оценок" required name = "password" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPassword()}">
+					<input title = "Оценка (вычисляемый столбец)" required name = "active"  class = "rowElem" disabled type = "checkbox" th:checked="${item.getActive()}">
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">EDIT</a>
+				<!--</form>-->
+			</form>
+			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#">X</a>
+					<input style = "width:50px;" type = "text" disabled value = "ID">
+					<input title = "Фамилия" required name = "surname" type = "text">
+					<input title = "Имя" required name = "firstname" type = "text">
+					<input title = "Отчество" name = "patronymic" type = "text">
+					<input title = "Дата рождения" required name = "birthdate" type = "date">
+					<input title = "Город" required name = "city" type = "text">
+					<input title = "Адрес" required name = "address" type = "text">
+					<input title = "E-mail" required name = "username" type = "text">
+					<input title = "Пароль" required name = "password" type = "text">
+					<input title = "Активность" required name = "active" type = "checkbox" >
+					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
+					<select title = "Роль" required name = "roles">
+						<option value="CONSUMER">CONSUMER</option>
+						<option value="DELIVERY">DELIVERY</option>
+						<option value="ADMIN">ADMIN</option>
+					</select>
+					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">SAVE</a>
+					<!-- th:action="@{/adminium/new_account}" -->
+				<!--</form>-->
+			</form>
+		</div>
+		<br>
+		<h3 style = "align-self:center" th:text="${error}"></h3>	
+	</body>
+</html>
