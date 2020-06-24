@@ -24,8 +24,8 @@ public class AdmService implements AdminiumService {
     
     public void removeAccount(Long itemId, Map<String, Object> model, Principal principal) {
 	try {
-	if (acc.findById(itemId).isPresent())
-	    acc.removeByIdPK(itemId);
+	    if (acc.findById(itemId).isPresent())
+		acc.removeByIdPK(itemId);
 	}
 	catch(Exception e) {
 	    model.put("error",e.getLocalizedMessage());
@@ -39,7 +39,7 @@ public class AdmService implements AdminiumService {
     @Override
     public void editAccount(Account a, Map<String, Object> model, Principal principal) {
 	try {
-	    Account toEdit = acc.findByUsername(a.getUsername());
+	    Account toEdit = acc.findById(a.getId_PK()).get();
 	    toEdit.setActive(a.getActive());
 	    toEdit.setSurname(a.getSurname());
 	    toEdit.setFirstname(a.getFirstname());
@@ -50,7 +50,7 @@ public class AdmService implements AdminiumService {
 	    toEdit.setUsername(a.getUsername());
 	    toEdit.setPassword(a.getPassword());
 	    toEdit.setRoles(a.getRoles());
-	    acc.save(toEdit);
+	    acc.saveAndFlush(toEdit);
 	}
 	catch(Exception e) {
 	    model.put("error",e.getLocalizedMessage());

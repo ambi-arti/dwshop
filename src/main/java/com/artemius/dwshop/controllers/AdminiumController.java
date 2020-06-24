@@ -35,15 +35,15 @@ public class AdminiumController {
 	return "admincontents";
     }
     
-    @PostMapping("adminium/edit_account")
-    public String removeAccount(Account acc,
+    @PostMapping("/adminium/edit_account")
+    public String editAccount(Account acc,
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.editAccount(acc,model,principal);
 	return "admincontents";
     }
     
-    @PostMapping("adminium/new_account")
+    @PostMapping("/adminium/new_account")
     public String newAccount(Account acc,
 	    Map<String,Object> model,
 	    Principal principal) {

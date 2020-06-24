@@ -1,6 +1,6 @@
-function submitForm(itemId,url) {
+function submitForm(itemId) {
 	const xhr = new XMLHttpRequest();
-	xhr.open("POST", url); 
+	xhr.open("POST", document.getElementById(itemId).action); 
 	xhr.onload = function(event){ 
 	    admincontents.innerHTML=event.target.response;
 		//console.log(event.target.response);
@@ -29,9 +29,9 @@ function editAccount(itemId,action) {
 		console.log("Editiing!");
 	}
 	else {
+		submitForm(itemId);	
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].setAttribute("disabled","disabled");
-		submitForm(itemId,"/adminium/edit_account");	
 		document.getElementById("editLink"+itemId).setAttribute("state","EDIT");
 		document.getElementById("editLink"+itemId).innerHTML = "EDIT";
 		console.log("Saving!");
@@ -39,6 +39,6 @@ function editAccount(itemId,action) {
 }
 
 function newAccount() {
-		submitForm("new","/adminium/edit_account");	
+		submitForm("new");	
 		console.log("Saving!");	
 }
