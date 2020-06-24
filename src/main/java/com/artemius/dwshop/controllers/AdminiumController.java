@@ -67,7 +67,7 @@ public class AdminiumController {
 	return "adminmerchproperty";
     }
     
-    @PostMapping("/adminium/merchdiscount")
+    @PostMapping("/adminium/merchdisc")
     @Secured("ADMIN")
     public String merchDisc(Map<String,Object> model, Principal principal) {
 	as.merchdisc(model,principal);
@@ -215,7 +215,7 @@ public class AdminiumController {
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.removeMerchDisc(itemId,model,principal);
-	return "adminmerchdisc";
+	return "adminmerchdiscount";
     }
     
     @PostMapping("/adminium/edit_merchdisc")
@@ -224,7 +224,7 @@ public class AdminiumController {
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.editMerchDisc(m,model,principal);
-	return "adminmerchdisc";
+	return "adminmerchdiscount";
     }
     
     @PostMapping("/adminium/new_merchdisc")
@@ -233,6 +233,6 @@ public class AdminiumController {
 	    Map<String,Object> model,
 	    Principal principal) {
 	as.newMerchDisc(m,model,principal);
-	return "adminmerchdisc";
+	return "adminmerchdiscount";
     }
 }

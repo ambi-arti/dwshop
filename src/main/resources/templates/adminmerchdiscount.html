@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	<body th:fragment="adminmerchsizes">
+	<body th:fragment="adminmerchdisc">
 		<div id="admincontents" class = "flexTable">
-			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merchsize}" method="post" class = "flexTableRow" th:each="item:${items}">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merchdisc}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
@@ -9,15 +9,14 @@
 						<option style="width:200px" th:value="${item.getMerchFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getMerchFK().getTitle()}"></option>
 						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
 					</select>
-					<select title = "Размер" style="width:200px" required disabled name = "sizeFK" th:class="${item.getId_PK()}" class = "rowElem">
-						<option style="width:200px" th:value="${item.getSizeFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getSizeFK().getTitle()}"></option>
-						<option th:each="size:${sizeList}" style="width:200px" th:text = "${size.getTitle()}" th:value = "${size.getId_PK()}"></option>
+					<select title = "Скидка" style="width:200px" required disabled name = "discountFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" th:value="${item.getDiscountFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getDiscountFK().getTitle()}"></option>
+						<option th:each="disc:${discs}" style="width:200px;"  th:text = "${disc.getTitle()}" th:value = "${disc.getId_PK()}"></option>
 					</select>
-					<input title = "Количество" size="3" required name = "quantity" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getQuantity()}">
 					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
 				<!--</form>-->
 			</form>
-			<form id="new" th:action="@{/adminium/new_merchsize}" method="post" class = "flexTableRow">
+			<form id="new" th:action="@{/adminium/new_merchdisc}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
 					<input style = "width:50px;" type = "text" disabled value = "ID">
@@ -25,11 +24,10 @@
 						<option style="width:200px" value="" selected disabled hidden></option>
 						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
 					</select>
-					<select title = "Размер" style="width:200px" required name = "sizeFK">
+					<select title = "Размер" style="width:200px" required name = "discountFK">
 						<option style="width:200px" value="" selected disabled hidden></option>
-						<option th:each="size:${sizeList}" style="width:200px" th:text = "${size.getTitle()}" th:value = "${size.getId_PK()}"></option>
+						<option th:each="disc:${discs}" style="width:200px" th:text = "${disc.getTitle()}" th:value = "${disc.getId_PK()}"></option>
 					</select>
-					<input title = "Количество" required size="6" name = "quantity" value = "1" type = "number">
 					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT"><b>[SAVE]</b></a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->

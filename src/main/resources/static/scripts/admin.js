@@ -70,14 +70,14 @@ function merchprops() {
 function merchcolours() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
-			"/adminium/merchcolours",null,
+			"/adminium/merchcolour",null,
 			admincontents);
 }
 
 function merchdiscs() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
-			"/adminium/merchdiscs",null,
+			"/adminium/merchdisc",null,
 			admincontents);
 }
 

@@ -3,7 +3,7 @@
 		<div id="admincontents" class = "flexTable">
 			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merch}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
+					<a th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
 					<input title = "Название" required name = "title" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getTitle()}">
 					<select title = "Тип" style="width:200px" required disabled name = "typeFK" th:class="${item.getId_PK()}" class = "rowElem">
@@ -22,7 +22,7 @@
 			</form>
 			<form id="new" th:action="@{/adminium/new_merch}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
+					<a style = "color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
 					<input style = "width:50px;" type = "text" disabled value = "ID">
 					<input title = "Название" required name = "title" type = "text">
 					<select title = "Тип" style="width:200px" required name = "typeFK">

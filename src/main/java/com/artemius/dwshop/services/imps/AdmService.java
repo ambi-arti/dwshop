@@ -187,7 +187,7 @@ public class AdmService implements AdminiumService {
     @Override
     public void merchdisc(Map<String, Object> model, Principal principal) {
 	model.put("merchList",mer.findAll());
-	model.put("discList",dsr.findAll());
+	model.put("discs",dsr.findAll());
 	model.put("items",mdr.findAll());
 	model.put("currentItem","merchdisc");
 	
@@ -214,7 +214,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	
+	merchsize(model,principal);
     }
 
     @Override
@@ -225,7 +225,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchsize(model,principal);
 	
     }
 
@@ -238,7 +238,7 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	   // model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchsize(model,principal);
 	
     }
 
@@ -253,6 +253,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
+	merchcolour(model,principal);
 	
     }
 
@@ -264,7 +265,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchcolour(model,principal);
 	
     }
 
@@ -277,7 +278,7 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	   // model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchcolour(model,principal);
 	
     }
 
@@ -292,6 +293,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
+	merchdisc(model,principal);
 	
     }
 
@@ -303,7 +305,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchdisc(model,principal);
 	
     }
 
@@ -316,7 +318,7 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	   // model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchdisc(model,principal);
 	
     }
 
@@ -331,6 +333,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
+	merchprops(model,principal);
 	
     }
 
@@ -342,7 +345,7 @@ public class AdmService implements AdminiumService {
 	catch (Exception e) {
 	    model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchprops(model,principal);
 	
     }
 
@@ -355,7 +358,7 @@ public class AdmService implements AdminiumService {
 	catch(Exception e) {
 	   // model.put("error",e.getLocalizedMessage());
 	}
-	fillMerch(model,principal);
+	merchprops(model,principal);
 	
     }
 
