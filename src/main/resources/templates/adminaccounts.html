@@ -3,7 +3,7 @@
 		<div id="admincontents" class = "flexTable">
 			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_account}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))">X</a>
+					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
 					<input title = "Фамилия" required name = "surname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSurname()}">
 					<input title = "Имя" required name = "firstname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getFirstname()}">
@@ -21,12 +21,12 @@
 						<option th:unless="${item.getRoles()=='DELIVERY'}"  value="DELIVERY">DELIVERY</option>
 						<option th:unless="${item.getRoles()=='ADMIN'}" value="ADMIN">ADMIN</option>
 					</select>
-					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">EDIT</a>
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">[EDIT]</a>
 				<!--</form>-->
 			</form>
 			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#">X</a>
+					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
 					<input style = "width:50px;" type = "text" disabled value = "ID">
 					<input title = "Фамилия" required name = "surname" type = "text">
 					<input title = "Имя" required name = "firstname" type = "text">
@@ -43,7 +43,7 @@
 						<option value="DELIVERY">DELIVERY</option>
 						<option value="ADMIN">ADMIN</option>
 					</select>
-					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">SAVE</a>
+					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">[SAVE]</a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->
 			</form>

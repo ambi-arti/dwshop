@@ -3,43 +3,40 @@
 		<div id="admincontents" class = "flexTable">
 			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merch}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))">X</a>
+					<a style = "font-size: 4vh" th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
 					<input title = "Название" required name = "title" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getTitle()}">
-					<select title = "Тип" required name = "typeFK" th:class="${item.getId_PK()}" class = "rowElem" disabled>
-						<option value="" selected disabled hidden th:text="${item.getTypeFK().getTitle()}"></option>
-						<option th:each="${type:types}" th:text = "${item.getTypeFK().getTitle()}" th:value = "${item.getTypeFK()}"></option>
+					<select title = "Тип" style="width:200px" required disabled name = "typeFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" value="" selected disabled hidden th:text="${item.getTypeFK().getTitle()}"></option>
+						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
 					</select>
-					<input title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPatronymic()}">
-					<input title = "Изображение" required name = "birthdate" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "date" th:value = "${item.getBirthdate()}">
-					<input title = "Категория" required name = "city" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getCity()}">
-					<input title = "Описание" required name = "address" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getAddress()}">
-					<input title = "Суммарный балл" required name = "username" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getUsername()}">
-					<input title = "Количество оценок" required name = "password" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPassword()}">
-					<input title = "Оценка (вычисляемый столбец)" required name = "active"  class = "rowElem" disabled type = "checkbox" th:checked="${item.getActive()}">
-					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">EDIT</a>
+					<input title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getPrice()}">
+					<input title = "Изображение" required name = "imgsrc" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getImgsrc()}">
+					<input title = "Категория" required name = "section" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSection()}">
+					<input title = "Описание" required name = "description" th:class="${item.getId_PK()}" class = "rowElem" disabled type="text" size = "200" th:value = "${item.getDescription()}">
+					<input title = "Суммарный балл" size="6" required name = "score" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getScore()}">
+					<input title = "Количество оценок" size="6" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getMarks()}">
+					<input title = "Оценка (вычисляемый столбец)" size="6" required name = "overall"  disabled type = "number" th:checked="${item.getOverall()}">
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT">[EDIT]</a>
 				<!--</form>-->
 			</form>
 			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
-					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#">X</a>
+					<a style = "font-size: 4vh; color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
 					<input style = "width:50px;" type = "text" disabled value = "ID">
-					<input title = "Фамилия" required name = "surname" type = "text">
-					<input title = "Имя" required name = "firstname" type = "text">
-					<input title = "Отчество" name = "patronymic" type = "text">
-					<input title = "Дата рождения" required name = "birthdate" type = "date">
-					<input title = "Город" required name = "city" type = "text">
-					<input title = "Адрес" required name = "address" type = "text">
-					<input title = "E-mail" required name = "username" type = "text">
-					<input title = "Пароль" required name = "password" type = "text">
-					<input title = "Активность" required name = "active" type = "checkbox" >
-					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
-					<select title = "Роль" required name = "roles">
-						<option value="CONSUMER">CONSUMER</option>
-						<option value="DELIVERY">DELIVERY</option>
-						<option value="ADMIN">ADMIN</option>
+					<input title = "Название" required name = "title" type = "text">
+					<select title = "Тип" style="width:200px" required name = "typeFK">
+						<option style="width:200px" value="" selected disabled hidden></option>
+						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
 					</select>
-					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">SAVE</a>
+					<input title = "Цена" name = "price" type = "number">
+					<input title = "Изображение" required name = "imgsrc" type = "text">
+					<input title = "Категория" required name = "category" type = "text">
+					<input title = "Описание" required size = "200" name = "description" type = "text">
+					<input title = "Суммарный балл" required size="6" name = "score" type = "number">
+					<input title = "Количество оценок" required size="6" name = "marks" type = "number">
+					<input title = "Оценка (вычисляемый столбец)" size="6" disabled type = "number" >
+					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT">[SAVE]</a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->
 			</form>

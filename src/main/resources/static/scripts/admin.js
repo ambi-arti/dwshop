@@ -26,7 +26,7 @@ function edit(itemId,action) {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].removeAttribute("disabled");
 		document.getElementById("editLink"+itemId).setAttribute("state","SAVE");
-		document.getElementById("editLink"+itemId).innerHTML = "SAVE";
+		document.getElementById("editLink"+itemId).innerHTML = "[SAVE]";
 		console.log("Editiing!");
 	}
 	else {
@@ -34,7 +34,7 @@ function edit(itemId,action) {
 		for (let i=0;i<itemElems.length;i++)
 			itemElems[i].setAttribute("disabled","disabled");
 		document.getElementById("editLink"+itemId).setAttribute("state","EDIT");
-		document.getElementById("editLink"+itemId).innerHTML = "EDIT";
+		document.getElementById("editLink"+itemId).innerHTML = "[EDIT]";
 		console.log("Saving!");
 	}	
 }

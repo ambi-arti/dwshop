@@ -99,6 +99,7 @@ public class AdmService implements AdminiumService {
     
     private void fillMerch(Map<String, Object> model, Principal principal) {
 	model.put("items",mer.findAll());
+	model.put("types",mtr.findAll());
 	model.put("user",acc.findByUsername(principal.getName()));
 	model.put("currentItem","merch");
     }
