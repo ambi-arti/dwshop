@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<body th:fragment="adminmerchsizes">
+		<div id="admincontents" class = "flexTable">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_merchprops}" method="post" class = "flexTableRow" th:each="item:${items}">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<a th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
+					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
+					<select title = "Товар" style="width:200px" required disabled name = "merchFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" th:value="${item.getMerchFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getMerchFK().getTitle()}"></option>
+						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
+					</select>
+					<select title = "Свойство" style="width:200px" required disabled name = "propertyFK" th:class="${item.getId_PK()}" class = "rowElem">
+						<option style="width:200px" th:value="${item.getPropertyFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getPropertyFK().getTitle()}"></option>
+						<option th:each="prop:${props}" style="width:200px" th:text = "${prop.getTitle()}" th:value = "${prop.getId_PK()}"></option>
+					</select>
+					<input title = "Значение" name = "value" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getValue()}">
+					<input title = "Единица измерения" size = "6" name = "measure" th:class="${item.getId_PK()}" class = "rowElem" readonly disabled type = "text" th:value = "${item.getPropertyFK().getMeasure()}">
+					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
+				<!--</form>-->
+			</form>
+			<form id="new" th:action="@{/adminium/new_merchprops}" method="post" class = "flexTableRow">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<a style = "color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
+					<input style = "width:50px;" type = "text" disabled value = "ID">
+					<select title = "Товар" style="width:200px" required name = "merchFK">
+						<option style="width:200px" value="" selected disabled hidden></option>
+						<option th:each="merch:${merchList}" style="width:200px" th:text = "${merch.getTitle()}" th:value = "${merch.getId_PK()}"></option>
+					</select>
+					<select title = "Свойство" style="width:200px" required name = "propertyFK">
+						<option style="width:200px" value="" selected disabled hidden></option>
+						<option th:each="prop:${props}" style="width:200px" th:text = "${prop.getTitle()}" th:value = "${prop.getId_PK()}"></option>
+					</select>
+					<input title = "Значение" name = "value" type = "text">
+					<input title = "Единица измерения" size="6" readonly name = "measure" type = "text">
+					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT"><b>[SAVE]</b></a>
+					<!-- th:action="@{/adminium/new_account}" -->
+				<!--</form>-->
+			</form>
+		</div>
+		<br>
+		<h3 style = "align-self:center" th:text="${error}"></h3>	
+	</body>
+</html>

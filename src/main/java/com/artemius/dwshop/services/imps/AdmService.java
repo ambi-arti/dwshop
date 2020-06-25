@@ -3,6 +3,13 @@ package com.artemius.dwshop.services.imps;
 import java.security.Principal;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +19,7 @@ import com.artemius.dwshop.entities.MerchColour;
 import com.artemius.dwshop.entities.MerchDiscount;
 import com.artemius.dwshop.entities.MerchProperty;
 import com.artemius.dwshop.entities.MerchSize;
+import com.artemius.dwshop.entities.Query;
 import com.artemius.dwshop.repositories.AccountRepository;
 import com.artemius.dwshop.repositories.ColourRepository;
 import com.artemius.dwshop.repositories.DiscountRepository;
@@ -25,6 +33,7 @@ import com.artemius.dwshop.repositories.MerchTypeRepository;
 import com.artemius.dwshop.repositories.PropertyRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.AdminiumService;
+
 
 @Service
 public class AdmService implements AdminiumService {
@@ -51,6 +60,8 @@ public class AdmService implements AdminiumService {
     DiscountRepository dsr;
     @Autowired
     MerchDiscountRepository mdr;
+    @Autowired
+    EntityManager em;
 
     @Override
     public void accounts(Map<String, Object> model, Principal principal) {
@@ -201,6 +212,10 @@ public class AdmService implements AdminiumService {
 	model.put("currentItem","merchprops");
 	
     }
+    
+    private void fillNative(Map<String, Object> model, Principal principal) {
+	model.put("response","Enter your query here (not sure if it works): ");
+    }
 
     @Override
     public void editMerchSize(MerchSize m, Map<String, Object> model, Principal principal) {
@@ -328,6 +343,7 @@ public class AdmService implements AdminiumService {
 	try {
 	    toEdit.setMerchFK(m.getMerchFK());
 	    toEdit.setPropertyFK(m.getPropertyFK());
+	    toEdit.setValue(m.getValue());
 	    mpr.save(toEdit);
 	}
 	catch (Exception e) {
@@ -360,6 +376,43 @@ public class AdmService implements AdminiumService {
 	}
 	merchprops(model,principal);
 	
+    }
+
+    @Override
+    public void nativeQuery(Map<String, Object> model, Principal principal) {
+	fillNative(model,principal);
+	
+    }
+
+    @Override
+    public void nativeSubmit(Query q, Map<String, Object> model, Principal principal) {
+	try {
+	    javax.persistence.Query query = em.createNativeQuery(q.getQuery());	    
+	    List<Object[]> response = query.getResultList();
+	    boolean hasResults=true;
+	    String toReturn="Response:\n";
+	    if (response==null) {
+		hasResults=false;
+		toReturn="The query didn't yield any results!";
+	    }
+	    if (hasResults) {
+		for (int i=0;i<response.size();i++) {
+		    toReturn+="#"+i+" {";
+		    for (int j=0;j<response
+			.get(i)
+			.length;j++) {
+				toReturn+="\n\t"+response.get(i)[j];
+		    }
+			toReturn+="\n}\n";
+		}
+	    }
+
+	    model.put("response",toReturn); 
+	}
+	catch (Exception e) {
+	    model.put("response",e.getLocalizedMessage());
+	}
+
     }
 
 }

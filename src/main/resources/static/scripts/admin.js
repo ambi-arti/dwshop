@@ -18,6 +18,10 @@ function remove(itemType,itemId) {
 			admincontents);
 }
 
+function sendQuery() {
+	submitForm("query");
+}
+
 function edit(itemId,action) {
 	let admincontents=document.getElementById("admincontents");
 	let itemElems = document.getElementsByClassName(itemId);
@@ -63,7 +67,7 @@ function merchsize() {
 function merchprops() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
-			"/adminium/merchprops",null,
+			"/adminium/merchproperty",null,
 			admincontents);
 }
 
@@ -78,6 +82,13 @@ function merchdiscs() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",
 			"/adminium/merchdisc",null,
+			admincontents);
+}
+
+function nativeQuery() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/native",null,
 			admincontents);
 }
 

@@ -9,17 +9,18 @@ import com.artemius.dwshop.entities.MerchColour;
 import com.artemius.dwshop.entities.MerchDiscount;
 import com.artemius.dwshop.entities.MerchProperty;
 import com.artemius.dwshop.entities.MerchSize;
+import com.artemius.dwshop.entities.Query;
 
 public interface AdminiumService {
     
     public void accounts(Map<String,Object> model, Principal principal);
     public void merch(Map<String,Object> model, Principal principal);
     
-    public void merchsize(Map<String,Object> model, Principal principal);
-    
+    public void merchsize(Map<String,Object> model, Principal principal);    
     public void merchcolour(Map<String,Object> model, Principal principal);
     public void merchdisc(Map<String,Object> model, Principal principal);
     public void merchprops(Map<String,Object> model, Principal principal);
+    public void nativeQuery(Map<String,Object> model, Principal principal);
     
     public void editAccount(Account acc, Map<String,Object> model, Principal principal);
     public void newAccount(Account acc, Map<String,Object> model, Principal principal);
@@ -44,4 +45,6 @@ public interface AdminiumService {
     public void editMerchProps(MerchProperty m, Map<String,Object> model, Principal principal);
     public void newMerchProps(MerchProperty m, Map<String,Object> model, Principal principal);
     public void removeMerchProps(Long itemId, Map<String, Object> model, Principal principal);
+    
+    public void nativeSubmit(Query q, Map<String,Object> model, Principal principal);
 }

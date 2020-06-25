@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<body th:fragment="adminnative">
+		<div id="admincontents">
+				<form class="flexTable" id = "query" th:action="@{adminium/native_submit}" method="post">
+					<textarea th:text="${response}" name="query" cols="60" rows="20" style = "font-size: 2.5vh; font-family: Consolas">	
+					</textarea>
+					<button style="width: 100px; align-self: center; margin-top: 1%;" type="button" class="btn btn-primary btn-lg" onclick="sendQuery()">Go!</button>
+				</form>
+		</div>
+	</body>
+</html>

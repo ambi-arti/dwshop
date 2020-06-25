@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -49,9 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(HttpMethod.POST,"/merchInfo").permitAll()
 				.antMatchers("/**","/index","/casual","/login","/register").permitAll()
-				//.antMatchers("/cart","/purchase","/orders").hasRole("Role.CONSUMER")
-				//.antMatchers("/delivery").hasRole("Role.DELIVERY")
-				//.antMatchers("/adminium").hasRole("Role.ADMIN")
+				.antMatchers("/cart**","/purchase","/orders").hasRole("Role.CONSUMER")
+				.antMatchers("/delivery","delivery_**").hasRole("Role.DELIVERY")
+				.antMatchers("/adminium","/adminium_**").hasRole("Role.ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	        auth.jdbcAuthentication()
 	                .dataSource(dataSource)
-	                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+	                .passwordEncoder(new Pbkdf2PasswordEncoder())
 	                .usersByUsernameQuery("select username, password, active from account where username=?")
 	                .authoritiesByUsernameQuery("select u.username, u.roles from account u where u.username=?");
 	    }

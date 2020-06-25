@@ -16,6 +16,7 @@ import com.artemius.dwshop.entities.MerchColour;
 import com.artemius.dwshop.entities.MerchDiscount;
 import com.artemius.dwshop.entities.MerchProperty;
 import com.artemius.dwshop.entities.MerchSize;
+import com.artemius.dwshop.entities.Query;
 import com.artemius.dwshop.services.AdminiumService;
 import com.artemius.dwshop.services.imps.AdmService;
 
@@ -64,7 +65,7 @@ public class AdminiumController {
     @Secured("ADMIN")
     public String merchProperty(Map<String,Object> model, Principal principal) {
 	as.merchprops(model,principal);
-	return "adminmerchproperty";
+	return "adminmerchprops";
     }
     
     @PostMapping("/adminium/merchdisc")
@@ -73,6 +74,21 @@ public class AdminiumController {
 	as.merchdisc(model,principal);
 	return "adminmerchdiscount";
     }
+    
+    @PostMapping("/adminium/native_submit")
+    @Secured("ADMIN")
+    public String nativeSubmit(Query q, Map<String,Object> model, Principal principal) {
+	as.nativeSubmit(q,model,principal);
+	return "adminnative";
+    }
+    
+    @PostMapping("/adminium/native")
+    @Secured("ADMIN")
+    public String nativeQuery(Map<String,Object> model, Principal principal) {
+	as.nativeQuery(model,principal);
+	return "adminnative";
+    }
+    
     
     @PostMapping("/adminium/remove_account")
     @Secured("ADMIN")

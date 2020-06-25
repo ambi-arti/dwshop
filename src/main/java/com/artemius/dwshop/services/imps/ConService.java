@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
@@ -99,7 +100,7 @@ public class ConService implements ConsumerService {
 		   }
 
 		   if (passwordChanged) {
-		       current.setPassword(user.getPassword());
+		       current.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
 		   }
 		   ass.saveNewAccount(current);
 		   return true;

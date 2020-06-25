@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
@@ -49,7 +50,8 @@ public class AccService implements AccountService {
 	}
 	if (!flawed) {
 	    user.setActive(true);
-	    user.setRoles(Role.CONSUMER);	    
+	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
+	    user.setRoles(Role.DELIVERY);	    
 	    ass.save(user);
 	    return true;
 	}
@@ -117,7 +119,7 @@ public class AccService implements AccountService {
     @Override
     public boolean isDateOkay(String date) {
 	boolean isDateOkay = true;
-	DateFormat f = new SimpleDateFormat("DD-MM-YYYY");
+	DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
 	Date d = new Date();
 	try {
 	    d = f.parse(date);
@@ -126,7 +128,7 @@ public class AccService implements AccountService {
 	    isDateOkay = false;
 	}
 	Date c = new Date();
-	if (d.compareTo(c)==0)
+	if (c.compareTo(d)>0)
 	    isDateOkay=false;
 	return isDateOkay;
     }

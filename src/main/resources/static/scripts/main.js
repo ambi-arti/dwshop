@@ -173,7 +173,7 @@ function sendRequest(type,url,params,target) {
 }
 
 function loadContent(page) {
-/*	let initMerchID;
+	let initMerchID;
 	switch (page) {
 		case "Casual":
 			initMerchID=1;
@@ -186,7 +186,7 @@ function loadContent(page) {
 			sizeFK: null,
 			quantity: 0,
 		};
-	//showMerchInfo(initMerchID);*/
+	//showMerchInfo(initMerchID);
 }
 
 function showMerchInfo(merchID) {
