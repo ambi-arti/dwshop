@@ -41,17 +41,17 @@ public class AccService implements AccountService {
 	    flawed=true;
 	}
 	if (isDateOkay(user.getBirthdate())==false) {
-	    model.put("badDate","Неверный формат даты рождения!");
+	    model.put("badDate","Неверный формат даты!");
 	    flawed=true;
 	}
 	if (isPasswordLongEnough(user.getPassword())==false) {
-	    model.put("passwordTooShort","Пароль содержит менее 8 символов!");
+	    model.put("passwordTooShort","Пароль слишком короткий!");
 	    flawed=true;
 	}
 	if (!flawed) {
 	    user.setActive(true);
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
-	    user.setRoles(Role.DELIVERY);	    
+	    user.setRoles(Role.ADMIN);	    
 	    ass.save(user);
 	    return true;
 	}
@@ -118,18 +118,18 @@ public class AccService implements AccountService {
 
     @Override
     public boolean isDateOkay(String date) {
-	boolean isDateOkay = true;
+	boolean isDateOkay = false;
 	DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
 	Date d = new Date();
 	try {
 	    d = f.parse(date);
+	Date c = new Date();
+	if (c.getTime()>d.getTime())
+	    isDateOkay=true;
 	}
 	catch(ParseException pe) {
 	    isDateOkay = false;
 	}
-	Date c = new Date();
-	if (c.compareTo(d)>0)
-	    isDateOkay=false;
 	return isDateOkay;
     }
 

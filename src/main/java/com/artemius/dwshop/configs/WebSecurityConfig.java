@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
@@ -48,8 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.disable()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.POST,"/merchInfo").permitAll()
-				.antMatchers("/**","/index","/casual","/login","/register").permitAll()
-				.antMatchers("/cart**","/purchase","/orders").hasRole("Role.CONSUMER")
+				.antMatchers("/index","/casual","/login","/register").permitAll()
+				.antMatchers("/cart**","/purchase","/orders**").hasRole("Role.CONSUMER")
 				.antMatchers("/delivery","delivery_**").hasRole("Role.DELIVERY")
 				.antMatchers("/adminium","/adminium_**").hasRole("Role.ADMIN")
 				.anyRequest().authenticated()
@@ -66,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.logout()
 				.permitAll();
+					
 	}
 
 	    @Override
@@ -75,6 +77,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .passwordEncoder(new Pbkdf2PasswordEncoder())
 	                .usersByUsernameQuery("select username, password, active from account where username=?")
 	                .authoritiesByUsernameQuery("select u.username, u.roles from account u where u.username=?");
+	    }
+	    
+	    @Override
+	    public void configure(WebSecurity web) throws Exception {
+	      web.ignoring().antMatchers("/**");
 	    }
 	    
 }
