@@ -1,6 +1,7 @@
 package com.artemius.dwshop.controllers;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,11 +66,11 @@ public class ConsmController {
       /* if (principal==null)
       	    return "redirect:/login";*/
        css.removeConfirm(model,principal);
-       return "redirect:/index";
+       return "redirect:/logout";
    }
    
    @PostMapping("/account")
-   public String account(Map<String,Object> model, EditedAccount user, Principal principal) {
+   public String account(Map<String,Object> model, EditedAccount user, Principal principal) throws ParseException {
        EditedAccount u = user;
        if (css.account(model,u,principal))
 	   return "redirect:/index";

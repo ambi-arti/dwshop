@@ -1,5 +1,6 @@
 package com.artemius.dwshop.controllers;
 
+import java.text.ParseException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import com.artemius.dwshop.services.imps.AccService;
 public class AuthController {
     
     @Autowired
-    AccountService ass = new AccService();
+    AccountService as = new AccService();
     
     @RequestMapping("/registration")
     public String registration(Map<String,Object> model) {
@@ -24,8 +25,8 @@ public class AuthController {
     }
     
     @PostMapping("/registration")
-    public String registration(Account user,Map<String,Object> model) {
-	boolean isSuccessful = ass.registration(model,user);
+    public String registration(Account user,Map<String,Object> model) throws ParseException {
+	boolean isSuccessful = as.registration(model,user);
 	if (!isSuccessful)
 	    return "registration";
 	return "redirect:/index";

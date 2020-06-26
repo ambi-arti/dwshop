@@ -18,10 +18,10 @@
 						<a class="nav-link" href="/casual">Кэжуал</a>
 					  </li>
 					  <li class="nav-item active">
-						<a class="nav-link" href="/business">Деловая</a>
+						<a class="nav-link" href="/#">Деловая</a>
 					  </li>
 					  <li class="nav-item active">
-						<a class="nav-link" href="/sportswear">Спортивная</a>
+						<a class="nav-link" href="/#">Спортивная</a>
 					  </li>
 					</ul>
 				  </div>
@@ -35,9 +35,11 @@
 					  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    <span th:text="${user.getSurname()}"></span>  <span th:text="${user.getFirstname()}"></span></a>
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					  	<a class="dropdown-item" th:if="${user.getRoles().name()=='ADMIN'}" href="/adminium">АДМИНИУМ</a>
 					    <a class="dropdown-item" href="/cart">Корзина</a>
 					    <a class="dropdown-item" href="/orders">Заказы</a>
 					    <a class="dropdown-item" href="/account">Настройки</a>
+					    <a class="dropdown-item" href="/disablepage">Удалить аккаунт</a>
 					    <a class="dropdown-item" href="/logout">Выход</a>
 					  </div>
 				 </div>

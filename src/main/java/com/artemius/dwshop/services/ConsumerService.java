@@ -1,12 +1,13 @@
 package com.artemius.dwshop.services;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.Map;
 
 import com.artemius.dwshop.entities.EditedAccount;
 
 public interface ConsumerService {
-    public boolean account(Map<String,Object> model, EditedAccount user, Principal principal);
+    public boolean account(Map<String,Object> model, EditedAccount user, Principal principal) throws ParseException;
     public void account(Map<String,Object> model, Principal principal);
     public void fillCart(Map<String,Object> model, Principal principal);
     public void incrementCart(Long itemId, Map<String,Object> model, Principal principal);

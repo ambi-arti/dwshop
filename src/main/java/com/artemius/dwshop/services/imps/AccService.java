@@ -24,9 +24,9 @@ import com.artemius.dwshop.services.AccountService;
 public class AccService implements AccountService {
 
     @Autowired
-    AccountRepository ass;
+    AccountRepository as;
     
-    public boolean registration(Map<String,Object> model, Account user) {
+    public boolean registration(Map<String,Object> model, Account user) throws ParseException {
 	boolean flawed = false;
 	if (isUsernameUnique(user.getUsername())==false) {
 	    model.put("nicknameExists","Данный email уже занят!");
@@ -40,7 +40,7 @@ public class AccService implements AccountService {
 	    model.put("wrongCity","Неверный формат названия!");
 	    flawed=true;
 	}
-	if (isDateOkay(user.getBirthdate())==false) {
+	if (!isDateOkay(user.getBirthdate())) {
 	    model.put("badDate","Неверный формат даты!");
 	    flawed=true;
 	}
@@ -52,7 +52,7 @@ public class AccService implements AccountService {
 	    user.setActive(true);
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
 	    user.setRoles(Role.CONSUMER);	    
-	    ass.save(user);
+	    as.save(user);
 	    return true;
 	}
 	model.put("surname",user.getSurname());
@@ -67,7 +67,7 @@ public class AccService implements AccountService {
     
     public boolean isUsernameUnique(String username) {
 	try {
-	Account u = ass.findByUsername(username);
+	Account u = as.findByUsername(username);
 	if (u!=null)
 	    return false;
 	}
@@ -103,12 +103,12 @@ public class AccService implements AccountService {
 
     @Override
     public Account saveNewAccount(Account account) {
-	return ass.save(account);
+	return as.save(account);
     }
 
     @Override
     public Account findByUsername(String username) {
-	return ass.findByUsername(username);
+	return as.findByUsername(username);
     }
 
     @Override
@@ -118,19 +118,15 @@ public class AccService implements AccountService {
 
     @Override
     public boolean isDateOkay(String date) {
-	boolean isDateOkay = false;
 	DateFormat f = new SimpleDateFormat("dd-MM-yyyy");
 	Date d = new Date();
 	try {
 	    d = f.parse(date);
+	} 
+	catch (ParseException e) {
+	} 
 	Date c = new Date();
-	if (c.getTime()>d.getTime())
-	    isDateOkay=true;
-	}
-	catch(ParseException pe) {
-	    isDateOkay = false;
-	}
-	return isDateOkay;
+	return c.after(d);
     }
 
 }

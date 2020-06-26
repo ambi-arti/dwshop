@@ -1,6 +1,7 @@
 package com.artemius.dwshop.services.imps;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class ConService implements ConsumerService {
     DiscountService ds = new DiscService();
 
     @Override
-    public boolean account(Map<String, Object> model, EditedAccount user, Principal principal) {	
+    public boolean account(Map<String, Object> model, EditedAccount user, Principal principal) throws ParseException {	
 	       boolean passOnly=false;
 	       if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) 
 		   passOnly=true;
@@ -52,7 +53,7 @@ public class ConService implements ConsumerService {
 	       if (user.getPassword().length()>1)
 		   passwordChanged=true;
 	       if (!passOnly) {
-		       if (as.isDateOkay(user.getBirthdate())==false) {
+		       if (!as.isDateOkay(user.getBirthdate())) {
 			   model.put("badDate","Неверный формат даты рождения!");
 			   flawed=true;
 		       }
@@ -117,6 +118,7 @@ public class ConService implements ConsumerService {
     public void removeConfirm(Map<String, Object> model, Principal principal) {
 	Account curr = as.findByUsername(principal.getName());
 	curr.setActive(false);
+	as.saveNewAccount(curr);
     }
 
     @Override

@@ -224,8 +224,12 @@ body {
 	height: 80%;
 }
 
-#formContainer #purchaseStatus {
+#purchaseStatus {
 	font-size: 2.5vh;
+}
+
+#purchaseDescription {
+	text-align: justify;
 }
 
 .field {
