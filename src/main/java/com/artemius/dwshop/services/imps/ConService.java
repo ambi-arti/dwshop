@@ -29,7 +29,7 @@ import com.artemius.dwshop.services.SizeService;
 public class ConService implements ConsumerService {
     
     @Autowired
-    AccountService ass = new AccService();
+    AccountService as = new AccService();
     @Autowired
     OrderRepository os;
     @Autowired
@@ -46,27 +46,27 @@ public class ConService implements ConsumerService {
 	       boolean passOnly=false;
 	       if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) 
 		   passOnly=true;
-	       Account current = ass.findByUsername(principal.getName());
+	       Account current = as.findByUsername(principal.getName());
 	       boolean flawed = false;
 	       boolean passwordChanged=false;
 	       if (user.getPassword().length()>1)
 		   passwordChanged=true;
 	       if (!passOnly) {
-		       if (ass.isDateOkay(user.getBirthdate())==false) {
+		       if (as.isDateOkay(user.getBirthdate())==false) {
 			   model.put("badDate","Неверный формат даты рождения!");
 			   flawed=true;
 		       }
-		       if (ass.isCityMatchingPattern(user.getCity())==false) {
+		       if (as.isCityMatchingPattern(user.getCity())==false) {
 			   model.put("wrongCity","Неверный формат названия!");
 			   flawed=true;
 		       }
 	       }
 	       
-	       if (passwordChanged&&ass.isPasswordUnique(user.getPassword(),current)==false) {
+	       if (passwordChanged&&as.isPasswordUnique(user.getPassword(),current)==false) {
 		   model.put("passwordTooShort","Введите другой пароль!");
 		   flawed=true;
 	       }
-	       if (passwordChanged&&ass.isPasswordLongEnough(user.getPassword())==false) {
+	       if (passwordChanged&&as.isPasswordLongEnough(user.getPassword())==false) {
 		   model.put("passwordTooShort","Пароль содержит менее 8 символов!");
 		   flawed=true;
 	       }
@@ -102,7 +102,7 @@ public class ConService implements ConsumerService {
 		   if (passwordChanged) {
 		       current.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
 		   }
-		   ass.saveNewAccount(current);
+		   as.saveNewAccount(current);
 		   return true;
 	        }
 		model.put("surname",user.getSurname());
@@ -113,10 +113,15 @@ public class ConService implements ConsumerService {
 		model.put("address",user.getAddress());
 	return false;
     }
+    
+    public void removeConfirm(Map<String, Object> model, Principal principal) {
+	Account curr = as.findByUsername(principal.getName());
+	curr.setActive(false);
+    }
 
     @Override
     public void account(Map<String, Object> model, Principal principal) {
-      	Account user = ass.findByUsername(principal.getName());
+      	Account user = as.findByUsername(principal.getName());
       	if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) {
   	    model.put("readOnly","В данный момент изменение личных данных невозможно: у вас есть ожидающие, или возвращаемые заказы");
   	    model.put("ro","disabled");
@@ -131,7 +136,7 @@ public class ConService implements ConsumerService {
 
     @Override
     public void fillCart(Map<String, Object> model, Principal principal) {
-       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       	List<CartItem> items = cs.findAllByConsumerFK(as
        		.findByUsername(principal.getName()));
        	double totalCost = 0;
        	for (CartItem i: items) {
@@ -141,7 +146,7 @@ public class ConService implements ConsumerService {
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);       	
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
        	model.put("totalCost",totalCost);
     }
 
@@ -158,7 +163,7 @@ public class ConService implements ConsumerService {
 	   toSave.setQuantity(quantity+1);
 	   cs.save(toSave);
 	}
-       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       	List<CartItem> items = cs.findAllByConsumerFK(as
        		.findByUsername(principal.getName()));
        	double totalCost = 0;
        	for (CartItem i: items) {
@@ -168,7 +173,7 @@ public class ConService implements ConsumerService {
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);       	
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
        	model.put("totalCost",totalCost);   
     }
 
@@ -181,7 +186,7 @@ public class ConService implements ConsumerService {
 	    toSave.setQuantity(quantity-1);
 	    cs.saveAndFlush(toSave);
 	}
-       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       	List<CartItem> items = cs.findAllByConsumerFK(as
        		.findByUsername(principal.getName()));
        	double totalCost = 0;
        	for (CartItem i: items) {
@@ -191,14 +196,14 @@ public class ConService implements ConsumerService {
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);       	
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
        	model.put("totalCost",totalCost);
     }
 
     @Override
     public void removeCart(Long itemId, Map<String, Object> model, Principal principal) {
 	cs.deleteById(itemId);
-       	List<CartItem> items = cs.findAllByConsumerFK(ass
+       	List<CartItem> items = cs.findAllByConsumerFK(as
        		.findByUsername(principal.getName()));
        	double totalCost = 0;
        	for (CartItem i: items) {
@@ -208,7 +213,7 @@ public class ConService implements ConsumerService {
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);       	
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
        	model.put("totalCost",totalCost);
     }
 
@@ -240,7 +245,7 @@ public class ConService implements ConsumerService {
 	    for (Double val: values)
 		cost*=val;
 	    ci.setCost(cost);
-	    ci.setConsumerFK(ass.findByUsername(principal.getName()));
+	    ci.setConsumerFK(as.findByUsername(principal.getName()));
 	    ci.setDiscarded(false);
 	    cs.save(ci);
 	    return "Готово!";
@@ -248,7 +253,7 @@ public class ConService implements ConsumerService {
 
     @Override
     public void orders(Map<String, Object> model, Principal principal) {
-       	List<Order> items = os.findAllByUsername(principal.getName());
+	List<Order> items = os.findAllByUsername(principal.getName());
        	double totalCost = 0;
        	OrderStatus[] r = OrderStatus.values();
        	if (items.isEmpty())
@@ -256,21 +261,26 @@ public class ConService implements ConsumerService {
        	else model.put("hasItems",true);     
        	model.put("Status",r);
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));	
+       	model.put("user",as.findByUsername(principal.getName()));	
     }
 
     @Override
-    public void ordersRemove(Long itemId, Map<String, Object> model, Principal principal) {
+    public void ordersRemove(Long itemId, Map<String, Object> model, Principal principal) {	
+	try {
+	    Order o = os.findById(itemId).get();
+	    os.delete(o); 
+	}
+	catch (Exception e) {
+	    //some code here
+	}
 	List<Order> items = os.findAllByUsername(principal.getName());
-	Order o = os.findById(itemId).get();
-	os.delete(o);
 	OrderStatus[] r = OrderStatus.values();
        	if (items.isEmpty())
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);     
        	model.put("Status",r);
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
     }
 
     @Override
@@ -279,21 +289,27 @@ public class ConService implements ConsumerService {
 		.get()
 		.getItemFK()
 		.getMerchFK();
+	try {
+	    Long initScore = o.getScore();
+	    Long initMarks = o.getMarks();
+	    o.setScore(initScore+mark);
+	    o.setMarks(initMarks+1);
+	    Order g = os.findById(itemId).get();
+	    g.setStatus(OrderStatus.DISCARDED);
+	    os.save(g);
+	    ms.addNewMerch(o);    
+	}
+	catch (Exception e) {
+	    //doing sweet nothing
+	}
 	List<Order> items = os.findAllByUsername(principal.getName());
-	Long initScore = o.getScore();
-	Long initMarks = o.getMarks();
-	o.setScore(initScore+mark);
-	o.setMarks(initMarks+1);
-	Order r = os.findById(itemId).get();
-	r.setStatus(OrderStatus.DISCARDED);
-	os.save(r);
-	ms.addNewMerch(o);
+	OrderStatus[] r = OrderStatus.values();
        	if (items.isEmpty())
        	    model.put("hasItems",false);
        	else model.put("hasItems",true);     
        	model.put("Status",r);
        	model.put("items",items);
-       	model.put("user",ass.findByUsername(principal.getName()));
+       	model.put("user",as.findByUsername(principal.getName()));
     }
 
 }

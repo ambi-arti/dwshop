@@ -22,8 +22,8 @@ public class DeliveryController {
     
     @GetMapping("/delivery")
     public String delivery(Map<String,Object> model, Principal principal) {
-	if (principal==null)
-	    return "redirect:/index";
+	/*if (principal==null)
+	    return "redirect:/index";*/
 	ds.delivery(model,principal);
 	return "delivery";
     }
@@ -34,8 +34,8 @@ public class DeliveryController {
     public String accept(@RequestParam(name="itemId",required=true)Long itemId,
 	    Map<String,Object> model,
 	    Principal principal) {
-	if (principal==null)
-	    return "redirect:/index";
+	/*if (principal==null)
+	    return "redirect:/index";*/
 	ds.accept(itemId,model,principal);
 	return "delcontents";
     }

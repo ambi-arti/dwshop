@@ -27,14 +27,14 @@ public class MerchSize {
     @Setter
     private long id_PK;
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "merch_fk", nullable = false)
     @Getter
     @Setter
     private Merch merchFK;
     
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "size_fk",nullable = false)
     @Getter
     @Setter

@@ -27,19 +27,19 @@ public class CartItem {
     @Setter
     private long id_PK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "merch_fk",nullable = false)
     @Getter
     @Setter
     private Merch merchFK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "merchsize_fk",nullable = false)
     @Getter
     @Setter
     private MerchSize merchSizeFK;
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "consumer_fk",nullable = false)
     @Getter
     @Setter

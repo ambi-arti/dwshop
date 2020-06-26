@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head th:replace="merchpagehead::merchpagehead"></head>
@@ -13,10 +13,10 @@
 	            Вы вышли из системы!
 	        </div>
 	    </div>
-	        <form th:action="@{/login}" method="post">
+	        <form th:action="@{/login}" id = "login" method="post">
 	            <div class = "field"><label for = "email">Email: </label><input id = "email" type="text" name="username"/></div>
 	            <div class = "field"><label for = "pass">Пароль: </label><input id = "pass" type="password" name="password"/></div>
-	            <button type="submit" class="btn btn-primary btn-lg">Войти в систему</button>
+	            <button type = "submit" class="btn btn-primary btn-lg">Войти в систему</button>
 	            <p style = "margin-top: 10%;">Ещё не завели учётную запись? <a href = "/registration">Зарегистрируйтесь!</a></p>
 	            <div></div>
 	        </form>

@@ -1,7 +1,10 @@
 function submitForm(itemId) {
 	let admincontents=document.getElementById("admincontents");
+//	let token = $("meta[name='_csrf']").attr("content"); 
+//	let header = $("meta[name='_csrf_header']").attr("content");
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", document.getElementById(itemId).action); 
+//	xhr.setRequestHeader(header, token);
 	xhr.onload = function(event){ 
 	    admincontents.innerHTML=event.target.response;
 		//console.log(event.target.response);

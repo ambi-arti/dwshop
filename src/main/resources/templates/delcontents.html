@@ -2,13 +2,13 @@
 <body th:fragment="delcontents">
 	<div class = "cartItem" th:each="item:${items}">
 		<img class = "cartItemImg" th:src = "${item.getItemFK().getMerchFK().getImgsrc()}"></img>
-		<div class = " innerItem">
+		<div class = " innerItem" style="width:40%;">
 			<p th:text="${item.getItemFK().getMerchFK().getTitle()}">D&W New Gigachad</p>
 			<span class = "cartItemInfo"><p>Размер: <span class = "cartItemInfo" th:text="${item.getItemFK().getMerchSizeFK()
 			.getSizeFK()
 			.getTitle()}">М</span></p><p>Скидка: <span class = "cartItemInfo" th:text="${(1-(item.getItemFK().getCost()/item.getItemFK().getMerchFK().getPrice()))*100}">75</span>%</p></span>
 		</div>
-		<div class = "innerItem">
+		<div class = "innerItem" style="width:40%;">
 			<p><span class = "cartItemInfo">Адрес: </span><span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getAddress()}"></span></p>
 			<p></p>
 			<p><span class = "cartItemInfo">Получатель: </span><span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getSurname()}"></span> <span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getFirstname()}"></span> <span class = "cartItemInfo" th:text="${item.getItemFK().getConsumerFK().getPatronymic()}"></span></p>

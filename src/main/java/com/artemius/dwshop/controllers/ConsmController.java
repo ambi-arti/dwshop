@@ -39,6 +39,7 @@ import com.artemius.dwshop.services.imps.MSizeService;
 import com.artemius.dwshop.services.imps.MerService;
 
 @Controller
+@Secured("CONSUMER")
 public class ConsmController {
     
     @Autowired
@@ -46,10 +47,25 @@ public class ConsmController {
     
    @GetMapping("/account")
    public String account(Map<String,Object> model, Principal principal) {
-       if (principal==null)
-      	    return "redirect:/login";
+      /* if (principal==null)
+      	    return "redirect:/login";*/
        css.account(model,principal);
        return "account";
+   }
+   
+   @GetMapping("/disablepage")
+   public String disablePage(Map<String,Object> model, Principal principal) {
+      /* if (principal==null)
+      	    return "redirect:/login";*/
+       return "disablepage";
+   }
+   
+   @GetMapping("/removeConfirm")
+   public String removeConfirm(Map<String,Object> model, Principal principal) {
+      /* if (principal==null)
+      	    return "redirect:/login";*/
+       css.removeConfirm(model,principal);
+       return "redirect:/index";
    }
    
    @PostMapping("/account")
@@ -59,11 +75,10 @@ public class ConsmController {
 	   return "redirect:/index";
        return "/account";
    }
-    
    @GetMapping("/cart")
     public String cart(Map<String,Object> model, Principal principal) { //redirects to the cart page
-       	if (principal==null)
-       	    return "redirect:/login";
+       /*	if (principal==null)
+       	    return "redirect:/login";*/
        	css.fillCart(model,principal);
 	return "cart";
     }
@@ -82,8 +97,8 @@ public class ConsmController {
    public String decrementCart(@RequestParam(name="itemId",required=true)Long itemId,
 	    Map<String,Object> model,
 	    Principal principal) throws Exception{
-	if (principal==null)
-      	    return "redirect:/login";
+	/*if (principal==null)
+      	    return "redirect:/login";*/
 	css.decrementCart(itemId,model,principal);
 	return "cartcontents";
    }
@@ -92,8 +107,8 @@ public class ConsmController {
     public String removeFromCart(@RequestParam(name="itemId",required=true)Long itemId,
 	    Map<String,Object> model,
 	    Principal principal) {
-	if (principal==null)
-       	    return "redirect:/login";
+	/*if (principal==null)
+       	    return "redirect:/login";*/
 	css.removeCart(itemId,model,principal);
 	return "cartcontents";
     }
@@ -112,8 +127,8 @@ public class ConsmController {
     
     @GetMapping("/orders")
     public String orders(Map<String,Object> model, Principal principal) { //redirects to the cart page
-       	if (principal==null)
-       	    return "redirect:/login";	
+       /*	if (principal==null)
+       	    return "redirect:/login";	*/
        	css.orders(model,principal);
 	return "orders";
     }

@@ -51,7 +51,7 @@ public class AccService implements AccountService {
 	if (!flawed) {
 	    user.setActive(true);
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
-	    user.setRoles(Role.ADMIN);	    
+	    user.setRoles(Role.CONSUMER);	    
 	    ass.save(user);
 	    return true;
 	}

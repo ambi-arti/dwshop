@@ -26,14 +26,14 @@ public class MerchProperty {
     @Setter
     private long id_PK;
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "merch_FK",nullable = false)
     @Getter
     @Setter
     private Merch merchFK;
     
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "property_FK",nullable = false)
     @Getter
     @Setter

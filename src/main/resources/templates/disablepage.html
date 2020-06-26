@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head th:replace="merchpagehead::merchpagehead"></head>
+    <body>
+    	<div th:replace = "menubarauth::menubarauth(authTitle='Удаление аккаунта')"></div>
+	    <div id = "formContainer">
+			<p id = "purchaseStatus">Удаление аккаунта</p>
+			<p id = "purchaseDescription">Этим действием вы дизактивируете аккаунт. Его можно будет восстановить, обратившись в администрацию в течение месяца.</p>
+			<a href = "/removeConfirm">Да, я желаю удалить аккаунт</a>
+	    </div>
+	    <div th:replace="footer::footer"></div>
+    </body>
+</html>

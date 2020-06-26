@@ -23,6 +23,8 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.artemius.dwshop.entities.Role;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -48,11 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf()
 			.disable()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.POST,"/merchInfo").permitAll()
-				.antMatchers("/index","/casual","/login","/register").permitAll()
-				.antMatchers("/cart**","/purchase","/orders**").hasRole("Role.CONSUMER")
-				.antMatchers("/delivery","delivery_**").hasRole("Role.DELIVERY")
-				.antMatchers("/adminium","/adminium_**").hasRole("Role.ADMIN")
+				.antMatchers(HttpMethod.POST,"/**").permitAll()
+				.antMatchers("/index**","/casual**","/login**","/registration**").permitAll()
+				.antMatchers("/cart","/purchase","/orders").hasAnyAuthority(Role.CONSUMER.name(),Role.ADMIN.name())
+				.antMatchers("/delivery**").hasAnyAuthority(Role.DELIVERY.name())
+				.antMatchers("/adminium","/adminium").hasAnyAuthority(Role.ADMIN.name())
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -76,12 +78,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .dataSource(dataSource)
 	                .passwordEncoder(new Pbkdf2PasswordEncoder())
 	                .usersByUsernameQuery("select username, password, active from account where username=?")
+	               // .groupAuthoritiesByUsername("select u.username, u.roles from account u where u.username=?");
 	                .authoritiesByUsernameQuery("select u.username, u.roles from account u where u.username=?");
 	    }
 	    
-	    @Override
+	  
 	    public void configure(WebSecurity web) throws Exception {
-	      web.ignoring().antMatchers("/**");
+	      web.ignoring().antMatchers("/scripts/**","/styles/**","/fonts/**","/slick/**","/graphics/**");
 	    }
 	    
 }

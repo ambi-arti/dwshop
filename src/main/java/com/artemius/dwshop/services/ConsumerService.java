@@ -16,4 +16,5 @@ public interface ConsumerService {
     public void orders(Map<String,Object> model, Principal principal);
     public void ordersRemove(Long itemId, Map<String,Object> model, Principal principal);
     public void ordersRate(Long itemId, Long mark, Map<String,Object> model, Principal principal);
+    public void removeConfirm(Map<String, Object> model, Principal principal);
 }

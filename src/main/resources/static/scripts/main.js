@@ -1,12 +1,5 @@
 var currentMerch = null;
 var sizeButton = document.getElementById("sizeButton");
-var token =  $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
-$.ajaxSetup({
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader(header, token);
-    }
-});
 
 /*$(function () {
     var token = $("meta[name='_csrf']").attr("content");
@@ -15,6 +8,16 @@ $.ajaxSetup({
         xhr.setRequestHeader(header, token);
     });
 });*/
+
+function submitAuth(itemId) {
+	let token = $("meta[name='_csrf']").attr("content"); 
+	let header = $("meta[name='_csrf_header']").attr("content");
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", document.getElementById(itemId).action); 
+	xhr.setRequestHeader(header, token);
+	const data = new FormData(document.getElementById(itemId)); 
+	xhr.send(data);
+}
 
 function resetContents()  {
 	//Resets all the contents to their default view
@@ -156,6 +159,8 @@ function hidePassChange() {
 
 function sendRequest(type,url,params,target) {
 	const request = new XMLHttpRequest();
+	//let token = $("meta[name='_csrf']").attr("content"); 
+	//let header = $("meta[name='_csrf_header']").attr("content");
 	if (params==null)
 		params="";
 	request.open(type, (url+"?"+params), true);
@@ -168,6 +173,7 @@ function sendRequest(type,url,params,target) {
 	    }
 	    
 	});
+//	request.setRequestHeader(header, token);
 	request.send();
 	return request;
 }
