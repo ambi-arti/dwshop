@@ -58,5 +58,12 @@ public class MerchController {
 	return "merchInfo";
     }
     
+    @PostMapping("/carousel")
+    public String carousel(@RequestParam(name = "sort",required=false)String sort, @RequestParam(name = "section",required=true)String section, Map<String,Object> model) {
+	//m.merchInfo(merchID,model);
+	m.carousel(model,sort,section);
+	return "carousel";
+    }
+    
 
 }

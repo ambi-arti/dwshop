@@ -15,6 +15,7 @@ public interface MerchService {
     public Merch addNewMerch(Merch merch);
     public String findTypeNameByMerchID(Long merchID);
     public void casual(Map<String,Object> model, Principal principal);
+    public void carousel(Map<String,Object> model, String sort, String section);
     public void merchInfo(Long merchID, Map<String,Object> model);
     public Long getIdByTitle(String title);
     public Iterable<Section> findAllSections();

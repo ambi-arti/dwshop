@@ -178,6 +178,14 @@ function sendRequest(type,url,params,target) {
 	return request;
 }
 
+function sortCarousel(section, sort) {
+	let mainContainer = document.getElementById("mainContainer");
+	let carousel = document.createElement("div");
+	const request = sendRequest("POST","/carousel",("section="+section+"&sort="+sort),carousel);
+	mainContainer.replaceChild(carousel,mainContainer.children[2]);
+	console.log(request);
+}
+
 function loadContent(page) {
 	let initMerchID;
 	switch (page) {

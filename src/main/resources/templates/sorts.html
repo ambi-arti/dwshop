@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head th:replace="merchpagehead::merchpagehead"></head>
+    <body>
+    		<div class = "sorts" th:fragment="sorts">
+				<a class = "rowElem" th:onclick = "sortCarousel('casual','titleAsc')">Название ▲</a>
+				<a class = "rowElem" th:onclick = "sortCarousel('casual','priceAsc')">Цена ▲</a>
+				<a class = "rowElem" th:onclick = "sortCarousel(${section},'scoreAsc')">Рейтинг ▲</a>
+				<a class = "rowElem" th:onclick = "sortCarousel(${section},'titleDesc')">Название ▼</a>
+				<a class = "rowElem" th:onclick = "sortCarousel(${section},'priceDesc')">Цена ▼</a>
+				<a class = "rowElem" th:onclick = "sortCarousel(${section},'scoreDesc')">Рейтинг ▼</a>
+			</div>
+	</body>
+</html>

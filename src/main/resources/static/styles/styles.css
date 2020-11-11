@@ -300,6 +300,17 @@ body .btn:focus {
 	margin-bottom: 2%;
 }
 
+#mainContainer .sorts {
+	width: 100%;
+	padding-right: 2%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-items: flex-start;
+	justify-content: center;
+}
+
 .cartItem {
 	display: flex;
 	box-sizing: border-box;
@@ -445,6 +456,8 @@ body .btn:focus {
 	margin-bottom: 0.5%;
 	flex: 1 1 0;
 }
+
+
 .flexTable .flexTableRow .rowElem {
 	margin-right:10px;
 	margin-left:10px;

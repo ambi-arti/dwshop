@@ -63,6 +63,7 @@ public class MerService implements MerchService {
     public void casual(Map<String,Object> model, Principal principal) {
 	Iterable<Merch> merchList = findBySection(getIdByTitle("casual"));
 	model.put("merchList",merchList);
+	model.put("section","casual");
 	if (principal!=null) {
 	    model.put("user",ass.findByUsername(principal.getName()));
 	}
@@ -129,6 +130,36 @@ public class MerService implements MerchService {
     @Override
     public Iterable<Section> findAllSections() {
 	return ss.findAll();
+    }
+
+    @Override
+    public void carousel(Map<String, Object> model, String sort, String section) {
+	Iterable<Merch> contents; // = findBySection(section);  gotta do some queries
+	Long category = getIdByTitle(section);
+	switch (sort) {
+        	case "nameAsc":
+        	    contents = ms.findAllBySectionOrderByTitleAsc(category);
+        	    break;
+        	case "nameDesc":
+        	    contents = ms.findAllBySectionOrderByTitleDesc(category);
+        	    break;
+        	case "priceAsc":
+        	    contents = ms.findAllBySectionOrderByPriceAsc(category);
+        	    break;
+        	case "priceDesc":
+        	    contents = ms.findAllBySectionOrderByPriceDesc(category);
+        	    break;
+        	case "scoreAsc":
+        	    contents = ms.findAllBySectionOrderByScoreAsc(category);
+        	    break;
+        	case "scoreDesc":
+        	    contents = ms.findAllBySectionOrderByScoreDesc(category);
+        	    break;
+        	default:
+        	    contents = ms.findAllBySectionOrderByPriceAsc(category);
+        	    break;
+	}
+	model.put("merchList",contents);
     }
     
 }
