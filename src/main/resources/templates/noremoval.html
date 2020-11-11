@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head th:replace="merchpagehead::merchpagehead"></head>
+    <body>
+    	<div th:replace = "menubarauth::menubarauth(authTitle='Удаление аккаунта')"></div>
+	    <div id = "formContainer">
+			<p id = "purchaseStatus">Ошибка удаления аккаунта</p>
+			<p id = "purchaseDescription">Невозможно удалить аккаунт: на нём присутствуют активные заказы!</p>
+			<a href = "/orders">Перейти к списку заказов</a>
+	    </div>
+	    <div th:replace="footer::footer"></div>
+    </body>
+</html>

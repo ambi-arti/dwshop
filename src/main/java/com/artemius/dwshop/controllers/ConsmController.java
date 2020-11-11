@@ -61,18 +61,25 @@ public class ConsmController {
        return "disablepage";
    }
    
+   @GetMapping("/noremoval")
+   public String noRemoval(Map<String,Object> model, Principal principal) {
+      /* if (principal==null)
+      	    return "redirect:/login";*/
+       return "noremoval";
+   }
+   
    @GetMapping("/removeConfirm")
    public String removeConfirm(Map<String,Object> model, Principal principal) {
       /* if (principal==null)
       	    return "redirect:/login";*/
        //If there are some undelivered orders, it won't delete the account;
-       if (css.ordersByAccount(principal)
+       if (!css.ordersByAccount(principal)
 	       .iterator()
 	       .hasNext()) {
         	       css.removeConfirm(model,principal);
         	       return "redirect:/logout";	   
        }
-       return "/orders";
+       return "/noremoval";
    }
    
    @PostMapping("/account")
