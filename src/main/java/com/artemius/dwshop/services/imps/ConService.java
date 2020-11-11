@@ -20,6 +20,7 @@ import com.artemius.dwshop.entities.OrderStatus;
 import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.OrderRepository;
+import com.artemius.dwshop.repositories.SectionRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.ConsumerService;
 import com.artemius.dwshop.services.DiscountService;
@@ -41,6 +42,8 @@ public class ConService implements ConsumerService {
     MerchService ms = new MerService();
     @Autowired
     DiscountService ds = new DiscService();
+    @Autowired
+    SectionRepository ses;
 
     @Override
     public boolean account(Map<String, Object> model, EditedAccount user, Principal principal) throws ParseException {	
@@ -112,6 +115,8 @@ public class ConService implements ConsumerService {
 		model.put("city",user.getCity());
 		model.put("birthdate",user.getBirthdate());
 		model.put("address",user.getAddress());
+		
+		model.put("sections",ses.findAll());   
 	return false;
     }
     
@@ -119,6 +124,7 @@ public class ConService implements ConsumerService {
 	Account curr = as.findByUsername(principal.getName());
 	curr.setActive(false);
 	as.saveNewAccount(curr);
+	model.put("sections",ses.findAll());   
     }
 
     @Override
@@ -134,6 +140,7 @@ public class ConService implements ConsumerService {
   	model.put("city",user.getCity());
   	model.put("birthdate",user.getBirthdate());
   	model.put("address",user.getAddress());
+  	model.put("sections",ses.findAll());   
     }
 
     @Override
@@ -149,6 +156,7 @@ public class ConService implements ConsumerService {
        	else model.put("hasItems",true);       	
        	model.put("items",items);
        	model.put("user",as.findByUsername(principal.getName()));
+       	model.put("sections",ses.findAll());   
        	model.put("totalCost",totalCost);
     }
 
@@ -263,7 +271,8 @@ public class ConService implements ConsumerService {
        	else model.put("hasItems",true);     
        	model.put("Status",r);
        	model.put("items",items);
-       	model.put("user",as.findByUsername(principal.getName()));	
+       	model.put("user",as.findByUsername(principal.getName()));
+       	model.put("sections",ses.findAll());   
     }
 
     @Override

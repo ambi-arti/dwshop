@@ -14,15 +14,15 @@
 				
 				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto" id = "menuBar">
-					  <li class="nav-item active">
-						<a class="nav-link" href="/casual">Кэжуал</a>
+					  <li class="nav-item active" th:each="section:${sections}">
+						<a class="nav-link" th:href="${section.getTitle()}" th:text="${section.getMenutitle()}">Кэжуал</a>
 					  </li>
-					  <li class="nav-item active">
+					  <!--  <li class="nav-item active">
 						<a class="nav-link" href="/#">Деловая</a>
 					  </li>
 					  <li class="nav-item active">
 						<a class="nav-link" href="/#">Спортивная</a>
-					  </li>
+					  </li>-->
 					</ul>
 				  </div>
 				  <div th:if="not ${user}">

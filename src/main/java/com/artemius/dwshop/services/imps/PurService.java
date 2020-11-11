@@ -17,6 +17,7 @@ import com.artemius.dwshop.entities.Order;
 import com.artemius.dwshop.entities.OrderStatus;
 import com.artemius.dwshop.repositories.CartItemRepository;
 import com.artemius.dwshop.repositories.OrderRepository;
+import com.artemius.dwshop.repositories.SectionRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.PurchaseService;
 import com.artemius.dwshop.services.SizeService;
@@ -31,6 +32,8 @@ public class PurService implements PurchaseService {
     private SizeService ss = new MSizeService();
     @Autowired
     private AccountService ass = new AccService();
+    @Autowired
+    private SectionRepository ses;
 
     @Override
     public void purchse(Map<String, Object> model, Principal principal) {
@@ -60,6 +63,7 @@ public class PurService implements PurchaseService {
 	model.put("user",ass.findByUsername(principal.getName()));
 	model.put("purchaseStatus",purchaseStatus);
 	model.put("purchaseDescription",purchaseDescription);
+	model.put("sections",ses.findAll());   
 	if (purchaseSuccess) {
 	    os.saveAll(orders);
 	    for (CartItem i: items) {

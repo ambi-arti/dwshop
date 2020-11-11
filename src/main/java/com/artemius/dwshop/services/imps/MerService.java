@@ -63,8 +63,10 @@ public class MerService implements MerchService {
     public void casual(Map<String,Object> model, Principal principal) {
 	Iterable<Merch> merchList = findBySection(getIdByTitle("casual"));
 	model.put("merchList",merchList);
-	if (principal!=null)
+	if (principal!=null) {
 	    model.put("user",ass.findByUsername(principal.getName()));
+	}
+	model.put("sections",ss.findAll());   
     }
     
     public void merchInfo(Long merchID, Map<String,Object> model) {
