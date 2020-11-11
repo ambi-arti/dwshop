@@ -314,4 +314,9 @@ public class ConService implements ConsumerService {
        	model.put("user",as.findByUsername(principal.getName()));
     }
 
+    @Override
+    public Iterable<Order> ordersByAccount(Principal principal) {
+	return os.findAllByUsername(principal.getName());
+    }
+
 }

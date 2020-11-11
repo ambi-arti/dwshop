@@ -377,6 +377,7 @@ public class AdmService implements AdminiumService {
 	merchprops(model,principal);
 	
     }
+    
 
     @Override
     public void nativeQuery(Map<String, Object> model, Principal principal) {

@@ -65,8 +65,14 @@ public class ConsmController {
    public String removeConfirm(Map<String,Object> model, Principal principal) {
       /* if (principal==null)
       	    return "redirect:/login";*/
-       css.removeConfirm(model,principal);
-       return "redirect:/logout";
+       //If there are some undelivered orders, it won't delete the account;
+       if (css.ordersByAccount(principal)
+	       .iterator()
+	       .hasNext()) {
+        	       css.removeConfirm(model,principal);
+        	       return "redirect:/logout";	   
+       }
+       return "/orders";
    }
    
    @PostMapping("/account")

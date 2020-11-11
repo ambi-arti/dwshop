@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.Map;
 
 import com.artemius.dwshop.entities.EditedAccount;
+import com.artemius.dwshop.entities.Order;
 
 public interface ConsumerService {
     public boolean account(Map<String,Object> model, EditedAccount user, Principal principal) throws ParseException;
@@ -18,4 +19,5 @@ public interface ConsumerService {
     public void ordersRemove(Long itemId, Map<String,Object> model, Principal principal);
     public void ordersRate(Long itemId, Long mark, Map<String,Object> model, Principal principal);
     public void removeConfirm(Map<String, Object> model, Principal principal);
+    public Iterable<Order> ordersByAccount(Principal principa);
 }

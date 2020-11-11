@@ -52,7 +52,7 @@ public class Merch {
     @Column(name = "section", nullable = false)
     @Getter
     @Setter
-    private String section;
+    private Long section;
     
     @Column(name = "description", nullable = false)
     @Getter

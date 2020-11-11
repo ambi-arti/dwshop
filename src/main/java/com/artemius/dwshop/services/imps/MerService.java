@@ -16,9 +16,11 @@ import com.artemius.dwshop.entities.Merch;
 import com.artemius.dwshop.entities.MerchProperty;
 import com.artemius.dwshop.entities.MerchSize;
 import com.artemius.dwshop.entities.Property;
+import com.artemius.dwshop.entities.Section;
 import com.artemius.dwshop.repositories.MerchRepository;
 import com.artemius.dwshop.repositories.MerchSizeRepository;
 import com.artemius.dwshop.repositories.MerchTypeRepository;
+import com.artemius.dwshop.repositories.SectionRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.ColourService;
 import com.artemius.dwshop.services.DiscountService;
@@ -34,6 +36,8 @@ public class MerService implements MerchService {
     MerchRepository ms;
     @Autowired
     MerchTypeRepository ts;
+    @Autowired
+    SectionRepository ss;
     @Autowired
     SizeService mss = new MSizeService();
     @Autowired
@@ -57,7 +61,7 @@ public class MerService implements MerchService {
     }
     
     public void casual(Map<String,Object> model, Principal principal) {
-	Iterable<Merch> merchList = findBySection("Casual");
+	Iterable<Merch> merchList = findBySection(getIdByTitle("casual"));
 	model.put("merchList",merchList);
 	if (principal!=null)
 	    model.put("user",ass.findByUsername(principal.getName()));
@@ -93,7 +97,7 @@ public class MerService implements MerchService {
     }
 
     @Override
-    public List<Merch> findBySection(String section) {
+    public List<Merch> findBySection(Long section) {
 	List<Merch> toReturn = new ArrayList<>();
 	for (Merch m: ms.findAllBySection(section)) {
 	    toReturn.add(m);
@@ -113,6 +117,16 @@ public class MerService implements MerchService {
     @Override
     public String findTypeNameByMerchID(Long merchID) {
 	return ts.findById(ms.getTypeFKById(merchID)).get().getTitle();
+    }
+
+    @Override
+    public Long getIdByTitle(String sectionTitle) {
+	return ss.getIdByTitle(sectionTitle);
+    }
+
+    @Override
+    public Iterable<Section> findAllSections() {
+	return ss.findAll();
     }
     
 }
