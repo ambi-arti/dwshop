@@ -180,11 +180,18 @@ function sendRequest(type,url,params,target) {
 
 function sortCarousel(section, sort) {
 	let mainContainer = document.getElementById("mainContainer");
-	let carousel = document.createElement("div");
-	const request = sendRequest("POST","/carousel",("section="+section+"&sort="+sort),carousel);
-	mainContainer.replaceChild(carousel,mainContainer.children[2]);
-	console.log(request);
+	const oldCarousel = document.getElementsByClassName("merchCarousel")[0];
+	$('.merchCarousel').slick('unslick');
+	//const newCarousel = document.createElement("div");
+//	newCarousel.className = "merchCarousel";
+//	oldCarousel.replaceWith(newCarousel);
+	const request = sendRequest("POST","/carousel",("section="+section+"&sort="+sort),oldCarousel);
+	let links = document.getElementsByClassName('sortType');
+	for (let i=0;i<links.length;i++)
+		links[i].style.color="#44a3fc";
+	setTimeout(initCars,500);
 }
+
 
 function loadContent(page) {
 	let initMerchID;
@@ -201,6 +208,7 @@ function loadContent(page) {
 			quantity: 0,
 		};
 	//showMerchInfo(initMerchID);
+	initCars();
 }
 
 function showMerchInfo(merchID) {
@@ -208,3 +216,4 @@ function showMerchInfo(merchID) {
 	const request = sendRequest("POST","/merchInfo",("merchID="+merchID),merchInfo);
 	console.log(request);
 }
+initCars();

@@ -3,13 +3,13 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head th:replace="merchpagehead::merchpagehead"></head>
     <body>
-    		<div class = "sorts" th:fragment="sorts">
-				<a class = "rowElem" th:onclick = "sortCarousel('casual','titleAsc')">Название ▲</a>
-				<a class = "rowElem" th:onclick = "sortCarousel('casual','priceAsc')">Цена ▲</a>
-				<a class = "rowElem" th:onclick = "sortCarousel(${section},'scoreAsc')">Рейтинг ▲</a>
-				<a class = "rowElem" th:onclick = "sortCarousel(${section},'titleDesc')">Название ▼</a>
-				<a class = "rowElem" th:onclick = "sortCarousel(${section},'priceDesc')">Цена ▼</a>
-				<a class = "rowElem" th:onclick = "sortCarousel(${section},'scoreDesc')">Рейтинг ▼</a>
+    		<div th:id="${section}" class = "sorts" th:fragment="sorts">
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'titleAsc'); this.style.color='blue'">Название ▲</a>
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'priceAsc'); this.style.color='blue'">Цена ▲</a>
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'scoreAsc'); this.style.color='blue'">Рейтинг ▲</a>
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'titleDesc'); this.style.color='blue'">Название ▼</a>
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'priceDesc'); this.style.color='blue'">Цена ▼</a>
+				<a class = "sortType" onclick = "sortCarousel(this.parentNode.id,'scoreDesc'); this.style.color='blue'">Рейтинг ▼</a>
 			</div>
 	</body>
 </html>

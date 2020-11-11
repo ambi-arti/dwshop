@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>	
+			<div onclick="setCurrentMerch(this.getAttribute('merchid'))" th:each="merch:${merchList}" class = "merchItem" th:merchID = ${merch.getId_PK()}>
+				<p class = "merchItemDesc" th:text = ${merch.getTitle()}></p>
+				<img class = "merchItemPic" th:src = ${merch.getImgsrc()}></img>
+				<p style ="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding-left: 2%; padding-right: 2%"class = "merchItemDesc"><span>Цена: <span style = "align-self: flex-start" th:text = ${merch.getPrice()}></span><span> рублей</span></span>
+				<span style = "display: flex; align-items: center; justify-content: center; align-self: flex-end">Оценка: <span th:text = ${merch.getOverall()}></span><img class="star" src ="/graphics/star.png"></span></p>
+			</div>
+	</body>
+</html>
