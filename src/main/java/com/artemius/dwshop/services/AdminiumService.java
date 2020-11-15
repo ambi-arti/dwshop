@@ -22,6 +22,16 @@ public interface AdminiumService {
     public void merchprops(Map<String,Object> model, Principal principal);
     public void nativeQuery(Map<String,Object> model, Principal principal);
     
+    //Statistics
+    public void mostPurchases(Map<String,Object> model, Principal principal);
+    public void leastPurchases(Map<String,Object> model, Principal principal);
+    public void mostPurchasesBySize(Map<String,Object> model, Principal principal);
+    public void leastPurchasesBySize(Map<String,Object> model, Principal principal);
+    public void mostRatingsBySize(Map<String,Object> model, Principal principal);
+    public void leastRatingsBySize(Map<String,Object> model, Principal principal);
+    public void avgPrices(Map<String,Object> model, Principal principal);
+    //
+    
     public void editAccount(Account acc, Map<String,Object> model, Principal principal);
     public void newAccount(Account acc, Map<String,Object> model, Principal principal);
     public void removeAccount(Long itemId, Map<String, Object> model, Principal principal);
@@ -47,4 +57,5 @@ public interface AdminiumService {
     public void removeMerchProps(Long itemId, Map<String, Object> model, Principal principal);
     
     public void nativeSubmit(Query q, Map<String,Object> model, Principal principal);
+
 }

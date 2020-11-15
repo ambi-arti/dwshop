@@ -73,4 +73,9 @@ public class Merch {
     @Column(name = "overall", nullable = false)
     @Getter
     private Double overall;
+    
+    @Column(name = "purchases", nullable = false)
+    @Getter
+    @Setter
+    private Long purchases;
 }

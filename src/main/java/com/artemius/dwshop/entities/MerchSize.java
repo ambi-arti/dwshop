@@ -45,4 +45,9 @@ public class MerchSize {
     @Setter
     private long quantity;
     
+    @Column(name = "purchases", nullable = false)
+    @Getter
+    @Setter
+    private Long purchases;
+    
 }

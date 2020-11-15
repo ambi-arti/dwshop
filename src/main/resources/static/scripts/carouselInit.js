@@ -6,5 +6,5 @@ function initCars() {
 		dots: true,
 		arrows: false
 	});
+	document.getElementsByClassName("merchCarousel")[0].style.display="block";
 }
-

@@ -416,4 +416,40 @@ public class AdmService implements AdminiumService {
 
     }
 
+    @Override
+    public void mostPurchases(Map<String, Object> model, Principal principal) {
+	model.put("merchList", mer.findAllOrderByPurchasesDesc());	
+    }
+
+    @Override
+    public void leastPurchases(Map<String, Object> model, Principal principal) {
+	model.put("merchList", mer.findAllOrderByPurchasesAsc());	
+    }
+
+    @Override
+    public void mostPurchasesBySize(Map<String, Object> model, Principal principal) {
+	model.put("merchSizeList", msr.findAllOrderByPurchasesDesc());	
+    }
+
+    @Override
+    public void leastPurchasesBySize(Map<String, Object> model, Principal principal) {
+	model.put("merchSizeList", msr.findAllOrderByPurchasesAsc());	
+    }
+
+    @Override
+    public void mostRatingsBySize(Map<String, Object> model, Principal principal) {
+	model.put("merchSizeList", mer.findAllOrderByScoresDesc());	
+    }
+
+    @Override
+    public void leastRatingsBySize(Map<String, Object> model, Principal principal) {
+	model.put("merchSizeList", mer.findAllOrderByScoresDesc());	
+    }
+
+    @Override
+    public void avgPrices(Map<String, Object> model, Principal principal) {
+	//let's leave it for the better times, I guess
+	
+    }
+
 }

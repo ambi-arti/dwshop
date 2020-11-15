@@ -182,6 +182,7 @@ function sortCarousel(section, sort) {
 	let mainContainer = document.getElementById("mainContainer");
 	const oldCarousel = document.getElementsByClassName("merchCarousel")[0];
 	$('.merchCarousel').slick('unslick');
+	oldCarousel.style.display="none";
 	//const newCarousel = document.createElement("div");
 //	newCarousel.className = "merchCarousel";
 //	oldCarousel.replaceWith(newCarousel);
