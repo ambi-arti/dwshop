@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.mail.javamail.JavaMailSender;
+
 import com.artemius.dwshop.entities.Account;
 
 public interface AccountService {
@@ -17,4 +19,5 @@ public interface AccountService {
     public Account saveNewAccount(Account account);
     public Account findByUsername(String username);
     public List<Account> findAllByCity(String city);
+    public void sendCongratsEmail(String sendTo, String fullName);
 }

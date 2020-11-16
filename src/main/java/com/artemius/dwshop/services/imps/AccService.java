@@ -8,10 +8,17 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +26,18 @@ import com.artemius.dwshop.entities.Account;
 import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.AccountRepository;
 import com.artemius.dwshop.services.AccountService;
+import com.artemius.dwshop.services.EmailService;
+
+
 
 @Service
 public class AccService implements AccountService {
 
     @Autowired
     AccountRepository as;
+    @Autowired
+    EmailService es;
+    
     
     public boolean registration(Map<String,Object> model, Account user) throws ParseException {
 	boolean flawed = false;
@@ -53,6 +66,8 @@ public class AccService implements AccountService {
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
 	    user.setRoles(Role.CONSUMER);	    
 	    as.save(user);
+	    String fullName = user.getSurname()+" "+user.getFirstname();
+	    sendCongratsEmail(user.getUsername(),fullName);
 	    return true;
 	}
 	model.put("surname",user.getSurname());
@@ -128,5 +143,22 @@ public class AccService implements AccountService {
 	Date c = new Date();
 	return c.after(d);
     }
+
+    @Override
+   public void sendCongratsEmail(String sendTo, String fullName) {
+	String message = "<!DOCTYPE html>\r\n" + 
+		"<html>\r\n" + 
+		"	<head>\r\n" + 
+		"		<title>Registration Confirmation Letter</title>\r\n" + 
+		"	</head>\r\n" + 
+		"	<body style = \"display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: #44a3fc\">\r\n" + 
+		"		<div style = \"position: absolute; top: 50%; transform: translateY(-50%); align-self: center; width: 50%; height: auto; flex-direction: column; justify-content: flex-start; align-items: center; background-color: white; padding: 2%; font-size: 2.5vh; text-align: center; font-family: Franklin Gothic Book; box-shadow: 10px 14px 15px 0px rgba(0,0,0,0.75); border-radius: 40px;\">\r\n" + 
+		"			<b style = \"font-size: 3vh\">Здравствуйте, "+fullName+"!</b>\r\n" + 
+		"			<p style = \"text-align: justify\">Регистрация прошла успешно. Мы благодарим вас за то, что выбрали наш магазин. Теперь у вас есть доступ к приобретению качественной и недорогой мужской одежды.</p>\r\n" + 
+		"			<b>Приятных покупок!</b>\r\n" + 
+		"		</div>\r\n" + 
+		"	</body>\r\n" + 
+		"</html>";
+   }
 
 }
