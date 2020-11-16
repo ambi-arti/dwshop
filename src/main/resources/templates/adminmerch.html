@@ -10,13 +10,14 @@
 						<option style="width:200px" th:value="${item.getTypeFK().getId_PK()}" th:class="${item.getId_PK()}" selected disabled hidden th:text="${item.getTypeFK().getTitle()}"></option>
 						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
 					</select>
-					<input title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getPrice()}">
-					<input title = "Изображение" required name = "imgsrc" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getImgsrc()}">
-					<input title = "Категория" required name = "section" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSection()}">
-					<input title = "Описание" required name = "description" th:class="${item.getId_PK()}" class = "rowElem" disabled type="text" size = "200" th:value = "${item.getDescription()}">
-					<input title = "Суммарный балл" size="6" required name = "score" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getScore()}">
-					<input title = "Количество оценок" size="6" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getMarks()}">
-					<input title = "Оценка (вычисляемый столбец)" size="6" required name = "overall"  disabled type = "number" th:checked="${item.getOverall()}">
+					<input style = "width:100px;" title = "Цена" name = "price" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getPrice()}">
+					<input th:title = "${item.getImgsrc()}" required name = "imgsrc" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getImgsrc()}">
+					<input title = "Категория" style = "width:50px" required name = "section" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSection()}">
+					<input style = "width:250px;" th:title = "${item.getDescription()}" required name = "description" th:class="${item.getId_PK()}" class = "rowElem" disabled type="text" size = "200" th:value = "${item.getDescription()}">
+					<input style = "width:50px;" title = "Суммарный балл" size="6" required name = "score" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getScore()}">
+					<input style = "width:100px;" title = "Количество оценок" size="6" required name = "marks" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "number" th:value = "${item.getMarks()}">
+					<input  style = "width:100px;"title = "Оценка (вычисляемый столбец)" size="6" required name = "overall"  disabled type = "number" th:checked="${item.getOverall()}">
+					<input  style = "width:100px;"title = "Число покупок" size="6" required name = "purchase"  disabled type = "number" th:checked="${item.getPurchases()}">
 					<a th:id = "editLink+${item.getId_PK()}" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="edit(this.getAttribute('itemId'),this.getAttribute('state'))" state="EDIT"><b>[EDIT]</b></a>
 				<!--</form>-->
 			</form>
@@ -29,13 +30,13 @@
 						<option style="width:200px" value="" selected disabled hidden></option>
 						<option th:each="type:${types}" style="width:200px" th:text = "${type.getTitle()}" th:value = "${type.getId_PK()}"></option>
 					</select>
-					<input title = "Цена" name = "price" type = "number">
+					<input style = "width:100px;" title = "Цена" name = "price" type = "number">
 					<input title = "Изображение" required name = "imgsrc" type = "text">
-					<input title = "Категория" required name = "section" type = "text">
-					<input title = "Описание" required size = "200" name = "description" type = "text">
-					<input title = "Суммарный балл" required size="6" name = "score" value = "5" type = "number">
-					<input title = "Количество оценок" required size="6" name = "marks" value = "1" type = "number">
-					<input title = "Оценка (вычисляемый столбец)" size="6" disabled type = "number" >
+					<input title = "Категория" style = "width:50px" required name = "section" type = "text">
+					<input style = "width:250px;" title = "Описание" required size = "200" name = "description" type = "text">
+					<input style = "width:100px;" title = "Суммарный балл" required size="6" name = "score" value = "5" type = "number">
+					<input style = "width:100px;" title = "Количество оценок" required size="6" name = "marks" value = "1" type = "number">
+					<input style = "width:100px;" title = "Оценка (вычисляемый столбец)" size="6" disabled type = "number" >
 					<a href="#" onclick="newItem()" class = "rowElem" state="EDIT"><b>[SAVE]</b></a>
 					<!-- th:action="@{/adminium/new_account}" -->
 				<!--</form>-->

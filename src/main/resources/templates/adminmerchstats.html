@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<body th:fragment="adminmerchcolour">
+		<div id="admincontents" class = "flexTable">
+			<form th:id="${item.getId_PK()}" th:action="@{/adminium/mostPurchases}" method="post" class = "flexTableRow" th:each="item:${items}">
+				<!--  <form th:action="@{/editAccount}" method="post">-->
+					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
+					<input title = "Название" style="width:200px" disabled name = "title" th:class="${item.getTitle()}" class = "rowElem" th:value = "${item.getTitle()}">
+					<input title = "Категория" style="width:200px" disabled name = "section" th:class="${item.getSection().getMenutitle()}" th:value="${item.getSection().getMenutitle()}" class = "rowElem">
+					<input title = "Число приобретений" style="width:100px" disabled name = "purchases" th:class="${item.getPurchases()}" th:value="${item.getPurchases()}" class = "rowElem">
+				<!--</form>-->
+			</form>
+		</div>
+		<br>
+		<h3 style = "align-self:center" th:text="${error}"></h3>	
+	</body>
+</html>

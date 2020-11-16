@@ -33,6 +33,13 @@ public class AdminiumController {
 	return "adminium";
     }
     
+    @PostMapping("/adminium/mostPurchases")
+    @Secured("ADMIN")
+    public String mostPurchases(Map<String,Object> model, Principal principal) {
+	as.mostPurchases(model,principal);
+	return "adminmerchstats";
+    }
+    
     @PostMapping("/adminium/accounts")
     @Secured("ADMIN")
     public String accounts(Map<String,Object> model, Principal principal) {

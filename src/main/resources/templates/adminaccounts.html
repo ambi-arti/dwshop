@@ -1,21 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<body th:fragment="adminaccounts">
-		<div id="admincontents" class = "flexTable">
+		<div class = "flexTable">
 			<form th:id="${item.getId_PK()}" th:action="@{/adminium/edit_account}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a th:itemType="${currentItem}" title = "Удалить элемент" th:itemId = "${item.getId_PK()}" class = "rowElem" href="#" onclick="remove(this.getAttribute('itemType'),this.getAttribute('itemId'))"><b>[X]</b></a>
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
-					<input title = "Фамилия" required name = "surname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSurname()}">
-					<input title = "Имя" required name = "firstname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getFirstname()}">
-					<input title = "Отчество" name = "patronymic" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPatronymic()}">
-					<input title = "Дата рождения" required name = "birthdate" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "date" th:value = "${item.getBirthdate()}">
+					<input title = "Фамилия" style = "width:120px;" required name = "surname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getSurname()}">
+					<input title = "Имя" style = "width:120px;" required name = "firstname" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getFirstname()}">
+					<input title = "Отчество" style = "width:120px;" name = "patronymic" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPatronymic()}">
+					<input title = "Дата рождения" style = "width:140px;" required name = "birthdate" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "date" th:value = "${item.getBirthdate()}">
 					<input title = "Город" required name = "city" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getCity()}">
 					<input title = "Адрес" required name = "address" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getAddress()}">
 					<input title = "E-mail" required name = "username" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getUsername()}">
-					<input title = "Пароль" required name = "password" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getPassword()}">
 					<input title = "Активность" required name = "active" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "checkbox" th:checked="${item.getActive()}">
 					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
-					<select title = "Роли" required name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled th:value = "${item.getRoles()}">
+					<select title = "Роли" style = "width:110px;" required name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled th:value = "${item.getRoles()}">
 						<option value="" selected disabled hidden th:text="${item.getRoles()}"></option>
 						<option th:unless="${item.getRoles()=='CONSUMER'}" value="CONSUMER">CONSUMER</option>
 						<option th:unless="${item.getRoles()=='DELIVERY'}"  value="DELIVERY">DELIVERY</option>
@@ -27,18 +26,18 @@
 			<form id="new" th:action="@{/adminium/new_account}" method="post" class = "flexTableRow">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<a style = "color: gray" disabled class = "rowElem" href="#"><b>[X]</b></a>
-					<input style = "width:50px;" type = "text" disabled value = "ID">
-					<input title = "Фамилия" required name = "surname" type = "text">
-					<input title = "Имя" required name = "firstname" type = "text">
-					<input title = "Отчество" name = "patronymic" type = "text">
-					<input title = "Дата рождения" required name = "birthdate" type = "date">
+					<input disabled style = "width:50px;" type = "text" value = "ID">
+					<input style = "width:120px;" title = "Фамилия" required name = "surname" type = "text">
+					<input style = "width:120px;" title = "Имя" required name = "firstname" type = "text">
+					<input style = "width:120px;" title = "Отчество" name = "patronymic" type = "text">
+					<input title = "Дата рождения" style = "width:140px;" required name = "birthdate" type = "date">
 					<input title = "Город" required name = "city" type = "text">
 					<input title = "Адрес" required name = "address" type = "text">
 					<input title = "E-mail" required name = "username" type = "text">
 					<input title = "Пароль" required name = "password" type = "text">
 					<input title = "Активность" required name = "active" type = "checkbox" >
 					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
-					<select title = "Роль" required name = "roles">
+					<select title = "Роль" style = "width:110px;" required name = "roles">
 						<option value="CONSUMER">CONSUMER</option>
 						<option value="DELIVERY">DELIVERY</option>
 						<option value="ADMIN">ADMIN</option>

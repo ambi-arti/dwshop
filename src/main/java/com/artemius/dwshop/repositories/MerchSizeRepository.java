@@ -12,9 +12,9 @@ public interface MerchSizeRepository extends CrudRepository<MerchSize, Long> {
     //@Query(value = "SELECT * FROM MerchSize e WHERE e.merchFK.id_PK = :merchID ")
     @Query(value = "SELECT * FROM MerchSize WHERE merch_FK = :merchID ", nativeQuery=true)
     public Iterable<MerchSize> findAllByMerchID(@Param("merchID")Long merchID);
-    @Query(value = "SELECT * FROM MerchSize ORDER BY purchases ASC GROUP BY merch_fk", nativeQuery=true)
+    @Query(value = "SELECT * FROM MerchSize GROUP BY merch_fk, id_pk ORDER BY purchases ASC", nativeQuery=true)
     public Iterable<Merch> findAllOrderByPurchasesAsc();
-    @Query(value = "SELECT * FROM MerchSize ORDER BY purchases DESC GROUP BY merch_fk", nativeQuery=true)
+    @Query(value = "SELECT * FROM MerchSize GROUP BY merch_fk, id_pk ORDER BY purchases DESC", nativeQuery=true)
     public Iterable<Merch> findAllOrderByPurchasesDesc();
 
     

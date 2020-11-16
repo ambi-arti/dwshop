@@ -46,6 +46,13 @@ function edit(itemId,action) {
 	}	
 }
 
+function mostPurchases() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/mostPurchases",null,
+			admincontents);
+}
+
 function accounts() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",

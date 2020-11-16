@@ -49,10 +49,11 @@ public class Merch {
     @Setter
     private String imgsrc;
     
-    @Column(name = "section", nullable = false)
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "section",nullable = false)
     @Getter
     @Setter
-    private Long section;
+    private Section section;
     
     @Column(name = "description", nullable = false)
     @Getter
