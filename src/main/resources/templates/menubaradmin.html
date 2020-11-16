@@ -41,13 +41,15 @@
 					  <li class="nav-item active">
 					  	<div class="dropdown show dropdown" th:if="${user}">
 					  		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    		STATISTICS
+					    		STATS
 					    	</a>
 					  		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 					  			<a class="dropdown-item" href="#" onclick = "mostPurchases()">Наиболее популярные</a>
 					    		<a class="dropdown-item" href="#" onclick = "leastPurchases()">Наименее популярные</a>
-					    		<a class="dropdown-item" href="#" onclick = "mostScores()">С наибольшим рейтингом</a>
-					    		<a class="dropdown-item" href="#" onclick = "leastScores()">С наименьшим рейтингом</a>
+					    		<a class="dropdown-item" href="#" onclick = "mostSizePurchases()">Наиболее популярные размеры</a>
+					    		<a class="dropdown-item" href="#" onclick = "leastSizePurchases()">Наименее популярные размеры</a>
+					    		<a class="dropdown-item" href="#" onclick = "mostOveralls()">С наибольшим рейтингом</a>
+					    		<a class="dropdown-item" href="#" onclick = "leastOveralls()">С наименьшим рейтингом</a>
 					    		<!--  <a class="dropdown-item" href="#" onclick = "avgPrice()">Средняя цена</a>-->
 					  		</div>
 				 		</div>

@@ -43,7 +43,7 @@ public class MerchSize {
     @Column(name = "quantity", nullable = false)
     @Getter
     @Setter
-    private long quantity;
+    private Long quantity;
     
     @Column(name = "purchases", nullable = false)
     @Getter

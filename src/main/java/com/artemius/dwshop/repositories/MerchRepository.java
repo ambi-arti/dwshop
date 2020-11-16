@@ -28,11 +28,11 @@ public interface MerchRepository extends CrudRepository<Merch, Long> {
     public Iterable<Merch> findAllOrderByPurchasesAsc();
     @Query(value = "SELECT * FROM Merch GROUP BY section, id_pk ORDER BY purchases DESC", nativeQuery=true)
     public Iterable<Merch> findAllOrderByPurchasesDesc();
-    @Query(value = "SELECT * FROM Merch GROUP BY section, id_pk ORDER BY score ASC", nativeQuery=true)
+    @Query(value = "SELECT * FROM Merch GROUP BY section, id_pk ORDER BY overall ASC", nativeQuery=true)
     public Iterable<Merch> findAllOrderByScoresAsc();
-    @Query(value = "SELECT * FROM Merch GROUP BY section, id_pk ORDER BY score DESC", nativeQuery=true)
+    @Query(value = "SELECT * FROM Merch GROUP BY section, id_pk ORDER BY overall DESC", nativeQuery=true)
     public Iterable<Merch> findAllOrderByScoresDesc();
-    @Query(value = "SELECT AVG(price) FROM Merch WHERE section = :section", nativeQuery=true)
-    public Long getAvgPriceBySection(Long section);
+  //  @Query(value = "SELECT AVG(price) FROM Merch WHERE section = :section", nativeQuery=true)
+ //   public Long getAvgPriceBySection(Long section);
     
 }

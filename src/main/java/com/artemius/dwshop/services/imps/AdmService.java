@@ -443,7 +443,7 @@ public class AdmService implements AdminiumService {
 
     @Override
     public void leastRatingsBySize(Map<String, Object> model, Principal principal) {
-	model.put("items", mer.findAllOrderByScoresDesc());	
+	model.put("items", mer.findAllOrderByScoresAsc());	
     }
 
     @Override

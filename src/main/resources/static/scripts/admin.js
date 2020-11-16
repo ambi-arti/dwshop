@@ -53,6 +53,41 @@ function mostPurchases() {
 			admincontents);
 }
 
+function leastPurchases() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/leastPurchases",null,
+			admincontents);
+}
+
+function mostSizePurchases() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/mostSizePurchases",null,
+			admincontents);
+}
+
+function leastSizePurchases() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/leastSizePurchases",null,
+			admincontents);
+}
+
+function mostOveralls() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/mostOveralls",null,
+			admincontents);
+}
+
+function leastOveralls() {
+	let admincontents=document.getElementById("admincontents");
+	const request = sendRequest("POST",
+			"/adminium/leastOveralls",null,
+			admincontents);
+}
+
 function accounts() {
 	let admincontents=document.getElementById("admincontents");
 	const request = sendRequest("POST",

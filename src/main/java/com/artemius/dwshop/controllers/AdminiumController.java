@@ -40,6 +40,41 @@ public class AdminiumController {
 	return "adminmerchstats";
     }
     
+    @PostMapping("/adminium/leastPurchases")
+    @Secured("ADMIN")
+    public String leastPurchases(Map<String,Object> model, Principal principal) {
+	as.leastPurchases(model,principal);
+	return "adminmerchstats";
+    }
+    
+    @PostMapping("/adminium/mostSizePurchases")
+    @Secured("ADMIN")
+    public String mostSizePurchases(Map<String,Object> model, Principal principal) {
+	as.mostPurchasesBySize(model,principal);
+	return "adminmerchsizestats";
+    }
+    
+    @PostMapping("/adminium/leastSizePurchases")
+    @Secured("ADMIN")
+    public String leastSizePurchases(Map<String,Object> model, Principal principal) {
+	as.leastPurchasesBySize(model,principal);
+	return "adminmerchsizestats";
+    }
+    
+    @PostMapping("/adminium/mostOveralls")
+    @Secured("ADMIN")
+    public String mostOveralls(Map<String,Object> model, Principal principal) {
+	as.mostRatingsBySize(model,principal);
+	return "adminmerchstats";
+    }
+    
+    @PostMapping("/adminium/leastOveralls")
+    @Secured("ADMIN")
+    public String leastOveralls(Map<String,Object> model, Principal principal) {
+	as.leastRatingsBySize(model,principal);
+	return "adminmerchstats";
+    }
+    
     @PostMapping("/adminium/accounts")
     @Secured("ADMIN")
     public String accounts(Map<String,Object> model, Principal principal) {

@@ -4,10 +4,9 @@
 			<form th:id="${item.getId_PK()}" th:action="@{/adminium/mostPurchases}" method="post" class = "flexTableRow" th:each="item:${items}">
 				<!--  <form th:action="@{/editAccount}" method="post">-->
 					<input title = "ID" style = "width:50px;" name="id_PK" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getId_PK()}">
-					<input title = "Название" style="width:200px" disabled name = "title" th:class="${item.getTitle()}" class = "rowElem" th:value = "${item.getTitle()}">
-					<input title = "Категория" style="width:200px" disabled name = "section" th:class="${item.getSection().getMenutitle()}" th:value="${item.getSection().getMenutitle()}" class = "rowElem">
+					<input title = "Название" style="width:200px" disabled name = "title" th:class="${item.getMerchFK().getTitle()}" class = "rowElem" th:value = "${item.getMerchFK().getTitle()}">
+					<input title = "Размер" style="width:100px" disabled name = "section" th:class="${item.getSizeFK().getTitle()}" th:value="${item.getSizeFK().getTitle()}" class = "rowElem">
 					<input title = "Число приобретений" style="width:100px" disabled name = "purchases" th:class="${item.getPurchases()}" th:value="${item.getPurchases()}" class = "rowElem">
-					<input title = "Оценка" style="width:100px" disabled name = "overall" th:class="${item.getOverall()}" th:value="${item.getOverall()}" class = "rowElem">
 				<!--</form>-->
 			</form>
 		</div>
