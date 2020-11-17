@@ -8,10 +8,12 @@ import com.artemius.dwshop.entities.Merch;
 import com.artemius.dwshop.entities.MerchType;
 
 public interface MerchRepository extends CrudRepository<Merch, Long> {
-    public Iterable<Merch> findAllBySection(Long section);
+   // public Iterable<Merch> findAllBySection(Long section);
   //  @Query(value = "SELECT type_FK FROM Merch e WHERE e.id_PK = :merchID", nativeQuery = true)
     @Query("SELECT e.typeFK.id_PK FROM Merch e WHERE e.id_PK = :merchID ")
     public Long getTypeFKById(@Param("merchID")Long merchID);
+    @Query(value = "SELECT * FROM Merch WHERE section = :section", nativeQuery=true)
+    public Iterable<Merch> findAllBySection(@Param("section")Long section);
     @Query(value = "SELECT * FROM Merch WHERE section = :section ORDER BY title ASC", nativeQuery=true)
     public Iterable<Merch> findAllBySectionOrderByTitleAsc(@Param("section")Long section);
     @Query(value = "SELECT * FROM Merch WHERE section = :section ORDER BY title DESC", nativeQuery=true)

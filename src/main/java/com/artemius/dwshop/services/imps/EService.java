@@ -19,22 +19,22 @@ public class EService implements EmailService {
     @Autowired
     JavaMailSender mailSender;
 
-    public void sendHtmlEmail(String subject, String rawText, String sendTo, JavaMailSender mailSender) {
+    public int sendHtmlEmail(String subject, String rawText, String sendTo) {
 	
 	 try {
 	      MimeMessage message = mailSender.createMimeMessage();
 	      MimeMessageHelper helper;
 	      message.setSubject(subject);	      
 	      helper = new MimeMessageHelper(message, true);
-	      helper.setFrom("DW Shop Russia");
+	      helper.setFrom("dwshop.noreply@yandex.ru");
 	      helper.setTo(sendTo);
 	      helper.setText(rawText, true);
 	      mailSender.send(message);
 	  }   
 	  catch (MessagingException ex) {
-	     // Logger.getLogger(HTMLMail.class.getName()).log(Level.SEVERE, null, ex);
+	     return 1;
 	  }
-
+	 return 0;
     }
 
 }

@@ -19,5 +19,5 @@ public interface AccountService {
     public Account saveNewAccount(Account account);
     public Account findByUsername(String username);
     public List<Account> findAllByCity(String city);
-    public void sendCongratsEmail(String sendTo, String fullName);
+    public int sendCongratsEmail(String sendTo, String fullName);
 }

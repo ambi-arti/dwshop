@@ -12,6 +12,7 @@
 					<input title = "Город" required name = "city" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getCity()}">
 					<input title = "Адрес" required name = "address" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getAddress()}">
 					<input title = "E-mail" required name = "username" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getUsername()}">
+					<input title = "Пароль" required style = "display: none" name = "password" th:class="${item.getId_PK()}" class = "rowElem" disabled  type = "text" th:value = "${item.getUsername()}">
 					<input title = "Активность" required name = "active" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "checkbox" th:checked="${item.getActive()}">
 					<!--  <input name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled type = "text" th:value = "${item.getRoles()}">-->
 					<select title = "Роли" style = "width:110px;" required name = "roles" th:class="${item.getId_PK()}" class = "rowElem" disabled th:value = "${item.getRoles()}">

@@ -62,12 +62,12 @@ public class AccService implements AccountService {
 	    flawed=true;
 	}
 	if (!flawed) {
-	    user.setActive(true);
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
 	    user.setRoles(Role.CONSUMER);	    
 	    as.save(user);
 	    String fullName = user.getSurname()+" "+user.getFirstname();
 	    sendCongratsEmail(user.getUsername(),fullName);
+	    user.setActive(true);
 	    return true;
 	}
 	model.put("surname",user.getSurname());
@@ -145,20 +145,15 @@ public class AccService implements AccountService {
     }
 
     @Override
-   public void sendCongratsEmail(String sendTo, String fullName) {
-	String message = "<!DOCTYPE html>\r\n" + 
-		"<html>\r\n" + 
-		"	<head>\r\n" + 
-		"		<title>Registration Confirmation Letter</title>\r\n" + 
-		"	</head>\r\n" + 
-		"	<body style = \"display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: #44a3fc\">\r\n" + 
-		"		<div style = \"position: absolute; top: 50%; transform: translateY(-50%); align-self: center; width: 50%; height: auto; flex-direction: column; justify-content: flex-start; align-items: center; background-color: white; padding: 2%; font-size: 2.5vh; text-align: center; font-family: Franklin Gothic Book; box-shadow: 10px 14px 15px 0px rgba(0,0,0,0.75); border-radius: 40px;\">\r\n" + 
-		"			<b style = \"font-size: 3vh\">Здравствуйте, "+fullName+"!</b>\r\n" + 
-		"			<p style = \"text-align: justify\">Регистрация прошла успешно. Мы благодарим вас за то, что выбрали наш магазин. Теперь у вас есть доступ к приобретению качественной и недорогой мужской одежды.</p>\r\n" + 
-		"			<b>Приятных покупок!</b>\r\n" + 
-		"		</div>\r\n" + 
-		"	</body>\r\n" + 
-		"</html>";
+   public int sendCongratsEmail(String sendTo, String fullName) {
+	String message = "			<html>\r\n" + 
+		"				<body style = \"font-family: Franklin Gothic Book; font-size: 2.5vh\">\r\n" + 
+		"					<b style = \"font-size: 3vh; text-align: center;\">Здравствуйте, "+fullName+"!</b>\r\n" + 
+		"					<p style = \"text-align: justify\">Регистрация прошла успешно. Мы благодарим вас за то, что выбрали наш магазин. Теперь у вас есть доступ к приобретению качественной и недорогой мужской одежды.</p>\r\n" + 
+		"					<b style = \"text-align: center\">Приятных покупок!</b>\r\n" + 
+		"				</body>\r\n" + 
+		"			</html>";
+	return es.sendHtmlEmail("Регистрация прошла успешно!",message,sendTo);
    }
 
 }
