@@ -1,0 +1,12 @@
+<!--  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">	
+      <head></head>       		
+      <body>-->
+      <label> Город: </label>
+            <select name = "city" id="citySelect" th:value="${city}">
+	       			<option disabled>Выберите населённый пункт</option>
+	       			<option th:each="city:${cityList}" th:id="${city.getCity_id()}" th:value="${city.getTitle()}" th:text="${city.getTitle()}"></option>
+	       	</select>
+      <!--  </body>
+</html>-->

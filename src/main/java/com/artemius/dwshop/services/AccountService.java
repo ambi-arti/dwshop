@@ -20,4 +20,6 @@ public interface AccountService {
     public Account findByUsername(String username);
     public List<Account> findAllByCity(String city);
     public int sendCongratsEmail(String sendTo, String fullName);
+    public void cityList(Map<String,Object> model, Long regionId) throws ParseException;
+    public void getRegionsList(Map<String,Object> model, Long countryId);
 }

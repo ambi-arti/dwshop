@@ -12,8 +12,17 @@
 	       	<div class = "field"><label> Дата рождения: </label><input th:disabled="${ro}"  type="date" th:value="${birthdate}" name="birthdate"/></input>
 	       		<div class="authNote" th:if="${badDate}" th:text="${badDate}"></div>
 	       	</div>
-	       	<div class = "field"><label> Город: </label><input th:disabled="${ro}"  type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/></input>
+	       <!--	<div class = "field"><label> Город: </label><input th:disabled="${ro}"  type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/></input>
 	       		<div class="authNote" th:if="${wrongCity}" th:text="${notAnEmail}"></div>
+	       	</div>-->
+	       	<div class = "field"><label> Регион: </label><select onchange = "getCityList(this.options[this.selectedIndex].value)">
+	       		<option disabled selected>Выберите регион</option>
+	       		<option th:each="region:${regionList}" th:value="${region.getRegion_id()}" th:text="${region.getTitle()}"></option>
+	       	</select></div>
+	       	<div class = "field" id="cityList"><label> Город: </label>
+	       		<select name = "city" th:value="${city}" disabled>
+	       			<option disabled selected th:text="${city}" th:value="${city}">Выберите город</option>
+	       		</select>
 	       	</div>
 	       	<div class = "field"><label> Адрес: </label><input th:disabled="${ro}"  type="text" th:value="${address}" name="address"/></input></div>
 	       	<div class = "field"><a id = "change" style = "align-self:center" href="#" onclick = "showPassChange()">Сменить пароль</a></div>

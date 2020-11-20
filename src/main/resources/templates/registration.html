@@ -12,9 +12,18 @@
 	       	<div class = "field"><label> Дата рождения: </label><input required type="date" th:value="${birthdate}" name="birthdate"/>
 	       		<div class="authNote" th:if="${badDate}" th:text="${badDate}"></div>
 	       	</div>
-	       	<div class = "field"><label> Город: </label><input min required type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/>
-	       		<div class="authNote" th:if="${wrongCity}" th:text="${notAnEmail}"></div>
+	       	<div class = "field"><label> Регион: </label><select onchange = "getCityList(this.options[this.selectedIndex].value)">
+	       		<option disabled selected>Выберите регион</option>
+	       		<option th:each="region:${regionList}" th:value="${region.getRegion_id()}" th:text="${region.getTitle()}"></option>
+	       	</select></div>
+	       	<div class = "field" id="cityList"><label> Город: </label>
+	       		<select name = "city"  th:value="${city}" disabled>
+	       			<option disabled selected>Выберите город</option>
+	       		</select>
 	       	</div>
+	       <!--  	<div class = "field"><label> Город: </label><input min required type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/>
+	       		<div class="authNote" th:if="${wrongCity}" th:text="${notAnEmail}"></div>
+	       	</div>-->
 	       	<div class = "field"><label> Адрес: </label><input min required type="text" th:value="${address}" name="address"/></div>
 	        <div class = "field"><label> Email: </label><input required type="email" th:value="${username}" name="username"/>
 		        <div class="authNote" th:if="${nicknameExists}" th:text="${nicknameExists}" ></div>

@@ -47,6 +47,7 @@ public class ConService implements ConsumerService {
 
     @Override
     public boolean account(Map<String, Object> model, EditedAccount user, Principal principal) throws ParseException {	
+	       as.getRegionsList(model,(long)1);
 	       boolean passOnly=false;
 	       if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) 
 		   passOnly=true;
@@ -55,6 +56,8 @@ public class ConService implements ConsumerService {
 	       boolean passwordChanged=false;
 	       if (user.getPassword().length()>1)
 		   passwordChanged=true;
+	       if (user.getCity()==null)
+		   user.setCity(as.findByUsername(principal.getName()).getCity());
 	       if (!passOnly) {
 		       if (!as.isDateOkay(user.getBirthdate())) {
 			   model.put("badDate","Неверный формат даты рождения!");
@@ -129,6 +132,7 @@ public class ConService implements ConsumerService {
 
     @Override
     public void account(Map<String, Object> model, Principal principal) {
+	as.getRegionsList(model,(long)1);
       	Account user = as.findByUsername(principal.getName());
       	if (os.findAllUndeliveredByUsername(principal.getName()).size()>0) {
   	    model.put("readOnly","В данный момент изменение личных данных невозможно: у вас есть ожидающие, или возвращаемые заказы");

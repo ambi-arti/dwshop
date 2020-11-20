@@ -23,8 +23,12 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.artemius.dwshop.entities.Account;
+import com.artemius.dwshop.entities.City;
+import com.artemius.dwshop.entities.Region;
 import com.artemius.dwshop.entities.Role;
 import com.artemius.dwshop.repositories.AccountRepository;
+import com.artemius.dwshop.repositories.CityRepository;
+import com.artemius.dwshop.repositories.RegionRepository;
 import com.artemius.dwshop.services.AccountService;
 import com.artemius.dwshop.services.EmailService;
 
@@ -37,6 +41,10 @@ public class AccService implements AccountService {
     AccountRepository as;
     @Autowired
     EmailService es;
+    @Autowired
+    RegionRepository rs;
+    @Autowired
+    CityRepository cs;
     
     
     public boolean registration(Map<String,Object> model, Account user) throws ParseException {
@@ -143,6 +151,18 @@ public class AccService implements AccountService {
 	Date c = new Date();
 	return c.after(d);
     }
+    
+    public void getRegionsList(Map<String,Object> model, Long countryId) {
+	Iterable<Region> regions = rs.findAllByCountryId(countryId);
+	model.put("regionList",regions);
+    }
+    
+    public void cityList(Map<String,Object> model, Long regionId) {
+	Iterable<City> cityList = cs.findAllByRegion(rs.findById(regionId));
+	model.put("cityList",cityList);
+    }
+    
+    
 
     @Override
    public int sendCongratsEmail(String sendTo, String fullName) {
