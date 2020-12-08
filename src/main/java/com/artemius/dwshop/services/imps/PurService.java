@@ -64,7 +64,7 @@ public class PurService implements PurchaseService {
 		"			</tr>\r\n" + 
 		"			<tr>\r\n" + 
 		"				<td width=\"250\" style=\"text-align: left\"><p>Дата: "+f.format(new Date())+"<p></td>\r\n" + 
-		"				<td colspan=\"3\" width=\"250\" style=\"text-align: right\"><p>Идентификатор: "+items.hashCode()+"<p></td>\r\n" + 
+		"				<td colspan=\"3\" width=\"250\" style=\"text-align: right\"><p>Идентификатор: "+Math.abs(items.hashCode())+"<p></td>\r\n" + 
 		"			</tr>\r\n" + 
 		"			<tr>\r\n" + 
 		"				<td colspan=\"5\" style=\"text-align: center\"><p>********************************************</p></td>\r\n" + 

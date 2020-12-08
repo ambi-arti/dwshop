@@ -63,7 +63,7 @@ public class Account {
     @Setter
     private String password;
     
-    @Column(name = "active")
+    @Column(name = "active", nullable = true)
     @Getter
     @Setter
     private Boolean active;

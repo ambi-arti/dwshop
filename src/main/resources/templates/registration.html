@@ -17,7 +17,7 @@
 	       		<option th:each="region:${regionList}" th:value="${region.getRegion_id()}" th:text="${region.getTitle()}"></option>
 	       	</select></div>
 	       	<div class = "field" id="cityList"><label> Город: </label>
-	       		<select name = "city"  th:value="${city}" disabled>
+	       		<select name = "city" required  th:value="${city}" disabled>
 	       			<option disabled selected>Выберите город</option>
 	       		</select>
 	       	</div>

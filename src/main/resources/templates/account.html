@@ -15,7 +15,7 @@
 	       <!--	<div class = "field"><label> Город: </label><input th:disabled="${ro}"  type="text" pattern = "|^[-А-Я-а-я]+$|i" th:value="${city}" name="city"/></input>
 	       		<div class="authNote" th:if="${wrongCity}" th:text="${notAnEmail}"></div>
 	       	</div>-->
-	       	<div class = "field"><label> Регион: </label><select onchange = "getCityList(this.options[this.selectedIndex].value)">
+	       	<div class = "field"><label> Регион: </label><select th:disabled="${ro}" onchange = "getCityList(this.options[this.selectedIndex].value)">
 	       		<option disabled selected>Выберите регион</option>
 	       		<option th:each="region:${regionList}" th:value="${region.getRegion_id()}" th:text="${region.getTitle()}"></option>
 	       	</select></div>

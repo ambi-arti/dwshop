@@ -71,11 +71,11 @@ public class AccService implements AccountService {
 	}
 	if (!flawed) {
 	    user.setPassword(new Pbkdf2PasswordEncoder().encode(user.getPassword()));
-	    user.setRoles(Role.CONSUMER);	    
+	    user.setRoles(Role.CONSUMER);
+	    user.setActive(true);
 	    as.save(user);
 	    String fullName = user.getSurname()+" "+user.getFirstname();
 	    sendCongratsEmail(user.getUsername(),fullName);
-	    user.setActive(true);
 	    return true;
 	}
 	model.put("surname",user.getSurname());
