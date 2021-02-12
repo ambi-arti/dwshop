@@ -40,7 +40,7 @@ public class DelService implements DeliveryService {
 	toAccept.get().setStatus(OrderStatus.Доставлен);
 	os.save(toAccept.get());
 	Account user = ass.findByUsername(principal.getName());
-        List<Order> items = os.findAllByCity("Саратов");
+	List<Order> items = os.findAllByCity(user.getCity());
         if (items.size()>0)
             model.put("hasItems","hasItems");       
 	model.put("user",user);
@@ -54,7 +54,7 @@ public class DelService implements DeliveryService {
 	toReject.get().setComment(comment);
 	os.save(toReject.get());
 	Account user = ass.findByUsername(principal.getName());
-        List<Order> items = os.findAllByCity("Саратов");
+	List<Order> items = os.findAllByCity(user.getCity());
         if (items.size()>0)
             model.put("hasItems","hasItems");       
 	model.put("user",user);
